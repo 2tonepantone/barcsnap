@@ -35,7 +35,7 @@ barcode_sample.each do |barcode|
   end
 
   html_doc.search('.table-block tr:nth-child(8) td').each do |element|
-    product_info["ingrediants"] = element.text.strip
+    product_info["ingredients"] = element.text.strip
     # puts element.attribute('href').value
   end
 
