@@ -29,17 +29,13 @@ barcode_sample.each do |barcode|
   puts "▶ Scraping data from #{barcode}..."
   jancode_scraper = ScrapeJancodeService.new(barcode)
   product_info = jancode_scraper.call
-  
-  product = jancode_scraper.create_product(product_info)
+  product = jancode_scraper.create_product
   if product.valid?
     if product.save!
       puts "▶ ▶ Product saved!"
       print "▶ ▶ ▶ "
       p product
-      if product_info['image_link'] && product_info['image_link'].length.positive?
-        file = URI.open(product_info['image_link'])
-        product.photo.attach(io: file, filename: "#{barcode}.jpg", content_type: 'image/jpg' )
-      end
+      jancode_scraper.upload_image
       rand(3..6).times do
         user = User.all.sample
         review = Review.new(rating: rand(1..5), user: user, product: product,

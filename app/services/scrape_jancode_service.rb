@@ -45,15 +45,32 @@ class ScrapeJancodeService
       product_info["image_link"] = image_link.split("?_ex=300x300")[0] if image_link_valid?(image_link)
     end
 
+    @product_info = product_info
     return product_info
   end
 
-  def create_product(product_info)
-    product = Product.new(name: product_info["name"], barcode: product_info["barcode"], company_name: product_info["company_name"], ingredients: product_info["ingredients"], size: product_info["size"])
-    product_info["categories"]&.each do |category|
+  def create_product
+    return Product.new if @product_info.nil? || @product_info.count.zero?
+
+    product = Product.new(name: @product_info["name"], barcode: @product_info["barcode"], company_name: @product_info["company_name"], ingredients: @product_info["ingredients"], size: @product_info["size"])
+    @product_info["categories"]&.each do |category|
       product.tag_list.add(category)
     end
+
+    @product = product
     return product
+  end
+
+  def upload_image
+    return false if @product_info['image_link'].nil?
+
+    if @product_info['image_link']&.length.positive?
+      file = URI.open(@product_info['image_link'])
+      # return attach result?
+      @product.photo.attach(io: file, filename: "#{@product.barcode}.jpg", content_type: 'image/jpg')
+    end
+    # return attach result?
+    false
   end
 
   private
