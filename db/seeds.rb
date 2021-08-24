@@ -15,21 +15,20 @@ puts "👴 Seed users ..."
   end
 end
 
-puts "🛒 Seed products from scraping result..."
+puts "🛒 Seed products from scraping result (+ create reviews)..."
 barcode_sample = ["4901330574352", "4954835290708", "4582469493006", "4902508070546", "4902777088785", "4902106010067", "4976548100075", "4901085192009", "4943765054269", "4582409189266", "4953103895515", "096619088089", "45019517"]
-# test_barcode = [normal (full detail), ingredient is in different column (+ no photo), product doesn't have some detail, product doesn't exist]
-# barcode_sample = [4901330574352, 4906178020030, 4976548100075, 4902106010067]
 # https://www.jancode.xyz/4901330574352/
 
 barcode_sample.each do |barcode|
-  puts "Scraping data from #{barcode}..."
+  puts "▶ Scraping data from #{barcode}..."
   jancode_scraper = ScrapeJancodeService.new(barcode)
   product_info = jancode_scraper.call
   
   product = jancode_scraper.create_product(product_info)
   if product.valid?
     if product.save!
-      puts "image_link: #{product_info['image_link']}"
+      puts "▶ ▶ Product saved!"
+      p product
       if product_info['image_link'] && product_info['image_link'].length.positive?
         file = URI.open(product_info['image_link'])
         product.photo.attach(io: file, filename: "#{barcode}.jpg", content_type: 'image/jpg' )
