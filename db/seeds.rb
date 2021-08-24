@@ -8,15 +8,17 @@ Product.destroy_all
 
 puts "👴 Seed users ..."
 10.times do |i|
-  user = User.new(email: "user#{i}@email.com", password: '123456', password_confirmation: '123456',
-    display_name: "#{Faker::Internet.username(specifier: 5..10)}#{i}")
-  user.save!
+  user = User.new(email: "user#{i}@email.com", password: '123456', password_confirmation: '123456', display_name: "#{Faker::Internet.username(specifier: 5..10)}#{i}")
+  if user.save!
+    file = URI.open("https://thispersondoesnotexist.com/")
+    user.photo.attach(io: file, filename: "#{user.email.split('@')[0]}.jpg", content_type: 'image/jpg' )
+  end
 end
 
 puts "🛒 Seed products from scraping result..."
-# barcode_sample = [4901330574352, 4954835290708, 4582469493006, 4902508070546, 4902777088785, 4902106010067, 4976548100075]
+barcode_sample = ["4901330574352", "4954835290708", "4582469493006", "4902508070546", "4902777088785", "4902106010067", "4976548100075", "4901085192009", "4943765054269", "4582409189266", "4953103895515", "096619088089", "45019517"]
 # test_barcode = [normal (full detail), ingredient is in different column (+ no photo), product doesn't have some detail, product doesn't exist]
-barcode_sample = [4901330574352, 4906178020030, 4976548100075, 4902106010067]
+# barcode_sample = [4901330574352, 4906178020030, 4976548100075, 4902106010067]
 # https://www.jancode.xyz/4901330574352/
 
 barcode_sample.each do |barcode|
@@ -26,7 +28,12 @@ barcode_sample.each do |barcode|
   
   product = jancode_scraper.create_product(product_info)
   if product.valid?
-    if product.save
+    if product.save!
+      puts "image_link: #{product_info['image_link']}"
+      if product_info['image_link'] && product_info['image_link'].length.positive?
+        file = URI.open(product_info['image_link'])
+        product.photo.attach(io: file, filename: "#{barcode}.jpg", content_type: 'image/jpg' )
+      end
       rand(3..6).times do
         user = User.all.sample
         review = Review.new(rating: rand(1..5), user: user, product: product,
@@ -37,4 +44,5 @@ barcode_sample.each do |barcode|
   end
 end
 
-puts "🌲 Seed complete ... #{User.count} Users / #{Product.count} Products / #{Review.count} Reviews"
+puts "🌲 Seed from #{barcode_sample.count} barcodes complete ..."
+puts "🌲 #{User.count} Users / #{Product.count} Products / #{Review.count} Reviews"

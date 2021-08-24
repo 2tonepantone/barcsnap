@@ -1,6 +1,6 @@
 class ScrapeJancodeService
   def initialize(barcode)
-    @barcode = barcode
+    @barcode = "%013d" % barcode.to_i
   end
 
   def call
@@ -38,7 +38,7 @@ class ScrapeJancodeService
 
     html_doc.search('.table-block tr:first-child img').each do |element|
       image_link = element.attribute('src').value
-      product_info["image_link"] = image_link if image_link_valid?(image_link)
+      product_info["image_link"] = image_link.split("?_ex=300x300")[0] if image_link_valid?(image_link)
     end
 
     return product_info
@@ -53,6 +53,6 @@ class ScrapeJancodeService
 
   def image_link_valid?(image_link)
     empty_image_link = "https://thumbnail.image.rakuten.co.jp/ran/img/default/now_printing.jpg?_ex=300x300"
-    return (image_link && image_link.length.positive? && image_link != empty_image_link && image_link.match?(%r{https?:\/\/.*}))
+    return (image_link && image_link.length.positive? && image_link != empty_image_link && image_link.match?(%r{https?://.*}))
   end
 end
