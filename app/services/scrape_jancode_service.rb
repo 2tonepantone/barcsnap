@@ -34,6 +34,9 @@ class ScrapeJancodeService
 
     product_info["categories"] = []
     html_doc.xpath('//*[contains(text(),"商品ジャンル")]/parent::tr/td/a').each do |element|
+      # Skip if category is "other"
+      next if element.text.strip == "その他"
+
       product_info["categories"] << element.text.strip
     end
 
@@ -47,10 +50,8 @@ class ScrapeJancodeService
 
   def create_product(product_info)
     product = Product.new(name: product_info["name"], barcode: product_info["barcode"], company_name: product_info["company_name"], ingredients: product_info["ingredients"], size: product_info["size"])
-    if product_info["categories"]
-      product_info["categories"].each do |category|
-        product.tag_list.add(category)
-      end
+    product_info["categories"]&.each do |category|
+      product.tag_list.add(category)
     end
     return product
   end
