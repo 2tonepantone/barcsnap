@@ -46,5 +46,13 @@ barcode_sample.each do |barcode|
   end
 end
 
+puts "💖 Seed favorites (User > Product) ..."
+User.all.each do |user|
+  rand(3..6).times do
+    product = Product.all.sample
+    user.favorite(product)
+  end
+end
+
 puts "🌲 Seed from #{barcode_sample.count} barcodes complete ..."
 puts "🌲 #{User.count} Users / #{Product.count} Products / #{Review.count} Reviews"
