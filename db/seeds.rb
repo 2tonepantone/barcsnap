@@ -3,7 +3,7 @@ require 'nokogiri'
 
 REVIEW_SOURCE = %w[barcsnap.com amazon.jp rakuten.co.jp s.mognavi.jp km.tsite.jp]
 
-puts "🔫 Please make sure to drop/create/migrate the database before running this seed file ..."
+puts "🔫 Dropping Products and Reviews. If you want to reseed users 👴, please drop/create/migrate the DB before running this file ..."
 Review.destroy_all
 Product.destroy_all
 
