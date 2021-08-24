@@ -32,11 +32,53 @@
 
 <!-- product_info -->
 <div class="product-background">
-  <%= render 'shared/product_info' %>
+  <%= render 'shared/product_info' , product_name: "The shampoo that bites your hair 58g", rating:"4.7", company_name:"calbee", price:"100 yen", info:"asdasdas"%>
 </div>
 <!-- review_card -->
-<%= render 'shared/review_card' %>
+<% if false %>
+  <%= render 'shared/review_card_no_click' %>
+<% else %>
+  <div class="title-card-product">
+    <div class="card-product-infos">
+      <h5><strong>Reviews</strong> <span class="text-muted">233</span></h5>
+    </div>
+  </div>
+  <div class="title-card-product2 .bg-secondary">
+    <div class="card-product-infos">
+      <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
+    </div>
+  </div>
+  <%= render 'shared/review_card' , username: 'Kandanai Leenutaphong', review:'very awesome product'%>
+<% end %>
 <!-- product_card -->
-<%= render 'shared/product_card' %>
+<h4 class="ml-4"><strong>Recommended for you</strong></h2>
+<div class="cards-product">
+  <div class="row">
+    <div class="col ml-3 pr-1">
+      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+    </div>
+    <div class="col mr-3">
+      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col ml-3 pr-1">
+      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+    </div>
+    <div class="col mr-3">
+      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+    </div>
+  </div>
+</div>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3 pr-4" style="background-color: rgba(0, 0, 0, 0.1);">
+    <a href="">click to see more: </a>
+  </div>
+  <!-- Copyright -->
+</footer>
 
-<%= render 'shared/user_history_card' %>
+<!-- user_history_card -->
+<%= render 'shared/user_history_card' , product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
+<%= render 'shared/user_history_card' , product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
+<%= render 'shared/user_history_card' , product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
