@@ -32,8 +32,9 @@ class ScrapeJancodeService
       product_info["size"] = element.text.strip
     end
 
-    html_doc.xpath('//*[contains(text(),"商品ジャンル")]/parent::tr/td').each do |element|
-      product_info["category"] = element.text.strip
+    product_info["categories"] = []
+    html_doc.xpath('//*[contains(text(),"商品ジャンル")]/parent::tr/td/a').each do |element|
+      product_info["categories"] << element.text.strip
     end
 
     html_doc.search('.table-block tr:first-child img').each do |element|
@@ -45,8 +46,13 @@ class ScrapeJancodeService
   end
 
   def create_product(product_info)
-    Product.new(name: product_info["name"], barcode: product_info["barcode"], company_name: product_info["company_name"],
-                ingredients: product_info["ingredients"], size: product_info["size"])
+    product = Product.new(name: product_info["name"], barcode: product_info["barcode"], company_name: product_info["company_name"], ingredients: product_info["ingredients"], size: product_info["size"])
+    if product_info["categories"]
+      product_info["categories"].each do |category|
+        product.tag_list.add(category)
+      end
+    end
+    return product
   end
 
   private
