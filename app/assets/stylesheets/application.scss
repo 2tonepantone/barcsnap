@@ -11,3 +11,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
+
+body a {
+  color: #607D8B;
+  &:hover{
+    color: #203d69;
+  }
+}

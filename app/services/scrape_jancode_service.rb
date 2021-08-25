@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class ScrapeJancodeService
   def initialize(barcode)
     @barcode = "%013d" % barcode.to_i
