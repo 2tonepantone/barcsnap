@@ -40,8 +40,58 @@
       <% end %>
     <% end %>
   </div>
-
+<%= render 'shared/footer' %>
 <% else %>
+  <!-- Product info compare -->
+  <div class="row">
+    <div class="col" style ="margin-right:-15px">
+      <%= render 'shared/product_info_comparison' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
+    </div>
+    <div class="col" style ="margin-left:-15px">
+      <%= render 'shared/product_info_comparison' , product_name: @product_compare.name, bg_img_url:@product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", company_name: @product_compare.company_name, price: "¥100", ingredients: @product_compare.ingredients, size: @product_compare.size%>
+    </div>
+  </div>
+<!-- review_card compare -->
+  <div class="row">
+    <div class="col">
+      <% review_count = 233 %>
+      <% if true %>
+        <h5 class="ml-3">Reviews <span class="text-muted"><%= review_count %></span></h2>
+        <%= render 'shared/review_card_no_click', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', review: 'Very awesome product.' %>
+      <% else %>
+        <div class="title-card-product">
+          <div class="card-product-infos">
+            <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span></h5>
+          </div>
+        </div>
+        <div class="title-card-product2 .bg-secondary">
+          <div class="card-product-infos">
+            <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
+          </div>
+        </div>
+        <%= render 'shared/review_card', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: 'Kandanai Leenutaphong', review:'very awesome product'%>
+      <% end %>
+    </div>
+    <div class="col">
+      <% review_count = 233 %>
+      <% if true %>
+        <h5 class="ml-3">Reviews <span class="text-muted"><%= review_count %></span></h2>
+        <%= render 'shared/review_card_no_click', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', review: 'Very awesome product.' %>
+      <% else %>
+        <div class="title-card-product">
+          <div class="card-product-infos">
+            <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span></h5>
+          </div>
+        </div>
+        <div class="title-card-product2 .bg-secondary">
+          <div class="card-product-infos">
+            <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
+          </div>
+        </div>
+        <%= render 'shared/review_card', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: 'Kandanai Leenutaphong', review:'very awesome product'%>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 <!-- footer -->
-<%= render 'shared/footer' %>
+

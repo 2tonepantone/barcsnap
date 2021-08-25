@@ -1,0 +1,31 @@
+<div class="product-background-comparison h-100" style="background-image: url(<%= bg_img_url %>);">
+  <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
+</div>
+<div class="card-category-comparison bg-white w-100 text-center">
+  <div class="m-4">
+    <h2 class="info-style">
+      <strong>
+        <%= product_name %>
+      </strong>
+    </h2>
+    <div class="info-style h6"><i class="fas fa-star"></i>
+      <%= rating %> | See Details
+    </div>
+    <p class="info-style"><strong>Company name:</strong>
+      <%= company_name %>
+    </p>
+    <p class="info-style"><strong>price:</strong>
+      <%= price %>
+    </p>
+    <% if !ingredients.nil? %>
+      <p class="info-style"><strong>Ingredients:</strong>
+        <%= ingredients %>
+      </p>
+      <% end %>
+        <% if !size.nil? %>
+          <p class="info-style"><strong>Size:</strong>
+            <%= size %>
+          </p>
+          <% end %>
+  </div>
+</div>
