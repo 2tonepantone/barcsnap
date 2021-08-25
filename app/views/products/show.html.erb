@@ -1,12 +1,9 @@
-<h1>Products#show</h1>
-
-
   <!-- Product info card -->
 
 <%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
 </div>
   <!-- review_card -->
-  <% if false %>
+  <% if true %>
     <%= render 'shared/review_card_no_click', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', review: 'Very awesome product.' %>
   <% else %>
     <div class="title-card-product">
@@ -27,21 +24,19 @@
   <!-- product_card -->
   <h4 class="ml-4"><strong>Recommended for you</strong></h2>
   <div class="cards-product">
-    <div class="row">
-      <div class="col ml-3 pr-1">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+    <% 6.times do |index| %>
+      <% if (index % 2  == 0) %>
+        <div class="row">
+      <% end %>
+      <% if index %2 == 0 %>
+        <div class="col ml-3 pr-1">
+      <% else %>
+        <div class="col mr-3">
+      <% end %>
+        <%= render 'shared/product_card', bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), product_name: @product.name, price: "¥50"%>
       </div>
-      <div class="col mr-3">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col ml-3 pr-1">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-      <div class="col mr-3">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-    </div>
+      <% if ((index - 1) % 2  == 0) && (index - 1 >= 0) %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-  <footer class="bg-light text-center text-lg-start">
