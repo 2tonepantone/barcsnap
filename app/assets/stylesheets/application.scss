@@ -17,4 +17,7 @@
 
 body a {
   color: #607D8B;
+  &:hover{
+    color: #203d69;
+  }
 }
