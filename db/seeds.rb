@@ -12,7 +12,7 @@ if User.count.zero?
   10.times do |i|
     user = User.new(email: "user#{i}@email.com", password: '123456', password_confirmation: '123456', display_name: "#{Faker::Internet.username(specifier: 5..10)}#{i}")
     if user.save!
-      file = URI.open("https://thispersondoesnotexist.com/")
+      file = URI.open("https://thispersondoesnotexist.com/image")
       user.photo.attach(io: file, filename: "#{user.email.split('@')[0]}.jpg", content_type: 'image/jpg' )
     end
   end

@@ -1,14 +1,14 @@
-<div class="cards">
-  <div class="card-category">
-    <div class="m-4">
-      <h2 class="info-style">
-        <strong> <%= product_name %></strong>
-        <i class="fas fa-star h5"></i> <span class = "h6"> <%= rating %> | See Details</span>
-      </h2>
-
-      <p class="info-style"><strong>Company name:</strong> <%= company_name %></p>
-      <p class="info-style"><strong>price:</strong> <%= price %></p>
-      <p class="info-style"><strong>info:</strong> <%= info %></p>
-    </div>
+<div class="product-background h-100" style="background-image: url('<%= bg_img_url %>');">
+  <img src="<%= bg_img_url %>" style="visibility: hidden;">
+</div>
+<div class="card-category bg-white w-100 text-center">
+  <div class="m-4">
+    <h2 class="info-style">
+      <strong> <%= product_name %></strong>
+    </h2>
+    <div class = "info-style h6"><i class="fas fa-star"></i> <%= rating %> | See Details</div>
+    <p class="info-style"><strong>Company name:</strong> <%= company_name %></p>
+    <p class="info-style"><strong>price:</strong> <%= price %></p>
+    <p class="info-style"><strong>info:</strong> <%= info %></p>
   </div>
 </div>
