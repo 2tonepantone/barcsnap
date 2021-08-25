@@ -9,8 +9,12 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <% body_content = render 'shared/barcode_scanner' %>
+        <%= render 'shared/modal', modal_id: 'camera', modal_title: 'Camera', 
+        text_header: "It's time to snap!", text_body: 'Show me your barcode!', body_content: body_content,
+        redirect_path: root_path, btn_modal_confirm: 'Home'  %>
         <div class="d-flex bd-highlight m-3">
-          <a class="btn btn btn-dark flex-grow-1 justify-content-between" data-toggle="modal" data-target="#takePhoto">
+          <a class="btn btn btn-dark flex-grow-1 justify-content-between" data-toggle="modal" data-target="#camera">
             <i class="fas fa-camera"></i> Scan a barcode!
           </a>
           <a href="" class="btn btn-dark ml-3" data-toggle="modal" data-target="#takePhoto">
