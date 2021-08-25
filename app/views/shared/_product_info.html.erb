@@ -9,10 +9,10 @@
     <div class = "info-style h6"><i class="fas fa-star"></i> <%= rating %> | See Details</div>
     <p class="info-style"><strong>Company name:</strong> <%= company_name %></p>
     <p class="info-style"><strong>price:</strong> <%= price %></p>
-    <% if !ingredients.nil? %>
+    <% if defined?(ingredients) %>
       <p class="info-style"><strong>Ingredients:</strong> <%= ingredients %></p>
     <% end %>
-    <% if !size.nil? %>
+    <% if defined?(size) %>
       <p class="info-style"><strong>Size:</strong> <%= size %></p>
     <% end %>
   </div>
