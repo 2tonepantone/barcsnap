@@ -14,8 +14,8 @@ const initScanditSDK = () => {
       // barcodePicker is ready here, show a message every time a barcode is scanned
       barcodePicker.on("scan", (scanResult) => {
         let barcode = scanResult.barcodes[0].data;
-        const scanValue = document.getElementById('barcode');
-        scanValue.setAttribute('value', barcode)
+        const input = document.getElementById('barcodeInput');
+        input.setAttribute('value', barcode)
         document.getElementById('barcodeSubmit').click()
       });
     });
