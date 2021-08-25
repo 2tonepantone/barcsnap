@@ -6,19 +6,29 @@ class ProductsController < ApplicationController
   end
 
   def create
-    barcode = params[:barcode]
-    jancode_scraper = ScrapeJancodeService.new(barcode)
-    jancode_scraper.call
-    @product = jancode_scraper.create_product
+    @barcode = params[:barcode]
 
-    if @product.save
+    if in_database?
+      @product = Product.find_by(barcode: @barcode)
       redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
     else
-      redirect_to root_path, alert: "Failed to scan barcode. #{@product.errors.full_messages.join(', ')}."
+      jancode_scraper = ScrapeJancodeService.new(@barcode)
+      jancode_scraper.call
+      @product = jancode_scraper.create_product
+
+      if @product.save
+        redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
+      else
+        redirect_to root_path, alert: "Failed to scan barcode. #{@product.errors.full_messages.join(', ')}."
+      end
     end
   end
 
-  # private
+  private
+
+  def in_database?
+    Product.exists?(barcode: @barcode)
+  end
 
   # def product_params
   #   params.require(:product).permit(:name, :barcode, :company_name,
