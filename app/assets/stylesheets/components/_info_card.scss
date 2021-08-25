@@ -6,11 +6,13 @@
   background-color: white;
 }
 .product-background {
-  background-image: url("https://www.calbee.co.jp/common/utility/binout.php?db=products&f=1397");
+  // background-image: url("https://www.calbee.co.jp/common/utility/binout.php?db=products&f=1397");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  padding-top: 200px;
+  // padding-top: 200px;
+  height: 100%;
+  width: 100%;
 }
 
 // Smallest device
@@ -52,7 +54,7 @@
   background-size: cover;
   background-position: center;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 15px;
+  // border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 

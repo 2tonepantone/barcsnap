@@ -28,16 +28,15 @@
   </div>
 </div>
 <!-- product_info -->
-<div class="product-background">
-  <%= render 'shared/product_info' , product_name: "The shampoo that bites your hair 58g", rating:"4.7", company_name:"calbee", price:"100 yen", info:"asdasdas"%>
-</div>
+<%= render 'shared/product_info' , product_name: "The shampoo that bites your hair 58g", rating:"4.7", company_name:"calbee", price:"100 yen", info:"asdasdas", bg_img_url: "https://www.calbee.co.jp/common/utility/binout.php?db=products&f=1397"%>
 <!-- review_card -->
 <% if false %>
-  <%= render 'shared/review_card_no_click' %>
+  <%= render 'shared/review_card_no_click', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', review: 'Very awesome product.' %>
 <% else %>
   <div class="title-card-product">
     <div class="card-product-infos">
-      <h5><strong>Reviews</strong> <span class="text-muted">233</span></h5>
+      <% review_count = 233 %>
+      <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span></h5>
     </div>
   </div>
   <div class="title-card-product2 .bg-secondary">
@@ -45,25 +44,25 @@
       <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
     </div>
   </div>
-  <%= render 'shared/review_card' , username: 'Kandanai Leenutaphong', review:'very awesome product'%>
+  <%= render 'shared/review_card', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: 'Kandanai Leenutaphong', review:'very awesome product'%>
 <% end %>
 <!-- product_card -->
 <h4 class="ml-4"><strong>Recommended for you</strong></h2>
 <div class="cards-product">
   <div class="row">
     <div class="col ml-3 pr-1">
-      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+      <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
     </div>
     <div class="col mr-3">
-      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+      <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
     </div>
   </div>
   <div class="row">
     <div class="col ml-3 pr-1">
-      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+      <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
     </div>
     <div class="col mr-3">
-      <%= render 'shared/product_card', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
+      <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
     </div>
   </div>
 </div>
@@ -75,6 +74,6 @@
   <!-- Copyright -->
 </footer>
 <!-- user_history_card -->
-<%= render 'shared/user_history_card' , product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
-<%= render 'shared/user_history_card' , product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
-<%= render 'shared/user_history_card' , product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
+<%= render 'shared/user_history_card', img_url:'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
+<%= render 'shared/user_history_card', img_url:'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
+<%= render 'shared/user_history_card', img_url:'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
