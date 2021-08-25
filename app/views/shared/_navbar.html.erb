@@ -7,8 +7,8 @@
     <% cl_image = cl_image_tag("https://dummyimage.com/25x25/fff/000&text=%3F", type: "fetch", class: "rounded-circle my-auto") %>
   <% else %>
     <% username = (current_user.display_name.blank? || current_user.display_name.nil?) ? current_user.email.split('@')[0] : current_user.display_name  %>
-    <!-- <p class="my-auto">Navbar punchline <%= username %></p> -->
-    <p class="my-auto"><%= username %></p>
+    <!-- <p class="my-auto">Navbar punchline <%#= username %></p> -->
+    <!-- <p class="my-auto"><%#= username %></p> -->
     <% if current_user.photo.attached? %>
       <% cl_image = cl_image_tag(current_user.photo.key, class: "rounded-circle my-auto", width: 24, height: 24) %>
     <% else %>
@@ -23,6 +23,8 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
       <% if user_signed_in? %>
+        <p class="dropdown-item disabled">Welcome, <%= username %>!</p>
+        <div class="dropdown-divider"></div>
         <%= link_to '#' do %>
           <p class="dropdown-item">My User Profile</p>
         <% end %>

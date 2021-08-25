@@ -18,7 +18,7 @@
             <% product_row.each do |product| %>
               <div class="col p-0 m-0">
                 <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
-                <%= link_to product_path(product.id) do %>
+                <%= link_to product_path(product) do %>
                   <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "¥#{rand(10..60) * 50}" %>
                 <% end %>
               </div>
@@ -49,7 +49,7 @@
           <% product_row.each do |product| %>
             <div class="col p-0 m-0">
               <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
-              <%= link_to product_path(product.id) do %>
+              <%= link_to product_path(product) do %>
                 <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "¥#{rand(10..60) * 50}" %>
               <% end %>
             </div>
