@@ -13,7 +13,10 @@ const initScanditSDK = () => {
     .then((barcodePicker) => {
       // barcodePicker is ready here, show a message every time a barcode is scanned
       barcodePicker.on("scan", (scanResult) => {
-        alert(scanResult.barcodes[0].data);
+        let barcode = scanResult.barcodes[0].data;
+        const scanValue = document.getElementById("scan-value");
+        scanValue.setAttribute('value', barcode)
+        document.getElementById('barcodeSubmit').click()
       });
     });
 }
