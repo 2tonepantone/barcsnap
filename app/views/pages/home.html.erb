@@ -1,35 +1,33 @@
-
-
 <!-- Modal button -->
-  <button type="button" class="btn btn btn-dark mb-3" data-toggle="modal" data-target="#takePhoto">
-    BarcSnap now!
-  </button>
+<button type="button" class="btn btn btn-dark mb-3" data-toggle="modal" data-target="#takePhoto">
+  BarcSnap now!
+</button>
 <!-- Modal -->
 <div class="modal fade" id="takePhoto" tabindex="-1" aria-labelledby="takePhotoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="takePhotoLabel">Scan <i class="fas fa-paw"></i></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="takePhotoLabel">Scan <i class="fas fa-paw"></i></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="scandit-barcode-picker"></div>
+      <div class="d-flex bd-highlight">
+        <div class="p-2 w-100 bd-highlight">
+          <button type="button" class="btn btn btn-dark px-5 mb-3 ml-1" data-toggle="modal" data-target="#takePhoto">
+            <i class="fas fa-camera"></i> scan a barcode!
           </button>
         </div>
-            <div class="d-flex bd-highlight">
-              <div class="p-2 w-100 bd-highlight">
-                <button type="button" class="btn btn btn-dark px-5 mb-3 ml-1" data-toggle="modal" data-target="#takePhoto">
-                  <i class="fas fa-camera"></i> scan a barcode!
-                </button>
-              </div>
-              <div class="p-2 flex-shrink-1 bd-highlight">
-                <button type="button" class="btn btn btn-dark px-3 mb-3 mr-1" data-toggle="modal" data-target="#takePhoto">
-                  <i class="far fa-folder"></i> Upload a photo!
-                </button>
-              </div>
-            </div>
+        <div class="p-2 flex-shrink-1 bd-highlight">
+          <button type="button" class="btn btn btn-dark px-3 mb-3 mr-1" data-toggle="modal" data-target="#takePhoto">
+            <i class="far fa-folder"></i> Upload a photo!
+          </button>
+        </div>
       </div>
     </div>
   </div>
-
+</div>
 <!-- product_info -->
 <div class="product-background">
   <%= render 'shared/product_info' %>

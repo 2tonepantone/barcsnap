@@ -6,7 +6,7 @@ const initScanditSDK = () => {
   })
     .then(() => {
       return ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
-        // enable some common symbologies
+        // enable some common barcode symbologies
         scanSettings: new ScanditSDK.ScanSettings({ enabledSymbologies: ["ean8", "ean13", "upca", "upce"] }),
       });
     })
