@@ -5,6 +5,5 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  validates :display_name, length: { within: 5..12 }
+  validates :display_name, length: { within: 5..12 }, allow_blank: true
 end
