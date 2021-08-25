@@ -1,0 +1,33 @@
+.banner {
+  // background-image: #9e9e9e;
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), 
+                    url(https://source.unsplash.com/en0CrvuW6Zc/3000x3000);
+  background-position: 0% 0%;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 66vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.footer {
+  // background-image: #9e9e9e;
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), 
+                    url(https://source.unsplash.com/en0CrvuW6Zc/3000x3000);
+  background-position: 0% 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 24vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.footer p {
+  color: #F5F5F5;
+}
+
+.barcode-text {
+  font-size: 48px;
+  font-family: 'Libre Barcode 128 Text', cursive;
+}
