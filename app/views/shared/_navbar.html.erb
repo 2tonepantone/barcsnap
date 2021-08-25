@@ -10,6 +10,7 @@
     <!-- <p class="my-auto">Navbar punchline <%= username %></p> -->
     <p class="my-auto"><%= username %></p>
     <% if current_user.photo.attached? %>
+      <% raise %>
       <% cl_image = cl_image_tag(current_user.photo.key, class: "rounded-circle my-auto", width: 24, height: 24) %>
     <% else %>
       <% initial = current_user.display_name.nil? ? current_user.email[0].upcase : current_user.display_name[0].upcase; %>
