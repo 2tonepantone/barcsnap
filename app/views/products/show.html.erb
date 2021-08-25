@@ -1,11 +1,7 @@
 <h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
- <%# if @product.photo.attached?  %>
- <%# cl_image_tag @product.photo.key  %>
+
 
   <!-- Product info card -->
-@product
-<%= @product %>
 
 <%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
 </div>
