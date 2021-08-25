@@ -1,14 +1,18 @@
-<div class="cards">
+<div class="cards-info">
   <div class="card-category">
     <div class="m-4">
       <h2 class="info-style">
         <strong> <%= product_name %></strong>
         <i class="fas fa-star h5"></i> <span class = "h6"> <%= rating %> | See Details</span>
       </h2>
-
       <p class="info-style"><strong>Company name:</strong> <%= company_name %></p>
       <p class="info-style"><strong>price:</strong> <%= price %></p>
-      <p class="info-style"><strong>info:</strong> <%= info %></p>
+      <% if !ingredients.nil? %>
+        <p class="info-style"><strong>Ingredients:</strong> <%= ingredients %></p>
+      <% end %>
+      <% if !size.nil? %>
+        <p class="info-style"><strong>Size:</strong> <%= size %></p>
+      <% end %>
     </div>
   </div>
 </div>
