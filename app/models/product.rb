@@ -4,7 +4,8 @@ class Product < ApplicationRecord
 
   validates :name, presence: true
   validates :barcode, presence: true
-  
+
   acts_as_taggable_on :tags
+  ActsAsTaggableOn.force_lowercase = true
   acts_as_favoritable
 end
