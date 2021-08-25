@@ -8,6 +8,9 @@ class ProductsController < ApplicationController
   def create
     @barcode = params[:barcode]
 
+    # check barcode length/format, change it if not 13
+    @barcode = convert_to_jancode unless jancode_format?
+
     if in_database?
       @product = Product.find_by(barcode: @barcode)
       redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
@@ -26,6 +29,18 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def jancode_format?
+    @barcode.length == 13
+  end
+
+  def convert_to_jancode
+    "0" * (13 - @barcode.length) + @barcode
+  end
+
+  def scrape_jancode
+    # put scrape method here
+  end
 
   def in_database?
     Product.exists?(barcode: @barcode)
