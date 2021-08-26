@@ -19,8 +19,8 @@
   </div>
 
     <% Product.find(params[:id]).reviews.each do |review| %>
-      <% display_name = Review.find(review.id).user.display_name %>
-      <%= render 'shared/review_card', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: display_name, review:review.comment%>
+      <% user = Review.find(review.id).user %>
+      <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment%>
     <% end %>
   <% end %>
 
