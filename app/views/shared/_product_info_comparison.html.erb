@@ -1,19 +1,15 @@
-<div class="row">
-  <div class="col">
-    <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);margin-right: -45px;">
+<table id="customers">
+  <tr>
+    <th>
+    <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
       <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
-    </div>
-  </div>
-  <div class="col">
-    <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>); margin-left: -45px;">
+    </div></th>
+    <th>
+    <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
       <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
     </div>
-  </div>
-</div>
-
-
-
-<table id="customers">
+    </th>
+  </tr>
   <tr>
     <th><%= product_name %></th>
     <th><%= product_name_compare %></th>
