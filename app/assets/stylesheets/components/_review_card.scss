@@ -28,14 +28,15 @@
   height: 50px;
   border-bottom: 0.5px solid rgba(0,0,0,.1);
   display: flex;
-  background-color: rgba(77,77,77,0.2);
+  background-color: rgba(77,77,77,0.06);
   align-items: center;
 }
 
 .card-product img {
   padding: 10px;
-  border-radius: 60%;
+  border-radius: 50%;
   width: 70px;
+  height: 70px;
   margin-left: 10px;
   object-fit: cover;
 }
