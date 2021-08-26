@@ -95,7 +95,6 @@
         <% user = Review.find(review.id).user %>
         <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment, rating:review.rating%>
       <% end %>
-    <%# <% end %>
     </div>
     <script>
     document.querySelector(".toggling")
@@ -126,9 +125,13 @@
           <div class="row">
           <% end %>
           <div class="col ml-3<%= " pr-1" if index.even? %>">
-            <%= link_to product_path(product) do %>
+
+            <%# <%= link_to product_path(product) do %>
+            <%= render 'shared/modal_product_info' , product: product%>
+              <div data-toggle="modal" data-target="#CompareSecond">
               <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: "¥50"%>
-            <% end %>
+            </div>
+            <%# <% end %>
           </div>
           <% if @product.find_related_on_tags.length.odd? && @product.find_related_on_tags.length == index + 1%>
             <div class="col p-0 m-0">
