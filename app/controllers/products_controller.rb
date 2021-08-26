@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    
+    @review = Review.new
     # If product_id exists, generate @product_compare
     if !params[:product_id].nil?
       @product_compare = Product.find(params[:product_id])

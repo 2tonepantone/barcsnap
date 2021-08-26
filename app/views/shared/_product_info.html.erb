@@ -1,3 +1,8 @@
+<div style="position:relative;">
+  <%= link_to product_favorites_path(@product), method: :post do %>
+    <i class="fas fa-heart btn btn-danger" style="position:absolute; left: 0; bottom: -1;"></i>
+  <% end %>
+</div>
 <div class="product-background h-100" style="background-image: url(<%= bg_img_url %>);">
   <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100 position-relative">
   <span class = "h4" style="position: absolute; top:290px; left:30px;"><i class="fas fa-star"></i> <%= rating %> </span>
