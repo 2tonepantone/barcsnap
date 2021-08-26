@@ -21,3 +21,15 @@ body a {
     color: #203d69;
   }
 }
+
+.dropdown-menu > a {
+  text-decoration: none;
+}
+.dropdown-menu > a > p:hover, .dropdown-menu > a:hover {
+  color: #607D8B;
+}
+
+.dropdown-menu > a > p:active, .dropdown-menu > a:active {
+  color: #F5F5F5;
+  background-color: #6c757d;
+}
