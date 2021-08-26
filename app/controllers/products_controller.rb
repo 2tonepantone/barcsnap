@@ -6,11 +6,11 @@ class ProductsController < ApplicationController
     return unless params.key? :sort_by
 
     case params[:sort_by]
-    when "related"
+    when "most_related"
       @products = @product.find_related_on_tags
     when "most_favorited"
       @products = @product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
-    when "rating"
+    when "high_rating"
       @products = @product.find_related_on_tags.sort_by do |p|
         reviews = p.reviews
         rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
     when "newest"
       @products = @product.find_related_on_tags.sort_by(&:created_at).reverse
     else
+      params[:sort_by] = "oldest"
       @products = @product.find_related_on_tags.sort_by(&:created_at)
     end
   end

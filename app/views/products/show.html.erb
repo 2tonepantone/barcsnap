@@ -1,25 +1,28 @@
 <div class="container">
   <% if params[:sort_by] %>
-    <div class="dropdown my-2 text-right">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Sort By
-      </a>
-      <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownMenuLink">
-        <%=  link_to (product_path + '?sort_by=related') do %>
-          <span class="dropdown-item">Most Related</span>
-        <% end %>
-        <%=  link_to (product_path + '?sort_by=most_favorited') do %>
-          <span class="dropdown-item">Most Favorited</span>
-        <% end %>
-        <%=  link_to (product_path + '?sort_by=rating') do %>
-          <span class="dropdown-item">Rating</span>
-        <% end %>
-        <%=  link_to (product_path + '?sort_by=oldest') do %>
-          <span class="dropdown-item">Oldest</span>
-        <% end %>
-        <%=  link_to (product_path + '?sort_by=newest') do %>
-          <span class="dropdown-item">Newest</span>
-        <% end %>
+    <div class="row d-flex justify-content-between">
+      <h1 class="text-dark"><%= params[:sort_by].split('_').join(' ').capitalize %> products</h1>
+      <div class="dropdown my-2 text-right">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort By
+        </a>
+        <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownMenuLink">
+          <%=  link_to (product_path + '?sort_by=most_related') do %>
+            <span class="dropdown-item">Most related</span>
+          <% end %>
+          <%=  link_to (product_path + '?sort_by=most_favorited') do %>
+            <span class="dropdown-item">Most favorited</span>
+          <% end %>
+          <%=  link_to (product_path + '?sort_by=high_rating') do %>
+            <span class="dropdown-item">High rating</span>
+          <% end %>
+          <%=  link_to (product_path + '?sort_by=oldest') do %>
+            <span class="dropdown-item">Oldest</span>
+          <% end %>
+          <%=  link_to (product_path + '?sort_by=newest') do %>
+            <span class="dropdown-item">Newest</span>
+          <% end %>
+        </div>
       </div>
     </div>
     <% @products.each do |product| %>
