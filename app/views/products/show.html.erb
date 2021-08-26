@@ -20,7 +20,7 @@
 
     <% Product.find(params[:id]).reviews.each do |review| %>
       <% user = Review.find(review.id).user %>
-      <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment%>
+      <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment, rating:review.rating%>
     <% end %>
   <% end %>
 
@@ -37,6 +37,11 @@
           <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), product_name: product.name, price: "¥50"%>
         <% end %>
       </div>
+      <% if @product.find_related_on_tags.length == 1%>
+        <div class="col p-0 m-0">
+          <div class="card-category-product mx-1 invisible"></div>
+        </div>
+      <% end %>
       <% if (index.odd? || @product.find_related_on_tags.length == 1) %>
       </div>
     <% end %>
@@ -54,9 +59,14 @@
       <% if (index.even?) %>
         <div class="row">
         <% end %>
-        <div class="col ml-3<%= " pr-1" if index.even? %>">
+        <div class="col">
           <%= render 'shared/product_card', bg_img_url:product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), product_name: product.name, price: "¥50"%>
         </div>
+        <% if @product.find_related_on_tags.length == 1%>
+          <div class="col p-0 m-0">
+            <div class="card-category-product mx-1 invisible"></div>
+          </div>
+        <% end %>
         <% if (index.odd? || @product.find_related_on_tags.length == 1) %>
         </div>
       <% end %>
