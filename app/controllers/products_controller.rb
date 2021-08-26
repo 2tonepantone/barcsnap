@@ -2,32 +2,19 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[show create]
 
   def show
-    @product = Product.find(params[:id])
-    @review = Review.new
+    @product = Product.find(params[:id]) if params[:id].to_i.positive?
     # If product_id exists, generate @product_compare
     if !params[:product_id].nil?
       @product_compare = Product.find(params[:product_id])
     end
-    
+
     # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
-    case params[:sort_by]
-    when "most_related"
-      @products = @product.find_related_on_tags
-    when "most_favorited"
-      @products = @product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
-    when "high_rating"
-      @products = @product.find_related_on_tags.sort_by do |p|
-        reviews = p.reviews
-        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
-        rating
-      end.reverse
-    when "newest"
-      @products = @product.find_related_on_tags.sort_by(&:created_at).reverse
+    if @product.nil? && params[:id] == '0'
+      @products = get_all_product_sorted
     else
-      params[:sort_by] = "oldest"
-      @products = @product.find_related_on_tags.sort_by(&:created_at)
+      @products = get_related_product_sorted(@product)
     end
   end
 
@@ -67,6 +54,45 @@ class ProductsController < ApplicationController
     Product.exists?(barcode: @barcode)
   end
 
+  def get_all_product_sorted
+    case params[:sort_by]
+    when "most_related"
+      @products = Product.all
+    when "most_favorited"
+      @products = Product.all.sort_by { |p| p.favoritors.count }.reverse
+    when "top_rating"
+      @products = Product.all.sort_by do |p|
+        reviews = p.reviews
+        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
+        rating
+      end.reverse
+    when "newest"
+      @products = Product.order(created_at: :desc)
+    else
+      params[:sort_by] = "oldest"
+      @products = Product.order(:created_at)
+    end
+  end
+
+  def get_related_product_sorted(product)
+    case params[:sort_by]
+    when "most_related"
+      @products = product.find_related_on_tags
+    when "most_favorited"
+      @products = product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
+    when "top_rating"
+      @products = product.find_related_on_tags.sort_by do |p|
+        reviews = p.reviews
+        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
+        rating
+      end.reverse
+    when "newest"
+      @products = product.find_related_on_tags.sort_by(&:created_at).reverse
+    else
+      params[:sort_by] = "oldest"
+      @products = product.find_related_on_tags.sort_by(&:created_at)
+    end
+  end
   # def product_params
   #   params.require(:product).permit(:name, :barcode, :company_name,
   #                                   :ingredients, :size, :photo, :reviews, :tags)
