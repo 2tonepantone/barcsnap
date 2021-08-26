@@ -3,6 +3,13 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    
+    # If product_id exists, generate @product_compare
+    if !params[:product_id].nil?
+      @product_compare = Product.find(params[:product_id])
+    end
+    
+    # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
     case params[:sort_by]

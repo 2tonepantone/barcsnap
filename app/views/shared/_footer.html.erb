@@ -1,10 +1,23 @@
 <footer id ="footer-stick" class="bg-light text-center text-lg-start">
   <!-- Copyright -->
-  <div class="text-center p-3 pr-4" style="background-color: rgba(0, 0, 0, 0.2);">
-    <button type="button" class="btn btn-secondary px-2">Retake</button>
-    <button type="button" class="btn btn-secondary px-2">Compare</button>
-    <button type="button" class="btn btn-secondary px-3">Recommend</button>
-    <i class="fas fa-times ml-2"></i>
+  <div class="text-center p-3 pr-4 item-drawer">
+    <button type="button" class="btn btn-secondary px-2 hidding1">Retake</button>
+    <button type="button" class="btn btn-secondary px-2 hidding2">Compare</button>
+    <button type="button" class="btn btn-secondary px-3 hidding3">Recommend</button>
+    <i class="fas fa-chevron-right item-drawer-button"></i>
   </div>
+
+
   <!-- Copyright -->
+  <script>
+  document.querySelector(".item-drawer-button")
+    .addEventListener("click", (event) => {
+      document.querySelector(".item-drawer").classList.toggle("active");
+      document.querySelector(".hidding1").classList.toggle("active")
+      document.querySelector(".hidding2").classList.toggle("active")
+      document.querySelector(".hidding3").classList.toggle("active")
+      document.querySelector(".show-chevron").classList.toggle("active")
+
+    });
+  </script>
 </footer>
