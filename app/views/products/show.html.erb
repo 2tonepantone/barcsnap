@@ -44,12 +44,9 @@
     <!-- Product info card -->
     <%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
     <!-- review_card -->
+    <!-- Button trigger modal -->
 
-    <%= simple_form_for([ @product, @review ]) do |f| %>
-      <%= f.input :rating %>
-      <%= f.input :comment, as: :text %>
-      <%= f.submit "Submit review", class: "btn btn-primary" %>
-    <% end %>
+    <%= render 'shared/modal_form' %>
 
     <% review_count = Product.find(params[:id]).reviews.count %>
     <% review_first =  Product.find(params[:id]).reviews.first%>
@@ -67,6 +64,9 @@
         <div class="card-product-infos">
           <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
         </div>
+      </div>
+      <div class ="comment-box" data-toggle="modal" data-target="#createReview">
+        <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: "Add a public comment..." %>
       </div>
       <% Product.find(params[:id]).reviews.each do |review| %>
         <% user = Review.find(review.id).user %>
