@@ -15,35 +15,29 @@
 
 <table id="customers">
   <tr>
-    <th>name</th>
     <th><%= product_name %></th>
     <th><%= product_name_compare %></th>
   </tr>
   <tr>
-    <td><strong>rating</strong></td>
     <td><%= rating %></td>
     <td><%= rating_compare %></td>
   </tr>
   <tr>
-    <td><strong>company</strong></td>
     <td><%= company_name %></td>
     <td><%= company_name_compare %></td>
   </tr>
   <tr>
-    <td><strong>price</strong></td>
     <td><%= price %></td>
     <td><%= price_compare %></td>
   </tr>
   <% if !ingredients.nil? %>
   <tr>
-    <td><strong>Ingredients</strong></td>
     <td><%= ingredients %></td>
     <td><%= ingredients_compare %></td>
   </tr>
   <% end %>
   <% if !size.nil? %>
   <tr>
-    <td><strong>size</strong></td>
     <td><%= size %></td>
     <td><%= size_compare %></td>
   </tr>
