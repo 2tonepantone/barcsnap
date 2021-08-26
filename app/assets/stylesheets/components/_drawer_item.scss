@@ -1,0 +1,20 @@
+.item-drawer {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.item-drawer.active {
+  /*customizable*/
+  background-color: transparent;
+  height: 0px;
+}
+
+.hidding1.active {
+  visibility: hidden;
+}
+.hidding2.active {
+  visibility: hidden;
+}
+.hidding3.active {
+  visibility: hidden;
+}
+
