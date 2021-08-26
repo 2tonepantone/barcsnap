@@ -8,6 +8,10 @@ class ProductsController < ApplicationController
       @product_compare = Product.find(params[:product_id])
     end
 
+    @product_favorited = false
+    if current_user && @product
+      @product_favorited = current_user.favorited?(@product)
+    end
     # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
