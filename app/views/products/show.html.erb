@@ -44,6 +44,13 @@
     <!-- Product info card -->
     <%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
     <!-- review_card -->
+
+    <%= simple_form_for([ @product, @review ]) do |f| %>
+      <%= f.input :rating %>
+      <%= f.input :comment, as: :text %>
+      <%= f.submit "Submit review", class: "btn btn-primary" %>
+    <% end %>
+
     <% review_count = Product.find(params[:id]).reviews.count %>
     <% review_first =  Product.find(params[:id]).reviews.first%>
     <% user = Review.find(review_first.user_id).user %>
@@ -100,7 +107,7 @@
   <% else %>
     <!-- Product info compare -->
     <div style ="margin-right:-15px">
-      <%= render 'shared/product_info_comparison', product_name: @product.name, product_name_compare: @product_compare.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), bg_img_url_compare: @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", rating_compare:"4.2", company_name: @product.company_name, company_name_compare: @product_compare.company_name, price: "¥100", price_compare:"¥50", ingredients: @product.ingredients, ingredients_compare: @product_compare.ingredients, size: @product.size, size_compare: @product_compare.size%>
+      <%= render 'shared/product_info_comparison', product_name: @product.name, product_name_compare: @product_compare.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), bg_img_url_compare: @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", rating_compare:"4.2", company_name: @product.company_name, company_name_compare: @product_compare.company_name, price: "¥100", price_compare:"¥50", ingredients: @product.ingredients.scan(/[^\、]+[\、]/).map(&:strip).count, ingredients_compare: @product_compare.ingredients.scan(/[^\、]+[\、]/).map(&:strip).count, size: @product.size, size_compare: @product_compare.size%>
     </div>
     <!-- product_card -->
     <div class="row" style="position: relative;">

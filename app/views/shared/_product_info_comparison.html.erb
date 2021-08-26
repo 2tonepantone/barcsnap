@@ -54,11 +54,11 @@
     <div class="row info-style pb-4">
       <div class="col-6">
 
-        <span class="d-flex justify-content-center"><%= product_name %></span>
+        <span class="d-flex justify-content-center h5"><%= product_name %></span>
       </div>
       <div class="col-6">
 
-        <span class="d-flex justify-content-center"><%= product_name_compare %></span>
+        <span class="d-flex justify-content-center h5"><%= product_name_compare %></span>
       </div>
     </div>
     <span class="d-flex justify-content-center py-2">Rating</span>
@@ -88,6 +88,29 @@
         <span class="d-flex justify-content-center py-2"><%= @product_compare.reviews.count %></span>
       </div>
     </div>
+    <% if !ingredients.nil? && !size_compare.nil?%>
+      <span class="d-flex justify-content-center py-2">Ingredients</span>
+      <div class="row info-style">
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= ingredients %></span>
+        </div>
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= ingredients_compare %></span>
+        </div>
+      </div>
+     <% end %>
+     <% if !size.nil? && !size_compare.nil? %>
+      <span class="d-flex justify-content-center py-2">Size</span>
+      <div class="row">
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= size %></span>
+        </div>
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= size_compare %></span>
+        </div>
+      </div>
+     <% end %>
+
     <span class="d-flex justify-content-center py-2">Company</span>
     <div class="row info-style">
       <div class="col-6">
@@ -97,28 +120,6 @@
         <span class="d-flex justify-content-center py-2"><%= company_name_compare %></span>
       </div>
     </div>
-    <% if !ingredients.nil? && !size_compare.nil?%>
-      <span class="d-flex justify-content-center py-2">Ingredients</span>
-      <div class="row info-style">
-        <div class="col-6">
-          <%= ingredients %>
-        </div>
-        <div class="col-6">
-          <%= ingredients_compare %>
-        </div>
-      </div>
-     <% end %>
-     <% if !size.nil? && !size_compare.nil? %>
-      <span class="d-flex justify-content-center py-2">Size</span>
-      <div class="row">
-        <div class="col-6">
-          <%= size %>
-        </div>
-        <div class="col-6">
-          <%= size_compare %>
-        </div>
-      </div>
-     <% end %>
   </div>
 </div>
 

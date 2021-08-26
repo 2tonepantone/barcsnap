@@ -3,12 +3,13 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    
+    # @review = @product.reviews.new
+    @review = Review.new
     # If product_id exists, generate @product_compare
     if !params[:product_id].nil?
       @product_compare = Product.find(params[:product_id])
     end
-    
+
     # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
@@ -32,6 +33,19 @@ class ProductsController < ApplicationController
   end
 
   def create
+    @product = Product.find(params[:id])
+    # @review = @product.reviews.new(reviews_params)
+    @review = Review.new(reviews_params)
+    raise
+    @review.product = @product
+    if @review.save
+      raise
+      redirect_to product_path(@product)
+    else
+      render 'products/show'
+    end
+
+
     @barcode = params[:barcode]
 
     @barcode = convert_to_jancode unless jancode_format?
@@ -71,4 +85,8 @@ class ProductsController < ApplicationController
   #   params.require(:product).permit(:name, :barcode, :company_name,
   #                                   :ingredients, :size, :photo, :reviews, :tags)
   # end
+
+  def reviews_params
+    params.require(:review).permit(:rating, :comment)
+  end
 end
