@@ -3,8 +3,31 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    
+    # If product_id exists, generate @product_compare
     if !params[:product_id].nil?
       @product_compare = Product.find(params[:product_id])
+    end
+    
+    # If sort_by key exists, generate @products
+    return unless params.key? :sort_by
+
+    case params[:sort_by]
+    when "most_related"
+      @products = @product.find_related_on_tags
+    when "most_favorited"
+      @products = @product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
+    when "high_rating"
+      @products = @product.find_related_on_tags.sort_by do |p|
+        reviews = p.reviews
+        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
+        rating
+      end.reverse
+    when "newest"
+      @products = @product.find_related_on_tags.sort_by(&:created_at).reverse
+    else
+      params[:sort_by] = "oldest"
+      @products = @product.find_related_on_tags.sort_by(&:created_at)
     end
   end
 
