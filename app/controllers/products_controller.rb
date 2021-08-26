@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
       @product = jancode_scraper.create_product
 
       if @product.save
+        jancode_scraper.upload_image
         redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
       else
         redirect_to root_path, alert: "Failed to scan barcode. #{@product.errors.full_messages.join(', ')}."

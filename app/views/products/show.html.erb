@@ -12,10 +12,10 @@
         <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span></h5>
       </div>
     </div>
-    <div class="title-card-product2 .bg-secondary">
-      <div class="card-product-infos">
-        <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
-      </div>
+  </div>
+  <div class="title-card-product2 .bg-secondary">
+    <div class="card-product-infos">
+      <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
     </div>
     <% Product.find(params[:id]).reviews.each do |review| %>
       <% display_name = Review.find(review.id).user.display_name %>
@@ -33,17 +33,18 @@
       <% end %>
       <% if index %2 == 0 %>
         <div class="col ml-3 pr-1">
-      <% else %>
-        <div class="col mr-3">
-      <% end %>
-        <%= render 'shared/product_card', bg_img_url:product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), product_name: product.name, price: "¥50"%>
-      </div>
-      <% if ((index - 1) % 2  == 0) && (index - 1 >= 0) %>
+        <% else %>
+          <div class="col mr-3">
+          <% end %>
+          <%= link_to product_path(product) do %>
+            <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), product_name: product.name, price: "¥50"%>
+          <% end %>
+        </div>
+        <% if ((index - 1) % 2  == 0) && (index - 1 >= 0) %>
         </div>
       <% end %>
     <% end %>
   </div>
-<%= render 'shared/footer' %>
 <% else %>
   <!-- Product info compare -->
     <div style ="margin-right:-15px">
@@ -68,8 +69,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- footer -->
-  <%= render 'shared/footer' %>
 <% end %>
-
-
+<!-- footer -->
+<%= render 'shared/footer' %>
