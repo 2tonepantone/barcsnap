@@ -10,7 +10,7 @@ const initScanditSDK = () => {
       vibrateOnScan: true,
       singleImageModeSettings: {
         desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
-        mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS }
+        mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
 
   }).then(function (barcodePicker) {
