@@ -1,5 +1,5 @@
 <!-- Product info card -->
-<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
+<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
 </div>
 <!-- review_card -->
 <% if true %>
@@ -31,7 +31,7 @@
           <div class="col mr-3">
           <% end %>
           <%= link_to product_path(product) do %>
-            <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://i.ytimg.com/vi/I4rS15xBL1Y/maxresdefault.jpg"), product_name: product.name, price: "¥50"%>
+            <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: "¥50"%>
           <% end %>
         </div>
         <% if ((index - 1) % 2  == 0) && (index - 1 >= 0) %>
