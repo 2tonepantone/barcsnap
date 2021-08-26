@@ -166,7 +166,7 @@
               <%= render 'shared/product_card', bg_img_url:product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: "¥50"%>
             <% end %>
           </div>
-          <% if @product.find_related_on_tags.length == 1%>
+          <% if @product.find_related_on_tags.length == 1 && @product.find_related_on_tags.length == index + 1%>
             <div class="col p-0 m-0">
               <div class="card-category-product mx-1 invisible"></div>
             </div>
@@ -195,4 +195,5 @@
 <% end %>
 </div>
 <!-- footer -->
+
 <%= render 'shared/footer' %>
