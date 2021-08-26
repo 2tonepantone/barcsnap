@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
   def create
     @barcode = params[:barcode]
 
-    # check barcode length/format, change it if not 13
     @barcode = convert_to_jancode unless jancode_format?
 
     if in_database?
@@ -36,10 +35,6 @@ class ProductsController < ApplicationController
 
   def convert_to_jancode
     "0" * (13 - @barcode.length) + @barcode
-  end
-
-  def scrape_jancode
-    # put scrape method here
   end
 
   def in_database?
