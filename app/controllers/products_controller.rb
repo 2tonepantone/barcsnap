@@ -21,19 +21,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.find(params[:id])
-    # @review = @product.reviews.new(reviews_params)
-    @review = Review.new(reviews_params)
-    raise
-    @review.product = @product
-    if @review.save
-      raise
-      redirect_to product_path(@product)
-    else
-      render 'products/show'
-    end
-
-
     @barcode = params[:barcode]
 
     @barcode = convert_to_jancode unless jancode_format?
