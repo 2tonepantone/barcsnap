@@ -2,7 +2,7 @@
   overflow: hidden;
   height: 50px;
   border: 0.5px solid rgba(0,0,0,.2);
-  display: flex;
+  // display: flex;
   background-color: white;
   align-items: center;
 }
@@ -72,3 +72,25 @@
   padding: 16px;
   padding-left: 20px;
 }
+
+.comment-box:hover {
+  background-color: rgba(0,0,0,.05);
+}
+
+.toggling {
+  display: block;
+}
+
+.toggling2.active {
+  display: none;
+}
+
+
+.toggling3 {
+  display: none;
+}
+.toggling3.active {
+  display: block;
+}
+
+

@@ -3,6 +3,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id]) if params[:id].to_i.positive?
+    @review = Review.new
+
     # If product_id exists, generate @product_compare
     if !params[:product_id].nil?
       @product_compare = Product.find(params[:product_id])
@@ -101,4 +103,8 @@ class ProductsController < ApplicationController
   #   params.require(:product).permit(:name, :barcode, :company_name,
   #                                   :ingredients, :size, :photo, :reviews, :tags)
   # end
+
+  def reviews_params
+    params.require(:review).permit(:rating, :comment)
+  end
 end

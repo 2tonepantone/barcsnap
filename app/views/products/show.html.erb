@@ -48,16 +48,39 @@
     <!-- Product info card -->
     <%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
     <!-- review_card -->
+    <!-- Button trigger modal -->
+
+    <%= render 'shared/modal_form' %>
+
     <% review_count = Product.find(params[:id]).reviews.count %>
-    <% if false %>
-      <% review_first =  Product.find(params[:id]).reviews.first%>
-      <% user = Review.find(review_first.user_id).user %>
-      <h5 class="ml-3">Reviews <span class="text-muted"><%= review_count %></span></h2>
-      <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: review_first.comment %>
-    <% else %>
-      <div class="title-card-product">
+    <% review_first =  Product.find(params[:id]).reviews.first%>
+    <% user = Review.find(review_first.user_id).user %>
+    <!-- small box before toggling -->
+      <div class="toggling2">
+        <div class="row">
+          <div class="col-10">
+            <h5 class="ml-3">Reviews <span class="text-muted"><%= review_count %></span></h5>
+          </div>
+          <div class="col-2">
+            <i class="fas fa-chevron-down toggling"></i>
+          </div>
+
+        </div>
+
+        <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: review_first.comment %>
+      </div>
+    <!-- Box when toggled -->
+    <div class="toggling3">
+      <div class="title-card-product d-block">
         <div class="card-product-infos">
-          <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span></h5>
+          <div class="row">
+            <div class="col-10">
+              <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span> </h5>
+            </div>
+            <div class="col-2">
+              <i class="fas fa-chevron-up toggling4"></i>
+            </div>
+          </div>
         </div>
       </div>
       <div class="title-card-product2">
@@ -65,11 +88,27 @@
           <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
         </div>
       </div>
+      <div class ="comment-box" data-toggle="modal" data-target="#createReview">
+        <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: "Add a public comment..." %>
+      </div>
       <% Product.find(params[:id]).reviews.each do |review| %>
         <% user = Review.find(review.id).user %>
         <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment, rating:review.rating%>
       <% end %>
-    <% end %>
+    <%# <% end %>
+    </div>
+    <script>
+    document.querySelector(".toggling")
+      .addEventListener("click", (event) => {
+        document.querySelector(".toggling2").classList.toggle("active");
+        document.querySelector(".toggling3").classList.toggle("active");
+      });
+    document.querySelector(".toggling4")
+      .addEventListener("click", (event) => {
+        document.querySelector(".toggling2").classList.toggle("active");
+        document.querySelector(".toggling3").classList.toggle("active");
+      });
+    </script>
     <!-- product_card -->
     <div class="row" style="position: relative;">
       <div class="col-9">

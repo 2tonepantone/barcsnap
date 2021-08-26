@@ -1,53 +1,129 @@
-<div class="row">
-  <div class="col">
-    <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);margin-right: -45px;">
-      <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
-    </div>
-  </div>
-  <div class="col">
-    <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>); margin-left: -45px;">
-      <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
-    </div>
-  </div>
-</div>
-
-
-
 <table id="customers">
   <tr>
-    <th>name</th>
-    <th><%= product_name %></th>
-    <th><%= product_name_compare %></th>
+    <th>
+    <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
+      <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
+    </div></th>
+    <th>
+    <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
+      <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
+    </div>
+    </th>
   </tr>
   <tr>
-    <td><strong>rating</strong></td>
-    <td><%= rating %></td>
-    <td><%= rating_compare %></td>
+    <th><%= product_name %> <i class="fas fa-star"></i> <%= rating %></th>
+    <th><%= product_name_compare %><br> <i class="fas fa-star"></i> <%= rating_compare %> </th>
   </tr>
   <tr>
-    <td><strong>company</strong></td>
     <td><%= company_name %></td>
     <td><%= company_name_compare %></td>
   </tr>
   <tr>
-    <td><strong>price</strong></td>
+
     <td><%= price %></td>
     <td><%= price_compare %></td>
   </tr>
   <% if !ingredients.nil? %>
   <tr>
-    <td><strong>Ingredients</strong></td>
     <td><%= ingredients %></td>
     <td><%= ingredients_compare %></td>
   </tr>
   <% end %>
   <% if !size.nil? %>
   <tr>
-    <td><strong>size</strong></td>
     <td><%= size %></td>
     <td><%= size_compare %></td>
   </tr>
   <% end %>
 </table>
+<div class="container">
+  <div class="compare-table">
+    <span class="d-flex justify-content-center pb-4 h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
+    <div class="row">
+      <div class="col-6">
+        <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
+          <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
+          <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
+        </div>
+      </div>
+    </div>
+    <div class="row info-style pb-4">
+      <div class="col-6">
 
-<select name="" id="" disabled="disabled"></select>
+        <span class="d-flex justify-content-center h5"><%= product_name %></span>
+      </div>
+      <div class="col-6">
+
+        <span class="d-flex justify-content-center h5"><%= product_name_compare %></span>
+      </div>
+    </div>
+    <span class="d-flex justify-content-center py-2">Rating</span>
+    <div class="row info-style">
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><i class="fas fa-star"></i> <%= rating %></span>
+      </div>
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><i class="fas fa-star"></i> <%= rating_compare %></span>
+      </div>
+    </div>
+      <span class="d-flex justify-content-center py-2">Price</span>
+    <div class="row info-style">
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= price %></span>
+      </div>
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= price_compare %></span>
+      </div>
+    </div>
+    <span class="d-flex justify-content-center py-2">Reviews</span>
+    <div class="row info-style">
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= @product.reviews.count %></span>
+      </div>
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= @product_compare.reviews.count %></span>
+      </div>
+    </div>
+    <% if !ingredients.nil? && !size_compare.nil?%>
+      <span class="d-flex justify-content-center py-2">Ingredients</span>
+      <div class="row info-style">
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= ingredients %></span>
+        </div>
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= ingredients_compare %></span>
+        </div>
+      </div>
+     <% end %>
+     <% if !size.nil? && !size_compare.nil? %>
+      <span class="d-flex justify-content-center py-2">Size</span>
+      <div class="row">
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= size %></span>
+        </div>
+        <div class="col-6">
+          <span class="d-flex justify-content-center py-2"><%= size_compare %></span>
+        </div>
+      </div>
+     <% end %>
+
+    <span class="d-flex justify-content-center py-2">Company</span>
+    <div class="row info-style">
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= company_name %></span>
+      </div>
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= company_name_compare %></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
