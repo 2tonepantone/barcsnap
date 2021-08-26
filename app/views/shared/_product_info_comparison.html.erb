@@ -1,41 +1,4 @@
-<table id="customers">
-  <tr>
-    <th>
-    <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
-      <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
-    </div></th>
-    <th>
-    <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
-      <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
-    </div>
-    </th>
-  </tr>
-  <tr>
-    <th><%= product_name %> <i class="fas fa-star"></i> <%= rating %></th>
-    <th><%= product_name_compare %><br> <i class="fas fa-star"></i> <%= rating_compare %> </th>
-  </tr>
-  <tr>
-    <td><%= company_name %></td>
-    <td><%= company_name_compare %></td>
-  </tr>
-  <tr>
 
-    <td><%= price %></td>
-    <td><%= price_compare %></td>
-  </tr>
-  <% if !ingredients.nil? %>
-  <tr>
-    <td><%= ingredients %></td>
-    <td><%= ingredients_compare %></td>
-  </tr>
-  <% end %>
-  <% if !size.nil? %>
-  <tr>
-    <td><%= size %></td>
-    <td><%= size_compare %></td>
-  </tr>
-  <% end %>
-</table>
 <div class="container">
   <div class="compare-table">
     <span class="d-flex justify-content-center pb-4 h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
@@ -59,6 +22,15 @@
       <div class="col-6">
 
         <span class="d-flex justify-content-center h5"><%= product_name_compare %></span>
+      </div>
+    </div>
+    <span class="d-flex justify-content-center py-2">Category</span>
+    <div class="row info-style">
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= @product.tag_list.second %></span>
+      </div>
+      <div class="col-6">
+        <span class="d-flex justify-content-center py-2"><%= @product_compare.tag_list.second %></span>
       </div>
     </div>
     <span class="d-flex justify-content-center py-2">Rating</span>
