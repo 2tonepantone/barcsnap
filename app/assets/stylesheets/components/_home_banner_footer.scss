@@ -28,6 +28,9 @@
 }
 
 .barcode-text {
-  font-size: 48px;
-  font-family: 'Libre Barcode 128 Text', cursive;
+  font-size: 54px;
+  font-family: 'Libre Barcode 128 Text';
+  color: #F5F3F5;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-weight: 400;
 }
