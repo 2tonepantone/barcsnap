@@ -25,11 +25,11 @@ body a {
 .dropdown-menu > a {
   text-decoration: none;
 }
-.dropdown-menu > a > p:hover, .dropdown-menu > a:hover {
+.dropdown-menu > a > span:hover, .dropdown-menu > a > p:hover {
   color: #607D8B;
 }
 
-.dropdown-menu > a > p:active, .dropdown-menu > a:active {
+.dropdown-menu > a > span:active, .dropdown-menu > a > p:active {
   color: #F5F5F5;
   background-color: #6c757d;
 }
