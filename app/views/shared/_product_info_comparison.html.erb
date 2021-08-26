@@ -11,18 +11,15 @@
     </th>
   </tr>
   <tr>
-    <th><%= product_name %></th>
-    <th><%= product_name_compare %></th>
-  </tr>
-  <tr>
-    <td><%= rating %></td>
-    <td><%= rating_compare %></td>
+    <th><%= product_name %> <i class="fas fa-star"></i> <%= rating %></th>
+    <th><%= product_name_compare %><br> <i class="fas fa-star"></i> <%= rating_compare %> </th>
   </tr>
   <tr>
     <td><%= company_name %></td>
     <td><%= company_name_compare %></td>
   </tr>
   <tr>
+
     <td><%= price %></td>
     <td><%= price_compare %></td>
   </tr>
@@ -39,5 +36,7 @@
   </tr>
   <% end %>
 </table>
+
+
 
 <select name="" id="" disabled="disabled"></select>
