@@ -5,18 +5,28 @@
         Sort By
       </a>
       <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">Most Related</a>
-        <a class="dropdown-item" href="#">Rating</a>
-        <a class="dropdown-item" href="#">Oldest</a>
-        <a class="dropdown-item" href="#">Newest</a>
+        <%=  link_to (product_path + '?sort_by=related') do %>
+          <span class="dropdown-item">Most Related</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=most_favorited') do %>
+          <span class="dropdown-item">Most Favorited</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=rating') do %>
+          <span class="dropdown-item">Rating</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=oldest') do %>
+          <span class="dropdown-item">Oldest</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=newest') do %>
+          <span class="dropdown-item">Newest</span>
+        <% end %>
       </div>
     </div>
-    <% products = @product.find_related_on_tags %>
-    <% products.each do |product| %>
+    <% @products.each do |product| %>
       <% image_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
       <% days_ago = (Date.today - Date.new(product.created_at.year, product.created_at.month, product.created_at.day)).to_i %>
       <% reviews = product.reviews %>
-      <% rating = (reviews.map(&:rating).sum / reviews.count).round(2) %>
+      <% rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : '-' %>
       <div class="my-1">
         <%= link_to product_path(product) do %>
           <%= render 'shared/user_history_card', img_url: image_url, product_name: product.name, price:"⭐ #{rating}", scanned_time: '' %>
@@ -51,7 +61,7 @@
     </div>
     <div class="col">
       <%=  link_to (product_path + '?sort_by=related') do %>
-        <p class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></p>
+        <span class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></span>
       <% end %>
     </div>
   </div>
