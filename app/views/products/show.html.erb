@@ -13,8 +13,8 @@
             <%=  link_to (product_path + '?sort_by=most_related') do %>
               <span class="dropdown-item">Most related</span>
             <% end %>
-            <%=  link_to (product_path + '?sort_by=most_favorited') do %>
-              <span class="dropdown-item">Most favorited</span>
+            <%=  link_to (product_path + '?sort_by=most_favorite') do %>
+              <span class="dropdown-item">Most favorite</span>
             <% end %>
             <%=  link_to (product_path + '?sort_by=top_rating') do %>
               <span class="dropdown-item">Top rating</span>
@@ -35,8 +35,12 @@
       <% reviews = product.reviews %>
       <% rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : '-' %>
       <div class="my-1">
+        <% product_favorited = false %>
+        <% if current_user && product %>
+          <% product_favorited = current_user.favorited?(product) %>
+        <% end %>
         <%= link_to product_path(product) do %>
-          <%= render 'shared/user_history_card', img_url: image_url, product_name: product.name, price:"⭐ #{rating}", scanned_time: '' %>
+          <%= render 'shared/user_history_card', product: product, product_favorited: product_favorited, img_url: image_url, product_name: product.name, price:"⭐ #{rating}", scanned_time: '' %>
         <% end %>
       </div>
     <% end %>
