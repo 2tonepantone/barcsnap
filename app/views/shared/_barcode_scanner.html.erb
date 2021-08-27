@@ -1,5 +1,5 @@
 <div class="container">
-  <div id="scandit-barcode-picker" style="max-width: 1280px; max-height: 50%;">
+  <div id="scandit-barcode-picker" style="max-width: 1280px; max-height: 80%;">
     <%= form_with url: "/products", class: 'd-none', method: "POST" do |form| %>
       <%= form.label :barcode, "Barcode number:" %>
       <%= form.text_field :barcode, id: 'barcodeInput' %>
