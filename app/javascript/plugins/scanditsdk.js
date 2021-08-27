@@ -6,10 +6,11 @@ const initScanditSDK = () => {
     engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/",
   }).then(() => {
     ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
+      accessCamera: false,
       playSoundOnScan: false,
       vibrateOnScan: true,
       singleImageModeSettings: {
-        desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
+        desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK },
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
 
@@ -20,6 +21,10 @@ const initScanditSDK = () => {
         codeDuplicateFilter: 3000, // Minimum delay between duplicate results
       });
       barcodePicker.applyScanSettings(scanSettings);
+      const startScanner = document.getElementById("start-scanner");
+      startScanner.addEventListener("click", (event) => {
+        barcodePicker.accessCamera();
+      });
       barcodePicker.on("scan", (scanResult) => {
         let barcode = scanResult.barcodes[0].data;
         const input = document.getElementById('barcodeInput');
