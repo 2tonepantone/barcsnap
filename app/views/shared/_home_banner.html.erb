@@ -30,8 +30,8 @@
     <div class="container mt-auto">
       <h1 class="normal">Get info on a Japanese product by scanning it's barcode!</h1>
       <% body_content = render 'shared/barcode_scanner' %>
-      <%= render 'shared/modal', modal_id: 'camera', modal_title: 'Camera',
-        text_header: "It's time to snap!", text_body: 'Show me your barcode!', body_content: body_content,
+      <%= render 'shared/modal', modal_id: 'camera', modal_title: 'Show me your barcode!',
+        text_header: '', text_body: '', body_content: body_content,
         redirect_path: root_path, btn_modal_confirm: 'Home'  %>
       <%# <div class="card mb-3 mt-3"> %>
       <p class="barcode-text text-center">Barcode Snap!</a>
