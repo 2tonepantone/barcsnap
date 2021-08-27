@@ -1,3 +1,4 @@
+// This scanner scans and returns one barcode at a time.
 import * as ScanditSDK from "scandit-sdk";
 import { SingleImageModeSettings } from "scandit-sdk";
 
@@ -13,12 +14,10 @@ const initScanditSDK = () => {
         desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
-
   }).then(function (barcodePicker) {
-      // barcodePicker is ready here, show a message every time a barcode is scanned
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: 3000, // Minimum delay between duplicate results
+        codeDuplicateFilter: 3000, // Minimum delay between allowing duplicate results
       });
       barcodePicker.applyScanSettings(scanSettings);
       const startScanner = document.getElementById("start-scanner");
