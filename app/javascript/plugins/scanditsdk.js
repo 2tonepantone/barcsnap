@@ -14,10 +14,10 @@ const initScanditSDK = () => {
         desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
-  }).then(function (barcodePicker) {
+    }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: 3000, // Minimum delay between allowing duplicate results
+        codeDuplicateFilter: 3000, // Minimum delay between allowing the same barcodes
       });
       barcodePicker.applyScanSettings(scanSettings);
       const startScanner = document.getElementById("start-scanner");
