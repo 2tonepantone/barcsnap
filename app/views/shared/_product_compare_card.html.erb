@@ -1,5 +1,4 @@
-
-<div class="container">
+<div class="container px-0">
   <div class="compare-table">
     <span class="d-flex justify-content-center pb-4 h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
     <div class="row">
@@ -16,11 +15,9 @@
     </div>
     <div class="row info-style pb-4">
       <div class="col-6">
-
         <span class="d-flex justify-content-center h5"><%= product_name %></span>
       </div>
       <div class="col-6">
-
         <span class="d-flex justify-content-center h5"><%= product_name_compare %></span>
       </div>
     </div>
@@ -42,7 +39,7 @@
         <span class="d-flex justify-content-center py-2"><i class="fas fa-star"></i> <%= rating_compare %></span>
       </div>
     </div>
-      <span class="d-flex justify-content-center py-2">Price</span>
+    <span class="d-flex justify-content-center py-2">Price</span>
     <div class="row info-style">
       <div class="col-6">
         <span class="d-flex justify-content-center py-2"><%= price %></span>
@@ -70,8 +67,8 @@
           <span class="d-flex justify-content-center py-2"><%= ingredients_compare %></span>
         </div>
       </div>
-     <% end %>
-     <% if !size.nil? && !size_compare.nil? %>
+    <% end %>
+    <% if !size.nil? && !size_compare.nil? %>
       <span class="d-flex justify-content-center py-2">Size</span>
       <div class="row">
         <div class="col-6">
@@ -81,8 +78,7 @@
           <span class="d-flex justify-content-center py-2"><%= size_compare %></span>
         </div>
       </div>
-     <% end %>
-
+    <% end %>
     <span class="d-flex justify-content-center py-2">Company</span>
     <div class="row info-style">
       <div class="col-6">
@@ -94,8 +90,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-

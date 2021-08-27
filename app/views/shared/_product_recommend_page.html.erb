@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-8 my-auto pr-0 align-middle">
+    <h3 class="text-dark my-auto"><%= params[:sort_by].split('_').join(' ').capitalize %> products</h3>
+  </div>
+  <div class="col pl-1 my-auto align-middle">
+    <div class="dropdown my-2 text-right">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort By
+      </a>
+      <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownMenuLink">
+        <%=  link_to (product_path + '?sort_by=most_related') do %>
+          <span class="dropdown-item">Most related</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=most_favorite') do %>
+          <span class="dropdown-item">Most favorite</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=top_rating') do %>
+          <span class="dropdown-item">Top rating</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=oldest') do %>
+          <span class="dropdown-item">Oldest</span>
+        <% end %>
+        <%=  link_to (product_path + '?sort_by=newest') do %>
+          <span class="dropdown-item">Newest</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% @products.each do |product| %>
+  <% image_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+  <% days_ago = (Date.today - Date.new(product.created_at.year, product.created_at.month, product.created_at.day)).to_i %>
+  <% reviews = product.reviews %>
+  <% rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : '-' %>
+  <div class="my-1">
+    <% product_favorited = false %>
+    <% if current_user && product %>
+      <% product_favorited = current_user.favorited?(product) %>
+    <% end %>
+    <%= link_to product_path(product) do %>
+      <%= render 'shared/user_history_card', product: product, product_favorited: product_favorited, img_url: image_url, product_name: product.name, price:"⭐ #{rating}", scanned_time: '' %>
+    <% end %>
+  </div>
+<% end %>

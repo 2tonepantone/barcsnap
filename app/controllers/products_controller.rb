@@ -84,7 +84,7 @@ class ProductsController < ApplicationController
     case params[:sort_by]
     when "most_related"
       @products = product.find_related_on_tags
-    when "most_favorited"
+    when "most_favorite"
       @products = product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
     when "top_rating"
       @products = product.find_related_on_tags.sort_by do |p|
