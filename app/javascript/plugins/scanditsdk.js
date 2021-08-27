@@ -10,7 +10,7 @@ const initScanditSDK = () => {
       playSoundOnScan: false,
       vibrateOnScan: true,
       singleImageModeSettings: {
-        desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK },
+        desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
 
