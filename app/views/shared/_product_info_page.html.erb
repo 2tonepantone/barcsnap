@@ -4,8 +4,10 @@
 <!-- Button trigger modal -->
 <%= render 'shared/modal_form' %>
 <% review_count = Product.find(params[:id]).reviews.count %>
-<% review_first =  Product.find(params[:id]).reviews.first%>
-<% user = Review.find(review_first.user_id).user %>
+<% if review_count > 0 %>
+  <% review_first =  Product.find(params[:id]).reviews.first%>
+  <% user = review_first.user %>
+<% end %>
 <!-- small box before toggling -->
 <div class="toggling2">
   <div class="row">
@@ -16,7 +18,10 @@
       <i class="fas fa-chevron-down toggling"></i>
     </div>
   </div>
-  <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: review_first.comment %>
+  <% if review_count > 0 %>
+    <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: review_first.comment %>
+  <% else %>
+  <% end %>
 </div>
 <!-- Box when toggled -->
 <div class="toggling3">
@@ -42,7 +47,11 @@
       <!-- <p class="my-auto">Navbar punchline</p> -->
       <%= render 'shared/review_card_no_click', bg_img_url:image_path("https://dummyimage.com/25x25/fff/000&text=%3F"), review: "Add a public comment..." %>
     <% else %>
-      <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: "Add a public comment..." %>
+      <% if review_count > 0 %>
+        <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: "Add a public comment..." %>
+      <% else %>
+        <%= render 'shared/review_card_no_click', bg_img_url: cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill), review: "Add a public comment..." %>
+      <% end %>
     <% end %>
   </div>
   <% Product.find(params[:id]).reviews.each do |review| %>

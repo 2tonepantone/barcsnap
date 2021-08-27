@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="<%= modal_id %>Label"><%= modal_title %></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close stop-scanner" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -16,9 +16,9 @@
         <%= body_content if body_content %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary stop-scanner" data-dismiss="modal">Close</button>
         <%= link_to redirect_path do %>
-          <button type="button" class="btn btn-primary" data-dismiss="modal"><%= btn_modal_confirm %></button>
+          <button type="button" class="btn btn-primary stop-scanner" data-dismiss="modal"><%= btn_modal_confirm %></button>
         <% end %>
       </div>
     </div>
