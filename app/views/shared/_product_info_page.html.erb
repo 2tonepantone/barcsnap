@@ -6,7 +6,7 @@
 <% review_count = Product.find(params[:id]).reviews.count %>
 <% if review_count > 0 %>
   <% review_first =  Product.find(params[:id]).reviews.first%>
-  <% user = Review.find(review_first.user_id).user %>
+  <% user = review_first.user %>
 <% end %>
 <!-- small box before toggling -->
 <div class="toggling2">
