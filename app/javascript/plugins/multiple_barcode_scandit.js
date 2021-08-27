@@ -31,7 +31,7 @@ const initScanditSDK = () => {
         });
       });
       barcodePicker.on("scan", (scanResult) => {
-        let barcodes = scanResult.barcodes;
+        let barcodes = scanResult.barcodes.map(barcode => barcode.data);
         console.log(barcodes);
         console.log(scanResult);
         // const input = document.getElementById('barcodeInput');
