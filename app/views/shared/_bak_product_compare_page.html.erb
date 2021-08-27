@@ -1,0 +1,51 @@
+<!-- Product info compare -->
+<div style ="margin-right:-15px">
+  <%= render 'shared/product_compare_card', product_name: @product.name, product_name_compare: @product_compare.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), bg_img_url_compare: @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", rating_compare:"4.2", company_name: @product.company_name, company_name_compare: @product_compare.company_name, price: "¥100", price_compare:"¥50", ingredients: @product.ingredients, ingredients_compare: @product_compare.ingredients, size: @product.size, size_compare: @product_compare.size%>
+</div>
+<!-- product_card -->
+<div class="row" style="position: relative;">
+  <div class="col-9">
+    <h4 class="mb-1">Recommended for you</h4>
+  </div>
+  <div class="col">
+    <%=  link_to (product_path(@product) + '?sort_by=most_related') do %>
+      <span class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></span>
+    <% end %>
+  </div>
+</div>
+<div class="cards-product">
+  <% @product.find_related_on_tags.each_with_index do |product, index| %>
+    <% if (index.even?) %>
+      <div class="row">
+      <% end %>
+      <div class="col">
+        <%= link_to product_path(product) do %>
+          <%= render 'shared/product_card', bg_img_url:product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: "¥50"%>
+        <% end %>
+      </div>
+      <% if @product.find_related_on_tags.length == 1 && @product.find_related_on_tags.length == index + 1%>
+        <div class="col p-0 m-0">
+          <div class="card-category-product mx-1 invisible"></div>
+        </div>
+      <% end %>
+      <% if (index.odd? || @product.find_related_on_tags.length == 1) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="cards-product">
+  <% @product.find_related_on_tags.each_with_index do |product, index| %>
+    <% if (index % 2  == 0) %>
+      <div class="row">
+      <% end %>
+      <div class="col ml-3<%= " pr-1" if index.even? %>">
+        <%= link_to product_path(product) do %>
+          <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: "¥50"%>
+        <% end %>
+      </div>
+      <% if (((index - 1) % 2  == 0 && index - 1 >= 0) || @product.find_related_on_tags.length == 1) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+</div>
