@@ -25,9 +25,10 @@ const initScanditSDK = () => {
       startScanner.addEventListener("click", (event) => {
         barcodePicker.accessCamera();
       });
-      const stopScanner = document.getElementById("stop-scanner");
-      stopScanner.addEventListener("click", (event) => {
-        barcodePicker.accessCamera(false);
+      document.querySelectorAll(".stop-scanner").forEach((stopButton) => {
+        stopButton.addEventListener("click", (event) => {
+          barcodePicker.pauseScanning(true)
+        });
       });
       barcodePicker.on("scan", (scanResult) => {
         let barcode = scanResult.barcodes[0].data;
