@@ -1,8 +1,8 @@
-<div class="modal fade" id="CompareSecond" tabindex="-1" aria-labelledby="createCourseLabel" aria-hidden="true">
+<div class="modal fade" id="<%= modal_id %>" tabindex="-1" aria-labelledby="<%= modal_id %>Label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="createCourseLabel">Create New Course</h5>
+          <h5 class="modal-title" id="<%= modal_id %>Label"><%= product.name %></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -10,10 +10,10 @@
         <div class="modal-body">
           Choose an option. <br>
           <%= link_to product_path(product) do %>
-            <span class="btn btn-dark flex-grow-1" data-toggle="modal" data-target="#CompareSecond">More infomation</span>
+            <span class="btn btn-dark flex-grow-1" data-toggle="modal" data-target="#<%= modal_id %>">More infomation</span>
           <% end %>
           <%= link_to product_path(@product) + "?product_id=#{product.id}" do %>
-            <span class="btn btn-dark flex-grow-1" data-toggle="modal" data-target="#CompareSecond">Compare this product</span>
+            <span class="btn btn-dark flex-grow-1" data-toggle="modal" data-target="#<%= modal_id %>">Compare this product</span>
           <% end %>
         </div>
       </div>
