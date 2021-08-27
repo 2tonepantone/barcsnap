@@ -14,8 +14,9 @@
       <% product_row.each do |product| %>
         <div class="col p-0 m-0">
           <% if show_compare_option %>
-            <%= render 'shared/modal_product_info' , product: product %>
-            <div data-toggle="modal" data-target="#CompareSecond">
+          <% modal_id = "product#{product.id}" %>
+            <%= render 'shared/modal_product_info',product: product, modal_id: modal_id %>
+            <div data-toggle="modal" data-target="#<%= modal_id %>" >
               <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: "¥50"%>
             </div>
           <% else %>
