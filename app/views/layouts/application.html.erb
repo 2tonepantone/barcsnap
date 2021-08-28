@@ -11,9 +11,11 @@
     <meta name="author" content="Kyle Bailey, Kochapas Santibut, Kandanai Leenutaphong">
     <!-- Facebook -->
     <meta property="og:title" content="<%= title %>">
-    <meta property="og:site_name" content="<%= site_name %>"/>
+    <meta property="og:site_name" content="<%= site_name %>">
     <meta property="og:description" content="<%= description %>">
-    <meta property="og:image" content="images/facebook-card.jpg">
+    <meta property="og:image" content="<%= image_url("facebook-card.jpg") %>">
+    <meta property="og:url" content="https://www.barcsnap.com">
+    <meta property="og:type" content="website" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
