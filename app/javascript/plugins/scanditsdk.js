@@ -13,7 +13,6 @@ const initScanditSDK = () => {
         desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
-
   }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
