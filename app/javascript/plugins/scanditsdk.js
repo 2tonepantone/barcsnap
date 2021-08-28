@@ -20,8 +20,7 @@ const initScanditSDK = () => {
         codeDuplicateFilter: 3000, // Minimum delay between duplicate results
       });
       barcodePicker.applyScanSettings(scanSettings);
-      const scannerStart = document.querySelectorAll(".scanner-start");
-      scannerStart.forEach((startButton) => {
+      document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
           barcodePicker.accessCamera();
         });
