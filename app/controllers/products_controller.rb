@@ -31,7 +31,13 @@ class ProductsController < ApplicationController
 
     if in_database?
       @product = Product.find_by(barcode: @barcode)
-      redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
+      if params[:compare] == "1"
+        @compare_product = @product
+        @first_product = Product.find(params[:first_product_id])
+        redirect_to product_path(@first_product) + "?product_id=#{@compare_product.id}"
+      elsif params[:compare] == "0"
+        redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
+      end
     else
       jancode_scraper = ScrapeJancodeService.new(@barcode)
       jancode_scraper.call
