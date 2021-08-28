@@ -9,8 +9,8 @@
         </div>
         <%= simple_form_for [@product, @review] do |f| %>
           <div class="modal-body">
-            <%= f.input :rating %>
-            <%= f.input :comment, as: :text %>
+            <%= f.input :rating, input_html: { min: '0', max: '5' }, required: true %>
+            <%= f.input :comment, as: :text, required: true, error: 'This is a custom error message' %>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
