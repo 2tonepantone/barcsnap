@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Barcsnap</title>
+    <!-- Meta data for SEO -->
+    <% site_name = 'Barcsnap' %>
+    <% title = "#{site_name} - Snap the barcode!" %>
+    <% description = 'Get the information on Japanese products by scanning its barcode!' %>
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="keywords" content="Barcode Scanner, Search, Product Information, Barcode Database">
+    <meta name="author" content="Kyle Bailey, Kochapas Santibut, Kandanai Leenutaphong">
+    <!-- Facebook -->
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:site_name" content="<%= site_name %>"/>
+    <meta property="og:description" content="<%= description %>">
+    <meta property="og:image" content="facebook-card.jpg">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
