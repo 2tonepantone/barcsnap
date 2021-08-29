@@ -3,7 +3,7 @@
     <!-- If sort_by params exist, render the recommendation page -->
     <%= render 'shared/product_recommend_page' %>
   <% elsif params[:product_id] %>
-    <!-- If sort_by product_id exist, render the product comparison page -->
+    <!-- If product_id params exist, render the product comparison page -->
     <%= render 'shared/product_compare_page' %>
   <% else %>
     <!-- the "show" page should be a default fallback -->
