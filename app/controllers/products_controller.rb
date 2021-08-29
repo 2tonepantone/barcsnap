@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
         @first_product = Product.find(params[:first_product_id])
         redirect_to product_path(@first_product) + "?product_id=#{@compare_product.id}"
       elsif params[:compare] == "0"
-        redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
+        redirect_to product_path(@product)
       end
     else
       jancode_scraper = ScrapeJancodeService.new(@barcode)
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
 
       if @product.save
         jancode_scraper.upload_image
-        redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
+        redirect_to product_path(@product)
       else
         redirect_back(fallback_location: root_path,
                       alert: "Product info unavailable. Please try a different barcode!")
