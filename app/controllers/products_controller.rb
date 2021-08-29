@@ -47,7 +47,8 @@ class ProductsController < ApplicationController
         jancode_scraper.upload_image
         redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
       else
-        redirect_to root_path, alert: "Failed to scan barcode. #{@product.errors.full_messages.join(', ')}."
+        redirect_back(fallback_location: root_path,
+                      alert: "Product info unavailable. Please try a different barcode!")
       end
     end
   end
