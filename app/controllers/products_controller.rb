@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
         @compare_product = @product
         @first_product = Product.find(params[:first_product_id])
         redirect_to product_path(@first_product) + "?product_id=#{@compare_product.id}"
-      elsif params[:compare] == "0"
+      else
         redirect_to product_path(@product)
       end
     else
