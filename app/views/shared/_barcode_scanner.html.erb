@@ -3,9 +3,9 @@
     <%= form_with url: "/products", class: '', method: "POST" do |form| %>
       <%= form.label :barcode, "Barcode number:" %>
       <%= form.text_field :barcode, id: 'barcodeInput' %>
-      <%= form.label :compare, "Scan and compare" %>
-      <%= form.check_box :compare, id: 'barcodeCompare' %>
-      <% if product %>
+      <% if @product %>
+        <%= form.label :compare, "Scan and compare" %>
+        <%= form.check_box :compare, id: 'barcodeCompare' %>
         <%= form.label :first_product_id, "Compare product id:" %>
         <%= form.number_field :first_product_id, id: 'compareProductId', value: product.id %>
       <% end %>
