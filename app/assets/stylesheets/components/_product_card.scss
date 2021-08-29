@@ -4,6 +4,15 @@
   grid-gap: 16px;
 }
 
+.card-effect {
+  color: rgb(55, 61, 60);
+  opacity: 0.9;
+}
+.card-effect:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
   .cards-product {

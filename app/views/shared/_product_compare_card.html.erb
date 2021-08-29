@@ -3,22 +3,30 @@
     <span class="d-flex justify-content-center pb-4 h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
     <div class="row">
       <div class="col-6">
-        <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
-          <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
-        </div>
+        <%= link_to product_path(@product) do %>
+          <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
+            <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
+          </div>
+        <% end %>
       </div>
       <div class="col-6">
-        <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
-          <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
-        </div>
+        <%= link_to product_path(@product_compare) do %>
+          <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
+            <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="row info-style pb-4">
       <div class="col-6">
-        <span class="d-flex justify-content-center h5 pt-2"><%= product_name %></span>
+        <%= link_to product_path(@product) do %>
+          <span class="d-flex justify-content-center h5 pt-2"><%= product_name %></span>
+        <% end %>
       </div>
       <div class="col-6">
-        <span class="d-flex justify-content-center h5 pt-2"><%= product_name_compare %></span>
+        <%= link_to product_path(@product_compare) do %>
+          <span class="d-flex justify-content-center h5 pt-2"><%= product_name_compare %></span>
+        <% end %>
       </div>
     </div>
     <span class="d-flex justify-content-center py-2">Category</span>
