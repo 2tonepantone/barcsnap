@@ -25,16 +25,3 @@
         text_header: ' ', text_body: ' ', body_content: body_content,
         redirect_path: root_path, btn_modal_confirm: 'Home'  %>
 </div>
-<div class="col-6 row justify-content-center">
-  <%= link_to product_path(@product) + "?product_id=#{23}" do %>
-    <span class="btn btn-dark flex-grow-1" data-toggle="modal" data-target="#CompareSecond">Compare this product</span>
-  <% end %>
-</div>
-<script>
-  document.querySelector('.scanner-new').addEventListener("click", () => {
-      document.getElementById("barcodeCompare").checked = false;
-    })
-    document.querySelector('.barcode-compare').addEventListener("click", () => {
-      document.getElementById("barcodeCompare").checked = true;
-    })
-</script>
