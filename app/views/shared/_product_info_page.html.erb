@@ -1,9 +1,9 @@
 <!-- Product info card -->
-<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size%>
+<% review_count = Product.find(params[:id]).reviews.count %>
+<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size, review_count: review_count%>
 <!-- review_card -->
 <!-- Button trigger modal -->
 <%= render 'shared/modal_form' %>
-<% review_count = Product.find(params[:id]).reviews.count %>
 <% if review_count > 0 %>
   <% review_first =  Product.find(params[:id]).reviews.first%>
   <% user = review_first.user %>

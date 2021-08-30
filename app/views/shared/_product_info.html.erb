@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <div class="card-category-product product-background mx-1 position-relative bg-white border-bottom" style="background-image: url(<%= bg_img_url %>); background-size: contain;">
-    <p class="mx-1 my-1 position-absolute badge badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong></p>
+    <p class="mx-1 my-1 position-absolute badge badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
     <%= link_to product_favorites_path(@product), method: :post do %>
       <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; top: 0;"></i>
     <% end %>
