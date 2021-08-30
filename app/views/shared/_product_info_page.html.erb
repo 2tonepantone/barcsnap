@@ -1,6 +1,8 @@
 <!-- Product info card -->
 <% review_count = Product.find(params[:id]).reviews.count %>
-<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating:"4.7", company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size, review_count: review_count%>
+<% avg_rating = @product.avg_rating %>
+<% rating = avg_rating ? avg_rating.round(2) : '-' %>
+<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating: rating, company_name: @product.company_name, ingredients: @product.ingredients, size: @product.size, review_count: review_count%>
 <!-- review_card -->
 <!-- Button trigger modal -->
 <%= render 'shared/modal_form' %>
@@ -10,13 +12,9 @@
 <% end %>
 <!-- small box before toggling -->
 <div class="toggling2">
-  <div class="row p-3">
-    <div class="col-11">
-      <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
-    </div>
-    <div class="col-1">
-      <i class="fas fa-chevron-down toggling"></i>
-    </div>
+  <div class="row px-3 d-flex justify-content-between">
+    <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
+    <i class="fas fa-chevron-down toggling mr-1"></i>
   </div>
   <% if review_count > 0 %>
     <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: review_first.comment %>
@@ -27,13 +25,9 @@
 <div class="toggling3">
   <div class="title-card-product d-block">
     <div class="card-product-infos">
-      <div class="row">
-        <div class="col-11">
-          <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span> </h5>
-        </div>
-        <div class="col-1">
-          <i class="fas fa-chevron-up toggling4"></i>
-        </div>
+      <div class="row d-flex justify-content-between">
+        <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
+        <i class="fas fa-chevron-up toggling4 mr-1"></i>
       </div>
     </div>
   </div>
