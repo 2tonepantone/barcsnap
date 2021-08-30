@@ -9,28 +9,45 @@
 </div>
 <div class="card-category bg-white w-100 text-justify-content-around">
   <div class="m-4">
-    <h5 class="info-style p-2">
+    <div class="row info-style p-3 d-flex justify-content-center">
       <strong> <%= product_name %> <span class = "h5"><i class="fas fa-star"></i> <%= rating %> </span></strong>
-    </h5>
-    <p class="info-style p-2"><strong>Category:</strong> <%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %></p>
+    </div>
+    <div class="row p-0 d-flex justify-content-center">
+      <p><strong>Category:</strong>
+    </div>
+    <div class="row info-style p-0 d-flex justify-content-center">
+      <p><%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %><p>
+    </div>
     <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
-      <p class="info-style p-2">
-        <strong>Ingredients:</strong>
-        <% if ingredients.length > 50  %>
-          <%= first_string = ingredients.slice(0,50)  %><span class="dots">...</span>
+      <div class="row info-style p-1 d-flex justify-content-center">
+        <p><strong>Ingredients:</strong></p>
+        <p>
+        <% if ingredients.length > 10  %>
+          <%= first_string = ingredients.slice(0,10)  %><span class="dots">...</span>
           <span class="more">
-            <%= second_string = ingredients.slice(50,ingredients.length-50) %>
+            <%= second_string = ingredients.slice(10,ingredients.length-10) %>
           </span>
           <span class="read-more">Read more</span>
         <% else %>
           <%= ingredients %>
         <% end %>
-      </p>
+        </p>
+      </div>
     <% end %>
     <% if defined?(size) && size && size.length.positive? %>
-      <p class="info-style p-2"><strong>Size:</strong> <%= size %></p>
+        <div class="row  p-0 d-flex justify-content-center">
+          <p><strong>Size:</strong></p>
+        </div>
+        <div class="row info-style justify-content-center">
+          <p><%= size %></p>
+        </div>
     <% end %>
-    <p class="info-style p-2"><strong>Company name:</strong> <%= company_name %></p>
+    <div class="row p-0 d-flex justify-content-center">
+      <p><strong>Company name:</strong></p>
+    </div>
+    <div class="row info-style p-0 d-flex justify-content-center">
+      <p><%= company_name %></p>
+    </div>
   </div>
 </div>
 
