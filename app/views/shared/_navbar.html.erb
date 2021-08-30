@@ -16,28 +16,30 @@
       <% cl_image = cl_image_tag("https://dummyimage.com/25x25/fff/000&text=#{initial}", type: "fetch", class: "rounded-circle my-auto") %>
     <% end %>
   <% end %>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= cl_image %>
-      <i class="fas fa-chevron-down"></i>
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      <% if user_signed_in? %>
-        <p class="dropdown-item disabled">Welcome, <%= username %>!</p>
-        <div class="dropdown-divider"></div>
-        <%= link_to '#' do %>
-          <p class="dropdown-item">My User Profile</p>
+  <div class="d-flex">
+    <%= cl_image if current_user %>
+    <li class="nav-item dropdown">
+      <a class="nav-link pl-3 pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <% if user_signed_in? %>
+          <p class="dropdown-item disabled">Welcome, <%= username %>!</p>
+          <div class="dropdown-divider"></div>
+          <%= link_to '#' do %>
+            <p class="dropdown-item">My User Profile</p>
+          <% end %>
+          <%= link_to edit_user_registration_path do %>
+            <p class="dropdown-item">Update my profile</p>
+          <% end %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
         <% end %>
-        <%= link_to edit_user_registration_path do %>
-          <p class="dropdown-item">Update my profile</p>
-        <% end %>
-        <div class="dropdown-divider"></div>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-      <% end %>
-    </div>
-  </li>
+      </div>
+    </li>
+  </div>
 </nav>
 <%# <div id="google_translate_element"></div>
 <script type="text/javascript">

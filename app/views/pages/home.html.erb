@@ -13,61 +13,41 @@
         <% end %>
       </div>
     </div>
-    <div class="cards-product">
-      <div class="overflow-auto">
-        <% @top_rating_products.each_slice(2) do |product_row| %>
-          <div class="row mx-0">
-            <% product_row.each do |product| %>
-              <div class="col p-0 m-0">
-                <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
-                <%= link_to product_path(product) do %>
-                  <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "¥#{rand(10..60) * 50}" %>
-                <% end %>
-              </div>
-            <% end %>
-            <% (2 - product_row.count).times do |i| %>
-              <div class="col p-0 m-0">
-                <div class="card-category-product mx-1 invisible"></div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="row" style="position: relative;">
-      <div class="col-9">
-        <h4 class="mt-3 mb-1">Loved by the people</i></h4>
-    </div>
-    <div class="col">
-      <%=  link_to (product_path(0) + '?sort_by=most_favorite') do %>
-        <span class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></span>
-      <% end %>
-    </div>
-  </div>
-  <div class="cards-product">
-    <div class="overflow-auto">
-      <% @most_liked_products.each_slice(2) do |product_row| %>
-        <div class="row mx-0">
-          <% product_row.each do |product| %>
-            <div class="col p-0 m-0">
-              <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
-              <%= link_to product_path(product) do %>
-                <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "¥#{rand(10..60) * 50}" %>
-              <% end %>
-            </div>
-          <% end %>
-          <% (2 - product_row.count).times do |i| %>
-            <div class="col p-0 m-0">
-              <div class="card-category-product mx-1 invisible"></div>
-            </div>
+    <div class="row mx-0 mb-3">
+      <% @top_rating_products.each do |product| %>
+        <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
+          <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+          <%= link_to product_path(product) do %>
+            <% avg_rating = product.avg_rating %>
+            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
-</div>
+  <div>
+    <div class="row" style="position: relative;">
+      <div class="col-9">
+        <h4 class="mt-3 mb-1">Loved by the people</h4>
+      </div>
+      <div class="col">
+        <%=  link_to (product_path(0) + '?sort_by=most_favorite') do %>
+          <span class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-3">
+      <% @most_liked_products.each do |product| %>
+        <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
+          <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+          <%= link_to product_path(product) do %>
+            <% avg_rating = product.avg_rating %>
+            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 <!-- Render footer -->
 <%= render 'shared/home_footer' %>

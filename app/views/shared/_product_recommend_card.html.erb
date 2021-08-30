@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="cards-product">
-  <% @product.find_related_on_tags.to_a.each_slice(2) do |product_row| %>
+  <% @product.find_related_on_tags[0..5].to_a.each_slice(2) do |product_row| %>
     <div class="row mx-0">
       <% product_row.each do |product| %>
         <div class="col p-0 m-0">
