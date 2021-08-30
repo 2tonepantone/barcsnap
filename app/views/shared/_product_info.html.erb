@@ -1,12 +1,4 @@
 <div class="">
-  <!-- <div class="py-1" style= "box-shadow: 0 0 15px rgba(0,0,0,0.2);">
-    <div class="card-category-product product-background mx-1 p-0 position-relative bg-white border-bottom" style="background-image: url(<%= bg_img_url %>); background-size: contain;">
-      <p id="badge-rating" class="mx-1 my-1 position-absolute badge badge-pill badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
-      <%= link_to product_favorites_path(@product), method: :post do %>
-        <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; top: 0;"></i>
-      <% end %>
-    </div>
-  </div> -->
   <div id="product-background-box" class="mx-0 my-1 p-3 position-relative border-bottom bg-white">
     <div class="card-category-product product-background p-0" style="background-image: url(<%= bg_img_url %>); background-size: contain;">
       <p id="badge-rating" class="mx-1 my-1 position-absolute badge badge-pill badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
@@ -62,16 +54,6 @@
           </div>
         </div>
       </div>
-      <%# <script>
-  document.querySelector(".read-more")
-    .addEventListener("click", (event) => {
-      document.querySelector(".more").classList.toggle("active");
-      document.querySelector(".dots").classList.toggle("active");
-      if (document.querySelector(".read-more").innerHTML === 'Read more') {
-        document.querySelector(".read-more").innerHTML = "Read less";
-        console.log('true');
-      } else {
-        document.querySelector(".read-more").innerHTML = "Read more";
-      }
-    });
-</script> %>
+    </div>
+  </div>
+</div>
