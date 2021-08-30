@@ -30,15 +30,19 @@
       </div>
     </div>
     <% if !ingredients.nil? && !size_compare.nil?%>
-      <span class="d-flex justify-content-center py-2">Contains</span>
+      <span class="d-flex justify-content-center py-2">Potential Allergens</span>
       <div class="row product-ingredients pb-2">
-        <div class="col-6 d-flex justify-content-center">
+        <div class="col-6 text-center">
+          <span class="d-flex justify-content-center pb-2"><%= allergens %></span>
           <button type="button" class="btn btn btn-dark" data-toggle="modal"
-            data-target="#ingredients">Full Ingredients</button>
+            data-target="#ingredients">Full Ingredients
+          </button>
         </div>
-        <div class="col-6 d-flex justify-content-center">
+        <div class="col-6 text-center">
+          <span class="d-flex justify-content-center pb-2"><%= allergens_compare %></span>
           <button type="button" class="btn btn btn-dark" data-toggle="modal"
-            data-target="#ingredients-compare">Full Ingredients</button>
+            data-target="#ingredients-compare">Full Ingredients
+          </button>
         </div>
       </div>
     <% end %>
