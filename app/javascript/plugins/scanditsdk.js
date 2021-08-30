@@ -18,6 +18,8 @@ const initScanditSDK = () => {
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
         codeDuplicateFilter: 3000, // Minimum delay between duplicate results
       });
+      // Hide scandit video element that white space below the sticky footer
+      document.querySelector(".scandit-video").classList.add("d-none");
       // Check for navbar footer elements
       if (document.querySelector('.scanner-new') && document.querySelector('.barcode-compare')) {
         // Set "compare" value false when clicking "scan" button
@@ -33,12 +35,14 @@ const initScanditSDK = () => {
       barcodePicker.applyScanSettings(scanSettings);
       document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
+          document.querySelector(".scandit-video").classList.remove("d-none");
           barcodePicker.accessCamera();
         });
       });
       // Close barcode scanner modal to pause scanning and camera access
       document.querySelectorAll(".scanner-pause").forEach((pauseButton) => {
         pauseButton.addEventListener("click", () => {
+          document.querySelector(".scandit-video").classList.add("d-none");
           barcodePicker.pauseScanning(true)
         });
       });
