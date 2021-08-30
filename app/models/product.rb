@@ -13,6 +13,6 @@ class Product < ApplicationRecord
     allergens = "アーモンド・あわび・いか・いくら・オレンジ・カシューナッツ・キウイフルーツ・"\
                 "牛肉・くるみ・ごま・さけ・さば・大豆・鶏肉・バナナ・豚肉・まつたけ・もも・やまいも・りんご・"\
                 "ゼラチン・えび・かに・小麦・そば・卵・乳・落花生・ピーナッツ".split('・')
-    allergens.select { |allergen| ingredients.include?(allergen) }
+    allergens.select { |allergen| ingredients.include?(allergen) }.join(', ')
   end
 end
