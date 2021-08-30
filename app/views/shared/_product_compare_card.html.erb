@@ -1,93 +1,69 @@
 <div class="container px-0">
   <div class="compare-table">
-    <span class="d-flex justify-content-center pb-4 h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
-    <div class="row">
+    <span class="d-flex justify-content-center h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
+    <div class="row product-header py-2">
       <div class="col-6">
         <%= link_to product_path(@product) do %>
-          <div class="product-background-comparison-new h-100 px-0" style="background-image: url(<%= bg_img_url %>);">
+          <div class="product-background-comparison-new h-50 px-0" style="background-image: url(<%= bg_img_url %>);">
             <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
+            <span class="d-flex justify-content-center pt-2"><%= product_name %></span>
           </div>
         <% end %>
       </div>
       <div class="col-6">
         <%= link_to product_path(@product_compare) do %>
-          <div class="product-background-comparison-new h-100" style="background-image: url(<%= bg_img_url_compare %>);">
+          <div class="product-background-comparison-new h-50 px-0" style="background-image: url(<%= bg_img_url_compare %>);">
             <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
-          </div>
-        <% end %>
+            <span class="d-flex justify-content-center pt-2"><%= product_name_compare %></span>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="row info-style pb-4">
+    <div class="row product-rating py-2">
       <div class="col-6">
-        <%= link_to product_path(@product) do %>
-          <span class="d-flex justify-content-center h5 pt-2"><%= product_name %></span>
-        <% end %>
+        <span class="d-flex justify-content-center"><i class="fas fa-star"></i><%= rating %></span>
+        <span class="d-flex justify-content-center">(<%= @product.reviews.count %> reviews)</span>
       </div>
       <div class="col-6">
-        <%= link_to product_path(@product_compare) do %>
-          <span class="d-flex justify-content-center h5 pt-2"><%= product_name_compare %></span>
-        <% end %>
-      </div>
-    </div>
-    <span class="d-flex justify-content-center py-2">Category</span>
-    <div class="row info-style">
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><%= @product.tag_list.second %></span>
-      </div>
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><%= @product_compare.tag_list.second %></span>
-      </div>
-    </div>
-    <span class="d-flex justify-content-center py-2">Rating</span>
-    <div class="row info-style">
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><i class="fas fa-star"></i> <%= rating %> </span>
-        <span class="d-flex justify-content-center py-2">(<%= @product.reviews.count %> reviews)</span>
-      </div>
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><i class="fas fa-star"></i> <%= rating_compare %> </span>
-        <span class="d-flex justify-content-center py-2">(<%= @product_compare.reviews.count %> reviews)</span>
-      </div>
-    </div>
-    <span class="d-flex justify-content-center py-2">Price</span>
-    <div class="row info-style">
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><%= price %></span>
-      </div>
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><%= price_compare %></span>
+        <span class="d-flex justify-content-center"><i class="fas fa-star"></i><%= rating_compare %></span>
+        <span class="d-flex justify-content-center">(<%= @product_compare.reviews.count %> reviews)</span>
       </div>
     </div>
     <% if !ingredients.nil? && !size_compare.nil?%>
-      <span class="d-flex justify-content-center py-2">Ingredients</span>
-      <div class="row info-style">
-        <div class="col-6">
-          <span class="d-flex justify-content-center py-2"><%= ingredients %></span>
+      <span class="d-flex justify-content-center py-2">Contains</span>
+      <div class="row product-ingredients py-2">
+        <div class="col-6 d-flex justify-content-center">
+          <button type="button" class="btn btn btn-dark" data-toggle="modal"
+            data-target="#ingredients">Full Ingredients</button>
         </div>
-        <div class="col-6">
-          <span class="d-flex justify-content-center py-2"><%= ingredients_compare %></span>
+        <div class="col-6 d-flex justify-content-center">
+          <button type="button" class="btn btn btn-dark" data-toggle="modal"
+            data-target="#ingredients-compare">Full Ingredients</button>
         </div>
       </div>
     <% end %>
     <% if !size.nil? && !size_compare.nil? %>
       <span class="d-flex justify-content-center py-2">Size</span>
-      <div class="row info-style">
+      <div class="row product-size py-2">
         <div class="col-6">
-          <span class="d-flex justify-content-center py-2"><%= size %></span>
+          <span class="d-flex justify-content-center"><%= size %></span>
         </div>
         <div class="col-6">
-          <span class="d-flex justify-content-center py-2"><%= size_compare %></span>
+          <span class="d-flex justify-content-center"><%= size_compare %></span>
         </div>
       </div>
     <% end %>
-    <span class="d-flex justify-content-center py-2">Company</span>
-    <div class="row info-style">
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><%= company_name %></span>
-      </div>
-      <div class="col-6">
-        <span class="d-flex justify-content-center py-2"><%= company_name_compare %></span>
-      </div>
-    </div>
   </div>
+</div>
+<div class="container">
+  <% body_content = ingredients %>
+  <%= render 'shared/modal', modal_id: 'ingredients', modal_title: 'Ingredients',
+        text_header: ' ', text_body: ' ', body_content: body_content,
+        redirect_path: root_path, btn_modal_confirm: 'Home'  %>
+</div>
+<div class="container">
+  <% body_content = ingredients_compare %>
+  <%= render 'shared/modal', modal_id: 'ingredients-compare', modal_title: 'Ingredients',
+        text_header: ' ', text_body: ' ', body_content: body_content,
+        redirect_path: root_path, btn_modal_confirm: 'Home'  %>
 </div>
