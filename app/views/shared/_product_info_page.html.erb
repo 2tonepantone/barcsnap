@@ -56,7 +56,7 @@
   </div>
   <% Product.find(params[:id]).reviews.each do |review| %>
     <% user = Review.find(review.id).user %>
-    <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment, rating:review.rating%>
+    <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment, rating:review.rating, source:review.source%>
   <% end %>
 </div>
 <script>
