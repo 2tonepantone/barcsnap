@@ -59,7 +59,7 @@
     <%= render 'shared/review_card', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: user.display_name, review:review.comment, rating:review.rating, source:review.source%>
   <% end %>
 </div>
-<script>
+<%# <script>
   document.querySelector(".toggling")
     .addEventListener("click", (event) => {
       document.querySelector(".toggling2").classList.toggle("active");
@@ -70,6 +70,6 @@
       document.querySelector(".toggling2").classList.toggle("active");
       document.querySelector(".toggling3").classList.toggle("active");
     });
-</script>
+</script> %>
 <!-- product_recommend_card -->
 <%= render 'shared/product_recommend_card', show_compare_option: true %>

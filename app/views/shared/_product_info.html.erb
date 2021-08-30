@@ -9,12 +9,23 @@
 </div>
 <div class="card-category bg-white w-100 text-justify-content-around">
   <div class="m-4">
-    <h2 class="info-style p-2">
-      <strong> <%= product_name %> <span class = "h4"><i class="fas fa-star"></i> <%= rating %> </span></strong>
-    </h2>
+    <h5 class="info-style p-2">
+      <strong> <%= product_name %> <span class = "h5"><i class="fas fa-star"></i> <%= rating %> </span></strong>
+    </h5>
     <p class="info-style p-2"><strong>Category:</strong> <%= @product.tag_list.second %></p>
     <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
-      <p class="info-style p-2"><strong>Ingredients:</strong> <%= ingredients %></p>
+      <p class="info-style p-2">
+        <strong>Ingredients:</strong>
+        <% if ingredients.length > 50  %>
+          <%= first_string = ingredients.slice(0,50)  %><span class="dots">...</span>
+          <span class="more">
+            <%= second_string = ingredients.slice(50,ingredients.length-50) %>
+          </span>
+          <span class="read-more">Read more</span>
+        <% else %>
+          <%= ingredients %>
+        <% end %>
+      </p>
     <% end %>
     <% if defined?(size) && size && size.length.positive? %>
       <p class="info-style p-2"><strong>Size:</strong> <%= size %></p>
@@ -22,3 +33,17 @@
     <p class="info-style p-2"><strong>Company name:</strong> <%= company_name %></p>
   </div>
 </div>
+
+<%# <script>
+  document.querySelector(".read-more")
+    .addEventListener("click", (event) => {
+      document.querySelector(".more").classList.toggle("active");
+      document.querySelector(".dots").classList.toggle("active");
+      if (document.querySelector(".read-more").innerHTML === 'Read more') {
+        document.querySelector(".read-more").innerHTML = "Read less";
+        console.log('true');
+      } else {
+        document.querySelector(".read-more").innerHTML = "Read more";
+      }
+    });
+</script> %>
