@@ -14,8 +14,7 @@
       </div>
     </div>
     <div class="row mx-0 mb-3">
-
-      <% @top_rating_products.each do |product| %>
+      <% @first_rating_products.each do |product| %>
         <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
           <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
           <%= link_to product_path(product) do %>
@@ -26,6 +25,66 @@
       <% end %>
     </div>
   </div>
+
+  <div>
+    <div class="row" style="position: relative;">
+      <div class="col-9">
+        <h4 class="mb-1">Top rating</h4>
+      </div>
+      <div class="col">
+        <%=  link_to (product_path(0) + '?sort_by=top_rating') do %>
+          <span class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-3">
+      <% @second_rating_products.each do |product| %>
+        <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
+          <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+          <%= link_to product_path(product) do %>
+            <% avg_rating = product.avg_rating %>
+            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<h1 class='text-dark'>Most tagged categories.</h1>
+<% most_tags = ActsAsTaggableOn::Tag.most_used %>
+<% most_tags.each do |tag| %>
+  <h2 class='text-dark mt-3'><%= "#{tag.name} (#{tag.taggings_count})" %></h2>
+  <% Product.tagged_with(tag.name).each do |product| %>
+    <%= link_to product do %>
+      <%= cl_image_tag(product.photo.key, class:'img-thumbnail', style:'width:100px; height:100px;') if product.photo.attached? %>
+    <% end %>
+  <% end %>
+<% end %>
+  <div>
+    <div class="row" style="position: relative;">
+      <div class="col-9">
+        <h4 class="mb-1">Top rating</h4>
+      </div>
+      <div class="col">
+        <%=  link_to (product_path(0) + '?sort_by=top_rating') do %>
+          <span class="mb-1 text-right mr-3" style="position: absolute; bottom:0; right:0;">More<i class="fas fa-chevron-right"></i></span>
+        <% end %>
+      </div>
+    </div>
+    <div class="row mx-0 mb-3">
+      <% @third_rating_products.each do |product| %>
+        <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
+          <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+          <%= link_to product_path(product) do %>
+            <% avg_rating = product.avg_rating %>
+            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
   <div>
     <div class="row" style="position: relative;">
       <div class="col-9">
@@ -38,7 +97,7 @@
       </div>
     </div>
     <div class="row mx-0 mb-3">
-      <% @most_liked_products.each do |product| %>
+      <% @fourth_rating_products.each do |product| %>
         <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
           <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
           <%= link_to product_path(product) do %>
