@@ -8,4 +8,8 @@ class Product < ApplicationRecord
   acts_as_taggable_on :tags
   ActsAsTaggableOn.force_lowercase = true
   acts_as_favoritable
+
+  def avg_rating
+    reviews.average(:rating)&.to_f
+  end
 end
