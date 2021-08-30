@@ -17,10 +17,10 @@
     <% end %>
   <% end %>
   <div class="d-flex">
-    <%= cl_image if cl_image %>
+    <%= cl_image if current_user %>
     <li class="nav-item dropdown">
-      <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-chevron-down"></i>
+      <a class="nav-link pl-3 pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bars"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <% if user_signed_in? %>
