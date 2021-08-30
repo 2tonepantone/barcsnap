@@ -9,12 +9,11 @@
 }
 
 .card-effect {
-  color: rgb(55, 61, 60);
-  opacity: 0.9;
-}
-.card-effect:hover {
-  opacity: 1;
-  text-decoration: underline;
+  color: #607D8B;
+  &:hover{
+    color: #203d69;
+    text-decoration: none;
+  }
 }
 
 // Smallest device
