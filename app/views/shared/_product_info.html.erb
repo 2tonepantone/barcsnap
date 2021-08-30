@@ -10,49 +10,45 @@
   <div class="card-category bg-white w-100 text-justify-content-around">
     <div class="mx-4 mb-4 mt-0">
       <div class="row info-style p-3 d-flex justify-content-center">
-        <strong> <%= product_name %></strong>
+        <strong><%= product_name %></strong>
       </div>
       <div class="row p-0 d-flex justify-content-center">
-        <p class="mb-1"><strong>Category:</strong>
+        <p class="mb-1"><strong>Category:</strong></p>
+      </div>
+      <div class="row info-style p-0 d-flex justify-content-center">
+        <p class="mb-1"><%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %></p>
+      </div>
+      <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
+        <div class="row p-1 d-flex justify-content-center">
+          <p class="mb-1"><strong>Ingredients:</strong></p>
         </div>
-        <div class="row info-style p-0 d-flex justify-content-center">
-          <p class="mb-1"><%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %>
-            <p class="mb-1">
-            </div>
-            <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
-              <div class="row p-1 d-flex justify-content-center">
-                <p class="mb-1"><strong>Ingredients:</strong></p>
-              </div>
-              <div class ="row info-style p-1 d-flex justify-content-center">
-                <p class="mb-1">
-                  <% if ingredients.length > 30  %>
-                    <%= first_string = ingredients.slice(0,30)  %><span class="dots">...</span>
-                    <span class="more">
-                      <%= second_string = ingredients.slice(30,ingredients.length-30) %>
-                    </span>
-                    <span class="read-more">Read more</span>
-                  <% else %>
-                    <%= ingredients %>
-                  <% end %>
-                </p>
-              </div>
+        <div class ="row info-style p-1 d-flex justify-content-center">
+          <p class="mb-1">
+            <% if ingredients.length > 30 %>
+              <%= first_string = ingredients.slice(0,30)  %><span class="dots">...</span>
+              <span class="more">
+                <%= second_string = ingredients.slice(30,ingredients.length-30) %>
+              </span>
+              <span class="read-more">Read more</span>
+            <% else %>
+              <%= ingredients %>
             <% end %>
-            <% if defined?(size) && size && size.length.positive? %>
-              <div class="row  p-0 d-flex justify-content-center">
-                <p class="mb-1"><strong>Size:</strong></p>
-              </div>
-              <div class="row info-style justify-content-center">
-                <p class="mb-1"><%= size %></p>
-              </div>
-            <% end %>
-            <div class="row p-0 d-flex justify-content-center">
-              <p class="mb-1"><strong>Company name:</strong></p>
-            </div>
-            <div class="row info-style p-0 d-flex justify-content-center border-bottom-0">
-              <p class="mb-1"><%= company_name %></p>
-            </div>
-          </div>
+          </p>
         </div>
+      <% end %>
+      <% if defined?(size) && size && size.length.positive? %>
+        <div class="row  p-0 d-flex justify-content-center">
+          <p class="mb-1"><strong>Size:</strong></p>
+        </div>
+        <div class="row info-style justify-content-center">
+          <p class="mb-1"><%= size %></p>
+        </div>
+      <% end %>
+      <div class="row p-0 d-flex justify-content-center">
+        <p class="mb-1"><strong>Company name:</strong></p>
+      </div>
+      <div class="row info-style p-0 d-flex justify-content-center border-bottom-0">
+        <p class="mb-1"><%= company_name %></p>
       </div>
     </div>
   </div>
