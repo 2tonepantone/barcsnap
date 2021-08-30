@@ -90,7 +90,9 @@
   background-size: cover;
   background-position: center;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 25px;
+  // border-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
