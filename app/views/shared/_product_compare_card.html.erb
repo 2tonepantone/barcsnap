@@ -2,59 +2,51 @@
   <div class="compare-table">
     <span class="d-flex justify-content-center h4" style="color: rgba(0,0,0,.7)"><strong>Product Comparison</strong></span>
     <div class="row product-header py-2">
-      <div class="col-6">
-        <%= link_to product_path(@product) do %>
-          <div class="product-background-comparison-new px-0" style="background-image: url(<%= bg_img_url %>);">
-            <img src="<%= bg_img_url %>" style="visibility: hidden; width: 50%;">
-          </div>
-          <span class="d-flex justify-content-center pt-2"><%= product_name %></span>
-        <% end %>
-      </div>
-      <div class="col-6">
-        <%= link_to product_path(@product_compare) do %>
-          <div class="product-background-comparison-new px-0" style="background-image: url(<%= bg_img_url_compare %>);">
-            <img src="<%= bg_img_url_compare %>" style="visibility: hidden; width: 50%;">
-          </div>
-          <span class="d-flex justify-content-center pt-2"><%= product_name_compare %></span>
-        <% end %>
-      </div>
+      <% [{product: @product, img: bg_img_url, name: product_name},
+          {product: @product_compare, img: bg_img_url_compare, name: product_name_compare}].each do |product| %>
+        <div class="col-6 text-center">
+          <%= link_to product_path(product[:product]) do %>
+            <div class="product-background-comparison-new px-0">
+              <img src="<%= product[:img] %>" class="w-75 py-3">
+            </div>
+            <span><%= product[:name] %></span>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-    <div class="row product-rating py-2">
-      <div class="col-6">
-        <span class="d-flex justify-content-center"><i class="fas fa-star"></i><%= rating %></span>
-        <span class="d-flex justify-content-center">(<%= @product.reviews.count %> reviews)</span>
-      </div>
-      <div class="col-6">
-        <span class="d-flex justify-content-center"><i class="fas fa-star"></i><%= rating_compare %></span>
-        <span class="d-flex justify-content-center">(<%= @product_compare.reviews.count %> reviews)</span>
-      </div>
+    <div class="row product-rating py-4">
+      <% [{reviews: @product.reviews.count, rating: rating},
+          {reviews: @product_compare.reviews.count, rating: rating_compare}].each do |product| %>
+        <div class="col-6 flex-column d-flex align-items-center">
+          <span><i class="fas fa-star"></i><%= product[:rating] %></span>
+          <span>(<%= product[:reviews] %> reviews)</span>
+        </div>
+      <% end %>
     </div>
-    <% if !ingredients.nil? && !size_compare.nil?%>
-      <span class="d-flex justify-content-center py-2">Potential Allergens</span>
+    <% unless ingredients.nil? && ingredients_compare.nil? %>
+      <div class="row py-3">
+        <div class="col text-center">Potential Allergens</div>
+      </div>
       <div class="row product-ingredients pb-2">
-        <div class="col-6 text-center">
-          <span class="d-flex justify-content-center pb-2"><%= allergens %></span>
-          <button type="button" class="btn btn btn-dark" data-toggle="modal"
-            data-target="#ingredients">Full Ingredients
-          </button>
-        </div>
-        <div class="col-6 text-center">
-          <span class="d-flex justify-content-center pb-2"><%= allergens_compare %></span>
-          <button type="button" class="btn btn btn-dark" data-toggle="modal"
-            data-target="#ingredients-compare">Full Ingredients
-          </button>
-        </div>
+        <% [allergens, allergens_compare].each_with_index do |allergens, i| %>
+          <div class="col-6 d-flex flex-column pb-2 text-center">
+            <span class="d-flex flex-grow-1 justify-content-center align-items-center pb-3"><%= allergens %></span>
+            <button type="button" class="btn btn-outline-secondary mt-auto align-self-center" data-toggle="modal"
+            data-target=<%= ["#ingredients", "#ingredients-compare"][i] %>>Full Ingredients</button>
+          </div>
+        <% end %>
       </div>
     <% end %>
-    <% if !size.nil? && !size_compare.nil? %>
-      <span class="d-flex justify-content-center py-2">Size</span>
+    <% unless size.nil? && size_compare.nil? %>
+      <div class="row py-3">
+        <div class="col text-center">Size</div>
+      </div>
       <div class="row product-size pb-2">
-        <div class="col-6">
-          <span class="d-flex justify-content-center"><%= size %></span>
-        </div>
-        <div class="col-6">
-          <span class="d-flex justify-content-center"><%= size_compare %></span>
-        </div>
+        <% [size, size_compare].each do |size| %>
+          <div class="col-6 text-center">
+            <%= size %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
