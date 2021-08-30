@@ -2,7 +2,7 @@
 <% review_count = Product.find(params[:id]).reviews.count %>
 <% avg_rating = @product.avg_rating %>
 <% rating = avg_rating ? avg_rating.round(2) : '-' %>
-<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating: rating, company_name: @product.company_name, price: "¥100", ingredients: @product.ingredients, size: @product.size, review_count: review_count%>
+<%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating: rating, company_name: @product.company_name, ingredients: @product.ingredients, size: @product.size, review_count: review_count%>
 <!-- review_card -->
 <!-- Button trigger modal -->
 <%= render 'shared/modal_form' %>
