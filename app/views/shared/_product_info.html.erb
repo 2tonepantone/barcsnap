@@ -1,5 +1,5 @@
 <div class="">
-  <div class="p-1">
+  <div class="p-0">
 
   <div style="position:relative;">
     <%= link_to product_favorites_path(@product), method: :post do %>
@@ -16,7 +16,7 @@
   <div class="card-category bg-white w-100 text-justify-content-around">
     <div class="m-4">
       <div class="row info-style p-3 d-flex justify-content-center">
-        <strong> <%= product_name %> <span class = "h5"><i class="fas fa-star"></i> <%= rating %> </span></strong>
+        <strong> <%= product_name %></strong>
       </div>
       <div class="row p-0 d-flex justify-content-center">
         <p><strong>Category:</strong>
@@ -25,8 +25,10 @@
         <p><%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %><p>
       </div>
       <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
-        <div class="row info-style p-1 d-flex justify-content-center">
-          <p><strong>Ingredients:</strong></p>
+          <div class="row p-1 d-flex justify-content-center">
+            <p><strong>Ingredients:</strong></p>
+          </div>
+          <div class ="row info-style p-1 d-flex justify-content-center">
           <p>
           <% if ingredients.length > 30  %>
             <%= first_string = ingredients.slice(0,30)  %><span class="dots">...</span>
