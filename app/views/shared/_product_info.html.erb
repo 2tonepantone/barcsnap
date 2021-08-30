@@ -13,7 +13,6 @@
       <strong> <%= product_name %> <span class = "h4"><i class="fas fa-star"></i> <%= rating %> </span></strong>
     </h2>
     <p class="info-style p-2"><strong>Category:</strong> <%= @product.tag_list.second %></p>
-    <p class="info-style p-2"><strong>price:</strong> <%= price %></p>
     <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
       <p class="info-style p-2"><strong>Ingredients:</strong> <%= ingredients %></p>
     <% end %>
