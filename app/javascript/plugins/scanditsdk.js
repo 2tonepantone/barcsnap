@@ -20,13 +20,13 @@ const initScanditSDK = () => {
       });
       // Check for navbar footer elements
       if (document.querySelector('.scanner-new') && document.querySelector('.barcode-compare')) {
-        // Set "compare" value to "0" (false) when clicking "scan" button
+        // Set "compare" value false when clicking "scan" button
         document.querySelector('.scanner-new').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").checked = false;
+          document.getElementById("barcodeCompare").setAttribute('value', false);
         });
-        // Set "compare" value to "1" (true) when clicking "compare" button
+        // Set "compare" value to true when clicking "compare" button
         document.querySelector('.barcode-compare').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").checked = true;
+          document.getElementById("barcodeCompare").setAttribute('value', true);
         });
       }
       // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
