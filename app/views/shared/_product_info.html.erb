@@ -1,56 +1,67 @@
-<div style="position:relative;">
-  <%= link_to product_favorites_path(@product), method: :post do %>
-    <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; bottom: -1;"></i>
-  <% end %>
-</div>
-<div class="product-background h-100" style="background-image: url(<%= bg_img_url %>);">
-  <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100 position-relative">
 
-</div>
-<div class="card-category bg-white w-100 text-justify-content-around">
-  <div class="m-4">
-    <div class="row info-style p-3 d-flex justify-content-center">
-      <strong> <%= product_name %> <span class = "h5"><i class="fas fa-star"></i> <%= rating %> </span></strong>
-    </div>
-    <div class="row p-0 d-flex justify-content-center">
-      <p><strong>Category:</strong>
-    </div>
-    <div class="row info-style p-0 d-flex justify-content-center">
-      <p><%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %><p>
-    </div>
-    <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
-      <div class="row info-style p-1 d-flex justify-content-center">
-        <p><strong>Ingredients:</strong></p>
-        <p>
-        <% if ingredients.length > 10  %>
-          <%= first_string = ingredients.slice(0,10)  %><span class="dots">...</span>
-          <span class="more">
-            <%= second_string = ingredients.slice(10,ingredients.length-10) %>
-          </span>
-          <span class="read-more">Read more</span>
-        <% else %>
-          <%= ingredients %>
-        <% end %>
-        </p>
+
+
+
+
+<div class="pt-2 px-2">
+
+  <div style="position:relative;">
+    <%= link_to product_favorites_path(@product), method: :post do %>
+      <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; bottom: -1;"></i>
+    <% end %>
+  </div>
+
+  <div class="card-category-product product-background mx-1 position-relative" style="background-image: url(<%= bg_img_url %>)">
+    <p class="mx-1 my-1 position-absolute badge badge-secondary" style="bottom: 0px; right: 0px;"><strong> <i class="fas fa-star"></i> <%= rating %></strong></p>
+    <%= link_to product_favorites_path(@product), method: :post do %>
+      <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; top: 0;"></i>
+    <% end %>
+  </div>
+
+  <div class="card-category bg-white w-100 text-justify-content-around">
+    <div class="m-4">
+      <div class="row info-style p-3 d-flex justify-content-center">
+        <strong> <%= product_name %> <span class = "h5"><i class="fas fa-star"></i> <%= rating %> </span></strong>
       </div>
-    <% end %>
-    <% if defined?(size) && size && size.length.positive? %>
-        <div class="row  p-0 d-flex justify-content-center">
-          <p><strong>Size:</strong></p>
+      <div class="row p-0 d-flex justify-content-center">
+        <p><strong>Category:</strong>
+      </div>
+      <div class="row info-style p-0 d-flex justify-content-center">
+        <p><%= "#{@product.tag_list.first}, #{@product.tag_list.second}"  %><p>
+      </div>
+      <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
+        <div class="row info-style p-1 d-flex justify-content-center">
+          <p><strong>Ingredients:</strong></p>
+          <p>
+          <% if ingredients.length > 10  %>
+            <%= first_string = ingredients.slice(0,10)  %><span class="dots">...</span>
+            <span class="more">
+              <%= second_string = ingredients.slice(10,ingredients.length-10) %>
+            </span>
+            <span class="read-more">Read more</span>
+          <% else %>
+            <%= ingredients %>
+          <% end %>
+          </p>
         </div>
-        <div class="row info-style justify-content-center">
-          <p><%= size %></p>
-        </div>
-    <% end %>
-    <div class="row p-0 d-flex justify-content-center">
-      <p><strong>Company name:</strong></p>
-    </div>
-    <div class="row info-style p-0 d-flex justify-content-center">
-      <p><%= company_name %></p>
+      <% end %>
+      <% if defined?(size) && size && size.length.positive? %>
+          <div class="row  p-0 d-flex justify-content-center">
+            <p><strong>Size:</strong></p>
+          </div>
+          <div class="row info-style justify-content-center">
+            <p><%= size %></p>
+          </div>
+      <% end %>
+      <div class="row p-0 d-flex justify-content-center">
+        <p><strong>Company name:</strong></p>
+      </div>
+      <div class="row info-style p-0 d-flex justify-content-center">
+        <p><%= company_name %></p>
+      </div>
     </div>
   </div>
 </div>
-
 <%# <script>
   document.querySelector(".read-more")
     .addEventListener("click", (event) => {
