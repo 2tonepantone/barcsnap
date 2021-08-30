@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
   private
 
   def comparing_scanned?
-    params[:compare]
+    params.key?(:compare) && params[:compare] == 'true'
   end
 
   def compare_scanned
