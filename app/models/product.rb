@@ -9,10 +9,7 @@ class Product < ApplicationRecord
   ActsAsTaggableOn.force_lowercase = true
   acts_as_favoritable
 
-  def avg_rating_str
-    avg = "-"
-    reviews = self.reviews
-    avg = (reviews.map(&:rating).sum / reviews.count).round(2) if reviews.count.positive?
-    return avg.to_s
+  def avg_rating
+    reviews.average(:rating)&.to_f
   end
 end
