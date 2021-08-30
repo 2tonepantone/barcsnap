@@ -50,16 +50,6 @@
     </div>
   </div>
 
-<h1 class='text-dark'>Most tagged categories.</h1>
-<% most_tags = ActsAsTaggableOn::Tag.most_used %>
-<% most_tags.each do |tag| %>
-  <h2 class='text-dark mt-3'><%= "#{tag.name} (#{tag.taggings_count})" %></h2>
-  <% Product.tagged_with(tag.name).each do |product| %>
-    <%= link_to product do %>
-      <%= cl_image_tag(product.photo.key, class:'img-thumbnail', style:'width:100px; height:100px;') if product.photo.attached? %>
-    <% end %>
-  <% end %>
-<% end %>
   <div>
     <div class="row" style="position: relative;">
       <div class="col-9">
@@ -97,7 +87,7 @@
       </div>
     </div>
     <div class="row mx-0 mb-3">
-      <% @fourth_rating_products.each do |product| %>
+      <% @most_liked_products.each do |product| %>
         <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
           <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
           <%= link_to product_path(product) do %>
