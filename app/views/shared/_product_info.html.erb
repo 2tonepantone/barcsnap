@@ -1,19 +1,20 @@
 <div class="">
-  <div class="py-1" style= "margin-left:-5px; margin-right:-5px; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
-    <div style="position:relative;">
-      <%= link_to product_favorites_path(@product), method: :post do %>
-        <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; bottom: -1;"></i>
-      <% end %>
-    </div>
-    <div class="card-category-product product-background mx-1 position-relative bg-white border-bottom" style="background-image: url(<%= bg_img_url %>); background-size: contain;">
+  <!-- <div class="py-1" style= "box-shadow: 0 0 15px rgba(0,0,0,0.2);">
+    <div class="card-category-product product-background mx-1 p-0 position-relative bg-white border-bottom" style="background-image: url(<%= bg_img_url %>); background-size: contain;">
       <p id="badge-rating" class="mx-1 my-1 position-absolute badge badge-pill badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
       <%= link_to product_favorites_path(@product), method: :post do %>
         <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; top: 0;"></i>
       <% end %>
     </div>
+  </div> -->
+  <div id="product-background-box" class="card-category-product product-background mx-0 my-1 p-0 position-relative bg-white border-bottom" style="background-image: url(<%= bg_img_url %>); background-size: contain;">
+    <p id="badge-rating" class="mx-1 my-1 position-absolute badge badge-pill badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
+    <%= link_to product_favorites_path(@product), method: :post do %>
+      <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; top: 0;"></i>
+    <% end %>
   </div>
   <div class="card-category bg-white w-100 text-justify-content-around">
-    <div class="m-4">
+    <div class="mx-4 mb-4 mt-0">
       <div class="row info-style p-3 d-flex justify-content-center">
         <strong> <%= product_name %></strong>
       </div>
