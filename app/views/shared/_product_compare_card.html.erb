@@ -4,19 +4,19 @@
     <div class="row product-header py-2">
       <div class="col-6">
         <%= link_to product_path(@product) do %>
-          <div class="product-background-comparison-new h-50 px-0" style="background-image: url(<%= bg_img_url %>);">
-            <img src="<%= bg_img_url %>" style="visibility: hidden;" class = "w-100 h-100">
-            <span class="d-flex justify-content-center pt-2"><%= product_name %></span>
+          <div class="product-background-comparison-new px-0" style="background-image: url(<%= bg_img_url %>);">
+            <img src="<%= bg_img_url %>" style="visibility: hidden; width: 50%;">
           </div>
+          <span class="d-flex justify-content-center pt-2"><%= product_name %></span>
         <% end %>
       </div>
       <div class="col-6">
         <%= link_to product_path(@product_compare) do %>
-          <div class="product-background-comparison-new h-50 px-0" style="background-image: url(<%= bg_img_url_compare %>);">
-            <img src="<%= bg_img_url_compare %>" style="visibility: hidden;" class = "w-100 h-100">
-            <span class="d-flex justify-content-center pt-2"><%= product_name_compare %></span>
-          <% end %>
-        </div>
+          <div class="product-background-comparison-new px-0" style="background-image: url(<%= bg_img_url_compare %>);">
+            <img src="<%= bg_img_url_compare %>" style="visibility: hidden; width: 50%;">
+          </div>
+          <span class="d-flex justify-content-center pt-2"><%= product_name_compare %></span>
+        <% end %>
       </div>
     </div>
     <div class="row product-rating py-2">
@@ -31,7 +31,7 @@
     </div>
     <% if !ingredients.nil? && !size_compare.nil?%>
       <span class="d-flex justify-content-center py-2">Contains</span>
-      <div class="row product-ingredients py-2">
+      <div class="row product-ingredients pb-2">
         <div class="col-6 d-flex justify-content-center">
           <button type="button" class="btn btn btn-dark" data-toggle="modal"
             data-target="#ingredients">Full Ingredients</button>
@@ -44,7 +44,7 @@
     <% end %>
     <% if !size.nil? && !size_compare.nil? %>
       <span class="d-flex justify-content-center py-2">Size</span>
-      <div class="row product-size py-2">
+      <div class="row product-size pb-2">
         <div class="col-6">
           <span class="d-flex justify-content-center"><%= size %></span>
         </div>
@@ -67,3 +67,4 @@
         text_header: ' ', text_body: ' ', body_content: body_content,
         redirect_path: root_path, btn_modal_confirm: 'Home'  %>
 </div>
+<%  %>
