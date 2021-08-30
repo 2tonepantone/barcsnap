@@ -1,8 +1,8 @@
 <footer id ="footer-stick" class="bg-light text-center text-lg-start">
   <!-- Copyright -->
   <div class="text-center p-3 pr-4 item-drawer">
-    <button type="button" class="scanner-start btn btn-dark px-2 hidding1" data-toggle="modal" data-target="#camera">scan</button>
-    <button type="button" class="scanner-start btn btn-dark px-2 hidding2" data-toggle="modal" data-target="#camera">compare</button>
+    <button type="button" class="scanner-start scanner-new btn btn-dark px-2 hidding1" data-toggle="modal" data-target="#camera">scan</button>
+    <button type="button" class="scanner-start barcode-compare btn btn-dark px-2 hidding2" data-toggle="modal" data-target="#camera">compare</button>
     <button type="button" class="btn btn-dark px-3 hidding3">Recommend</button>
     <i class="fas fa-chevron-right item-drawer-button"></i>
   </div>
@@ -20,7 +20,7 @@
   </script>
 </footer>
 <div class="container">
-  <% body_content = render 'shared/barcode_scanner' %>
+  <% body_content = render 'shared/barcode_scanner', product: @product %>
   <%= render 'shared/modal', modal_id: 'camera', modal_title: 'Show me your barcode!',
         text_header: ' ', text_body: ' ', body_content: body_content,
         redirect_path: root_path, btn_modal_confirm: 'Home'  %>

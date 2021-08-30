@@ -13,22 +13,36 @@ const initScanditSDK = () => {
         desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
-  }).then(function (barcodePicker) {
+    }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
         codeDuplicateFilter: 3000, // Minimum delay between duplicate results
       });
+      // Check for navbar footer elements
+      if (document.querySelector('.scanner-new') && document.querySelector('.barcode-compare')) {
+        // Set "compare" value false when clicking "scan" button
+        document.querySelector('.scanner-new').addEventListener("click", () => {
+          document.getElementById("barcodeCompare").setAttribute('value', false);
+        });
+        // Set "compare" value to true when clicking "compare" button
+        document.querySelector('.barcode-compare').addEventListener("click", () => {
+          document.getElementById("barcodeCompare").setAttribute('value', true);
+        });
+      }
+      // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
       barcodePicker.applyScanSettings(scanSettings);
       document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
           barcodePicker.accessCamera();
         });
       });
+      // Close barcode scanner modal to pause scanning and camera access
       document.querySelectorAll(".scanner-pause").forEach((pauseButton) => {
         pauseButton.addEventListener("click", () => {
           barcodePicker.pauseScanning(true)
         });
       });
+      // Send scanned barcode to hidden form and automatically submit it
       barcodePicker.on("scan", (scanResult) => {
         let barcode = scanResult.barcodes[0].data;
         const input = document.getElementById('barcodeInput');
