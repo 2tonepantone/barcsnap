@@ -31,7 +31,7 @@
   <% image_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
   <% days_ago = (Date.today - Date.new(product.created_at.year, product.created_at.month, product.created_at.day)).to_i %>
   <% reviews = product.reviews %>
-  <% rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : '-' %>
+  <% rating = product.avg_rating_str %>
   <div class="my-1">
     <% product_favorited = false %>
     <% if current_user && product %>

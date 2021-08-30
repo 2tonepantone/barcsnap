@@ -89,11 +89,7 @@ class ProductsController < ApplicationController
     when "most_favorite"
       @products = Product.all.sort_by { |p| p.favoritors.count }.reverse
     when "top_rating"
-      @products = Product.all.sort_by do |p|
-        reviews = p.reviews
-        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
-        rating
-      end.reverse
+      @products = Product.all.sort_by(&:avg_rating_str).reverse
     when "newest"
       @products = Product.order(created_at: :desc)
     else
@@ -109,11 +105,7 @@ class ProductsController < ApplicationController
     when "most_favorite"
       @products = product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
     when "top_rating"
-      @products = product.find_related_on_tags.sort_by do |p|
-        reviews = p.reviews
-        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
-        rating
-      end.reverse
+      @products = product.find_related_on_tags.sort_by(&:avg_rating_str).reverse
     when "newest"
       @products = product.find_related_on_tags.sort_by(&:created_at).reverse
     else
