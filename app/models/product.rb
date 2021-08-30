@@ -14,8 +14,8 @@ class Product < ApplicationRecord
 
   def allergens
     contains = ALLERGENS.select { |allergen| ingredients.include?(allergen) }.join(', ') if ingredients
-    return "No ingredients provided. For your own safety, please check the product thoroughly." if contains.nil?
-    return "No allergens found. For your own safety, please check the product thoroughly." if contains.empty?
+    return "No ingredients provided." if contains.nil?
+    return "No allergens found." if contains.empty?
 
     contains
   end
