@@ -4,8 +4,8 @@
 <% rating = avg_rating ? avg_rating.round(2) : '-' %>
 <% avg_rating_compare = @product_compare.avg_rating %>
 <% rating_compare = avg_rating_compare ? avg_rating_compare.round(2) : '-' %>
-<% image_path = @product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.jpg") %>
-<% compare_image_path = @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.jpg") %>
+<% image_path = @product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.png") %>
+<% compare_image_path = @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.png") %>
 <%= render 'shared/product_compare_card', product_name: @product.name, product_name_compare: @product_compare.name, bg_img_url: image_path, bg_img_url_compare: compare_image_path, rating: rating, rating_compare: rating_compare, company_name: @product.company_name, company_name_compare: @product_compare.company_name, price: "¥100", price_compare:"¥50", ingredients: @product.ingredients, ingredients_compare: @product_compare.ingredients, allergens: @product.allergens, allergens_compare: @product_compare.allergens, size: @product.size, size_compare: @product_compare.size%>
 <!-- </div> -->
 <!-- product_recommend_card -->
