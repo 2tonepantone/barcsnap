@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
-REVIEW_SOURCE = %w[barcsnap.com amazon.jp rakuten.co.jp s.mognavi.jp km.tsite.jp]
+REVIEW_SOURCE = %w[BarcSnap amazon.jp rakuten.co.jp s.mognavi.jp km.tsite.jp]
 
 puts "🔫 Dropping Products and Reviews. If you want to reseed users 👴, please drop/create/migrate the DB before running this file ..."
 Review.destroy_all
