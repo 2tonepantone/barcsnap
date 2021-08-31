@@ -26,27 +26,31 @@ class ProductsController < ApplicationController
 
   def create
     @barcode = params[:barcode]
-
     @barcode = convert_to_jancode unless jancode_format?
 
     if in_database?
       @product = Product.find_by(barcode: @barcode)
-      redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
-    else
-      jancode_scraper = ScrapeJancodeService.new(@barcode)
-      jancode_scraper.call
-      @product = jancode_scraper.create_product
-
-      if @product.save
-        jancode_scraper.upload_image
-        redirect_to product_path(@product), notice: 'Barcode was scanned successfully.'
+      if comparing_scanned?
+        compare_scanned
       else
-        redirect_to root_path, alert: "Failed to scan barcode. #{@product.errors.full_messages.join(', ')}."
+        redirect_to product_path(@product)
       end
+    else
+      create_scraped_product
     end
   end
 
   private
+
+  def comparing_scanned?
+    params.key?(:compare) && params[:compare] == 'true'
+  end
+
+  def compare_scanned
+    @compare_product = @product
+    @first_product = Product.find(params[:first_product_id])
+    redirect_to product_path(@first_product) + "?product_id=#{@compare_product.id}"
+  end
 
   def jancode_format?
     @barcode.length == 13
@@ -60,6 +64,24 @@ class ProductsController < ApplicationController
     Product.exists?(barcode: @barcode)
   end
 
+  def create_scraped_product
+    jancode_scraper = ScrapeJancodeService.new(@barcode)
+    jancode_scraper.call
+    @product = jancode_scraper.create_product
+
+    if @product.save
+      jancode_scraper.upload_image
+      if comparing_scanned?
+        compare_scanned
+      else
+        redirect_to product_path(@product)
+      end
+    else
+      redirect_back(fallback_location: root_path,
+                    alert: "Product info unavailable. Please try a different barcode!")
+    end
+  end
+
   def get_all_product_sorted
     case params[:sort_by]
     when "most_related"
@@ -67,11 +89,7 @@ class ProductsController < ApplicationController
     when "most_favorite"
       @products = Product.all.sort_by { |p| p.favoritors.count }.reverse
     when "top_rating"
-      @products = Product.all.sort_by do |p|
-        reviews = p.reviews
-        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
-        rating
-      end.reverse
+      @products = Product.all.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = Product.order(created_at: :desc)
     else
@@ -87,11 +105,7 @@ class ProductsController < ApplicationController
     when "most_favorite"
       @products = product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
     when "top_rating"
-      @products = product.find_related_on_tags.sort_by do |p|
-        reviews = p.reviews
-        rating = reviews.count.positive? ? (reviews.map(&:rating).sum / reviews.count).round(2) : 0
-        rating
-      end.reverse
+      @products = product.find_related_on_tags.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = product.find_related_on_tags.sort_by(&:created_at).reverse
     else
@@ -99,10 +113,6 @@ class ProductsController < ApplicationController
       @products = product.find_related_on_tags.sort_by(&:created_at)
     end
   end
-  # def product_params
-  #   params.require(:product).permit(:name, :barcode, :company_name,
-  #                                   :ingredients, :size, :photo, :reviews, :tags)
-  # end
 
   def reviews_params
     params.require(:review).permit(:rating, :comment)

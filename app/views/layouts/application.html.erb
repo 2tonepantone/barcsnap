@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Barcsnap</title>
+    <!-- Meta data for SEO -->
+    <% site_name = 'BarcSnap' %>
+    <% title = "#{site_name} - Snap a barcode!" %>
+    <% description = 'Get information on Japanese products by scanning their barcodes!' %>
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="keywords" content="Barcode Scanner, Search, Product Information, Barcode Database">
+    <meta name="author" content="Kyle Bailey, Kochapas Santibut, Kandanai Leenutaphong">
+    <!-- Facebook -->
+    <meta property="og:title" content="<%= title %>">
+    <meta property="og:site_name" content="<%= site_name %>">
+    <meta property="og:description" content="<%= description %>">
+    <meta property="og:image" content="<%= image_url("facebook-card.jpg") %>">
+    <meta property="og:url" content="https://www.barcsnap.com">
+    <meta property="og:type" content="website" >
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
+    <%= render 'shared/ios_pwa_links' %>
   </head>
   <body>
     <%= render 'shared/navbar' %>

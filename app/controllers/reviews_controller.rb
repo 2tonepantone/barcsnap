@@ -9,7 +9,8 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to product_path(@product)
     else
-      redirect_to product_path(@product)
+      # redirect_to product_path(@product)
+      redirect_to product_path(@product), alert: "Cannot insert review. #{@review.errors.full_messages.join(', ')}."
     end
   end
     private

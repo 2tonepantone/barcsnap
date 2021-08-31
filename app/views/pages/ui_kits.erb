@@ -1,82 +1,10 @@
-<div class="container">
-  <!-- Modal button -->
-  <button type="button" class="btn btn btn-dark my-3" data-toggle="modal" data-target="#takePhoto">
-    BarcSnap now!
-  </button>
-  <!-- Modal -->
-  <div class="modal fade" id="takePhoto" tabindex="-1" aria-labelledby="takePhotoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="takePhotoLabel">Scan <i class="fas fa-paw"></i></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="d-flex bd-highlight">
-          <div class="p-2 w-100 bd-highlight">
-            <button type="button" class="btn btn btn-dark px-5 mb-3 ml-1" data-toggle="modal" data-target="#takePhoto">
-              <i class="fas fa-camera"></i> scan a barcode!
-            </button>
-          </div>
-          <div class="p-2 flex-shrink-1 bd-highlight">
-            <button type="button" class="btn btn btn-dark px-3 mb-3 mr-1" data-toggle="modal" data-target="#takePhoto">
-              <i class="far fa-folder"></i> Upload a photo!
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- product_info -->
-  <%= render 'shared/product_info' , product_name: "The shampoo that bites your hair 58g", rating:"4.7", company_name:"calbee", price:"100 yen", info:"asdasdas", bg_img_url: "https://www.calbee.co.jp/common/utility/binout.php?db=products&f=1397"%>
-  <!-- review_card -->
-  <% if false %>
-    <%= render 'shared/review_card_no_click', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', review: 'Very awesome product.' %>
-  <% else %>
-    <div class="title-card-product">
-      <div class="card-product-infos">
-        <% review_count = 233 %>
-        <h5><strong>Reviews</strong> <span class="text-muted"><%= review_count %></span></h5>
-      </div>
-    </div>
-    <div class="title-card-product2 .bg-secondary">
-      <div class="card-product-infos">
-        <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
-      </div>
-    </div>
-    <%= render 'shared/review_card', img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg' , username: 'Kandanai Leenutaphong', review:'very awesome product'%>
+<h1 class='text-dark'>Most tagged categories.</h1>
+<% most_tags = ActsAsTaggableOn::Tag.most_used(50) %>
+<% most_tags.each do |tag| %>
+  <h2 class='text-dark mt-3'><%= "#{tag.name} (#{tag.taggings_count})" %></h2>
+  <% Product.tagged_with(tag.name).each do |product| %>
+    <%= link_to product do %>
+      <%= cl_image_tag(product.photo.key, class:'img-thumbnail', style:'width:100px; height:100px;') if product.photo.attached? %>
+    <% end %>
   <% end %>
-  <!-- product_card -->
-  <h4 class="ml-4"><strong>Recommended for you</strong></h2>
-  <div class="cards-product">
-    <div class="row">
-      <div class="col ml-3 pr-1">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg', product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-      <div class="col mr-3">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col ml-3 pr-1">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-      <div class="col mr-3">
-        <%= render 'shared/product_card', bg_img_url: 'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg',product_name: "The shampoo that bites your hair 58g", price: "¥50"%>
-      </div>
-    </div>
-  </div>
-  <footer class="bg-light text-center text-lg-start">
-    <!-- Copyright -->
-    <div class="text-center p-3 pr-4" style="background-color: rgba(0, 0, 0, 0.1);">
-      <a href="">click to see more: </a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  <!-- user_history_card -->
-  <%= render 'shared/user_history_card', img_url:'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
-  <%= render 'shared/user_history_card', img_url:'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
-  <%= render 'shared/user_history_card', img_url:'https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg', product_name: "The shampoo that bites your hair 58g", price:"10 yen", scanned_time:"yesterday"%>
-</div>
-<%= render 'shared/footer' %>
+<% end %>
