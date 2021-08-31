@@ -11,16 +11,17 @@
 <div class="row mx-0 mb-3">
   <% @product.find_related_on_tags[0..5].each do |product| %>
     <% avg_rating = product.avg_rating %>
-    <% rating_str = "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+    <% rating_str = "⭐#{avg_rating ? avg_rating.round(1) : '-'} (#{product.reviews.count})" %>
     <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
       <% if show_compare_option %>
         <% modal_id = "product#{product.id}" %>
         <%= render 'shared/modal_product_info',product: product, modal_id: modal_id %>
         <div class ="card-effect" data-toggle="modal" data-target="#<%= modal_id %>" >
-          <%= render 'shared/product_card', bg_img_url: product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), product_name: product.name, price: rating_str %>
+          <% image_path = product.photo.attached? ? cl_image_path(product.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.png") %>
+          <%= render 'shared/product_card', bg_img_url: image_path, product_name: product.name, price: rating_str %>
         </div>
       <% else %>
-        <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+        <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : image_path("default-product.png") %>
         <%= link_to product_path(product) do %>
           <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: rating_str %>
         <% end %>

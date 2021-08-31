@@ -1,11 +1,8 @@
 <div class="card-product w-100 border-top border-bottom">
   <div class="">
-    <img src="<%= img_url %>" class ="rounded p-0 h-100"/>
+    <img src="<%= img_url %>" class ="rounded p-0 h-100 bg-white p-1"/>
   </div>
-  <div class="card-product-infos w-100" style="position:relative;">
-    <%= link_to product_favorites_path(product), method: :post do %>
-      <i class="fas fa-heart btn btn-sm <%= defined?(product_favorited) && product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; right: 8px; bottom: 8px;"></i>
-    <% end %>
+  <div class="card-product-infos w-100">
     <h2><%= product_name %></h2>
     <p><%= price %></p>
     <p><%= scanned_time %></p>

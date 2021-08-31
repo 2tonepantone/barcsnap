@@ -28,17 +28,22 @@
   </div>
 </div>
 <% @products.each do |product| %>
-  <% image_url = product.photo.attached? ? cl_image_path(product.photo.key) : '' %>
+  <% image_url = product.photo.attached? ? cl_image_path(product.photo.key) : image_path("default-product.png") %>
   <% days_ago = (Date.today - Date.new(product.created_at.year, product.created_at.month, product.created_at.day)).to_i %>
   <% avg_rating = product.avg_rating %>
-  <% rating_str = "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+  <% rating_str = "⭐#{avg_rating ? avg_rating.round(1) : '-'} (#{product.reviews.count})" %>
   <div class="my-1">
     <% product_favorited = false %>
     <% if current_user && product %>
       <% product_favorited = current_user.favorited?(product) %>
     <% end %>
-    <%= link_to product_path(product) do %>
-      <%= render 'shared/user_history_card', product: product, product_favorited: product_favorited, img_url: image_url, product_name: product.name, price:rating_str, scanned_time: '' %>
-    <% end %>
+    <div class="position-relative">
+      <%= link_to product_path(product) do %>
+        <%= render 'shared/user_history_card', product: product, product_favorited: product_favorited, img_url: image_url, product_name: product.name, price:rating_str, scanned_time: '' %>
+      <% end %>
+      <%= link_to product_favorites_path(product), method: :post do %>
+        <i class="fas fa-heart btn btn-sm <%= defined?(product_favorited) && product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; right: 8px; bottom: 8px;"></i>
+      <% end %>
+    </div>
   </div>
 <% end %>

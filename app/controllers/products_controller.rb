@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id]) if params[:id].to_i.positive?
+    @reviews = @product.reviews.order(created_at: :desc) if @product
     @review = Review.new
 
     # If product_id exists, generate @product_compare
