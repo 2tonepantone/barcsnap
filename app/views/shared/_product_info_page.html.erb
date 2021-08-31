@@ -7,7 +7,7 @@
 <!-- Button trigger modal -->
 <%= render 'shared/modal_form' %>
 <% if review_count > 0 %>
-  <% review_first =  Product.find(params[:id]).reviews.first%>
+  <% review_first =  Product.find(params[:id]).reviews.first %>
   <% user = review_first.user %>
 <% end %>
 <!-- small box before toggling -->
@@ -41,11 +41,7 @@
       <!-- <p class="my-auto">Navbar punchline</p> -->
       <%= render 'shared/review_card_no_click', bg_img_url:image_path("https://dummyimage.com/25x25/fff/000&text=%3F"), review: "Add a public comment..." %>
     <% else %>
-      <% if review_count > 0 %>
-        <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: "Add a public comment..." %>
-      <% else %>
-        <%= render 'shared/review_card_no_click', bg_img_url: cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill), review: "Add a public comment..." %>
-      <% end %>
+      <%= render 'shared/review_card_no_click', bg_img_url: current_user.photo.attached? ? cl_image_path(current_user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: "Add a public comment..." %>
     <% end %>
   </div>
   <% Product.find(params[:id]).reviews.each do |review| %>
