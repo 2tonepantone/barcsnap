@@ -112,6 +112,7 @@ class ProductsController < ApplicationController
       params[:sort_by] = "oldest"
       @products = product.find_related_on_tags.sort_by(&:created_at)
     end
+    raise
   end
 
   def reviews_params

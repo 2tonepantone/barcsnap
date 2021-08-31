@@ -11,6 +11,8 @@
           <div class="modal-body">
             <%= f.input :rating, input_html: { min: '1', max: '5' }, required: true %>
             <%= f.input :comment, as: :text, required: true %>
+            <%= f.input :source, as: :text %>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
