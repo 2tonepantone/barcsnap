@@ -23,7 +23,7 @@
           <div class="row p-0 d-flex justify-content-center">
             <p class="mb-1"><strong>Potential allergens:</strong></p>
           </div>
-          <div class="row info-style p-0 d-flex justify-content-center">
+          <div id="inputText"class="row info-style p-0 d-flex justify-content-center">
             <p class="mb-1"><%= allergens %></p>
           </div>
         <% end %>
@@ -61,3 +61,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  function highlight(text) {
+    var inputText = document.getElementById("inputText");
+    var innerHTML = inputText.innerHTML;
+    var index = innerHTML.indexOf(text);
+    console.log("hi");
+    if (index >= 0) {
+    innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+    inputText.innerHTML = innerHTML;
+    }
+  }
+  highlight("<%= current_user.allergies %>")
+</script>
