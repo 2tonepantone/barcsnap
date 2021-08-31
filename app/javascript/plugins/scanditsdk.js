@@ -31,19 +31,20 @@ const initScanditSDK = () => {
           document.getElementById("barcodeCompare").setAttribute('value', true);
         });
       }
+      // Close barcode scanner modal to pause scanning and camera access
+      document.querySelectorAll(".scanner-pause").forEach((pauseButton) => {
+        pauseButton.addEventListener("click", () => {
+          document.querySelector(".scandit-video").classList.add("d-none");
+          barcodePicker.pauseScanning(true);
+        });
+      });
       // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
       barcodePicker.applyScanSettings(scanSettings);
       document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
           document.querySelector(".scandit-video").classList.remove("d-none");
           barcodePicker.accessCamera();
-        });
-      });
-      // Close barcode scanner modal to pause scanning and camera access
-      document.querySelectorAll(".scanner-pause").forEach((pauseButton) => {
-        pauseButton.addEventListener("click", () => {
-          document.querySelector(".scandit-video").classList.add("d-none");
-          barcodePicker.pauseScanning(true)
+          barcodePicker.resumeScanning();
         });
       });
       // Send scanned barcode to hidden form and automatically submit it
