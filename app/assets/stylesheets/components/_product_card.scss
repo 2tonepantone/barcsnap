@@ -1,3 +1,11 @@
+.product-header, .product-rating, .product-ingredients {
+  border-bottom: 0.5px solid rgba(0,0,0,.1);
+}
+
+.product-ingredients button {
+  font-size: 12px;
+}
+
 .cards-product {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -9,12 +17,11 @@
 }
 
 .card-effect {
-  color: rgb(55, 61, 60);
-  opacity: 0.9;
-}
-.card-effect:hover {
-  opacity: 1;
-  text-decoration: underline;
+  color: #607D8B;
+  &:hover{
+    color: #203d69;
+    text-decoration: none;
+  }
 }
 
 // Smallest device
@@ -65,4 +72,10 @@
   // text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+#badge-rating {
+  font-size: 24;
+  font-weight: 400;
+  background-color: #607d8b80;
 }

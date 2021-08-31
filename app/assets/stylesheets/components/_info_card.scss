@@ -10,10 +10,18 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  margin-bottom: -25px;
-  padding-top: 15px;
+  // margin-bottom: -25px;
+  padding-top: 10px;
   // box-shadow: 1px 0px 0px rgba(0,0,0,0.1);
   // padding-top: 200px;
+}
+
+#product-background-box {
+  // border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 .product-background-comparison {
@@ -100,8 +108,8 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   // border-radius: 25px;
   border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // border-bottom-right-radius: 25px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .card-category-comparison {

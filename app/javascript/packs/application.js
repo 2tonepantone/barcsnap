@@ -23,6 +23,7 @@ import "bootstrap";
 import { initScanditSDK } from "../plugins/scanditsdk"
 import { readMore } from "../plugins/readmore"
 import { footer } from "../plugins/footer"
+import { closeModal } from "../plugins/closemodal"
 import { reviewMore } from "../plugins/reviewmore"
 
 // Internal imports, e.g:
@@ -35,6 +36,7 @@ document.addEventListener('turbolinks:load', () => {
   readMore();
   footer();
   reviewMore();
+  closeModal();
 });
 
 import "controllers"
