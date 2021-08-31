@@ -21,7 +21,9 @@ const initScanditSDK = () => {
         maxNumberOfCodesPerFrame: 2,
       });
       // Hide scandit video element that white space below the sticky footer
-      document.querySelector(".scandit-video").classList.add("d-none");
+      if (document.querySelector(".scandit-video")) {
+        document.querySelector(".scandit-video").classList.add("d-none");
+      }
       // Select sticky footer navbar elements
       const scannerNew = document.querySelector('.scanner-new');
       const barcodeCompare = document.querySelector('.barcode-compare');
@@ -68,9 +70,11 @@ const initScanditSDK = () => {
       //     maxNumberOfCodesPerFrame: 2,
       //   });
       // }
-      console.log("hello! above applyscansettings");
+      console.log("hello! before applyscansettings");
       console.log(scanSettings);
       barcodePicker.applyScanSettings(scanSettings); // need to appyScanSettings for each type of scan?
+      console.log("hello! after applyscansettings");
+      console.log(scanSettings);
       // Send scanned barcode to hidden form and automatically submit it
       barcodePicker.on("scan", (scanResult) => {
           let barcodes = scanResult.barcodes.map(barcode => barcode.data);
