@@ -21,6 +21,7 @@ ActiveStorage.start()
 // External imports
 import "bootstrap";
 import { initScanditSDK } from "../plugins/scanditsdk"
+import { initScanditSDKMultiple } from "../plugins/multiple_barcode_scandit"
 import { readMore } from "../plugins/readmore"
 import { footer } from "../plugins/footer"
 import { closeModal } from "../plugins/closemodal"
@@ -33,6 +34,7 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initScanditSDK();
+  initScanditSDKMultiple();
   readMore();
   footer();
   reviewMore();
