@@ -22,7 +22,6 @@ ActiveStorage.start()
 import "bootstrap";
 import { initScanditSDK } from "../plugins/scanditsdk"
 import { readMore } from "../plugins/readmore"
-import { footer } from "../plugins/footer"
 import { closeModal } from "../plugins/closemodal"
 import { reviewMore } from "../plugins/reviewmore"
 
@@ -34,7 +33,6 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initScanditSDK();
   readMore();
-  footer();
   reviewMore();
   closeModal();
 });
