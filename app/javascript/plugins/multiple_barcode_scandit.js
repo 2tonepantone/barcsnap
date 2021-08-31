@@ -12,7 +12,7 @@ const initScanditSDKMultiple = () => {
       vibrateOnScan: true,
       singleImageModeSettings: {
         desktop: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS },
-        mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
+        mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.ALWAYS }
       }
     }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
@@ -26,11 +26,11 @@ const initScanditSDKMultiple = () => {
       if (document.querySelector('.scanner-new') && document.querySelector('.barcode-compare')) {
         // Set "compare" value false when clicking "scan" button
         document.querySelector('.scanner-new').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").setAttribute('value', false);
+          document.getElementById("barcodeMultiple").setAttribute('value', false);
         });
         // Set "compare" value to true when clicking "compare" button
-        document.querySelector('.barcode-compare').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").setAttribute('value', true);
+        document.querySelector('.barcode-multiple').addEventListener("click", () => {
+          document.getElementById("barcodeMultiple").setAttribute('value', true);
         });
       }
       // Close barcode scanner modal to pause scanning and camera access
@@ -42,7 +42,7 @@ const initScanditSDKMultiple = () => {
       });
       // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
       barcodePicker.applyScanSettings(scanSettings);
-      document.querySelectorAll(".scanner-start").forEach((startButton) => {
+      document.querySelectorAll(".scanner-multiple-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
           document.querySelector(".scandit-video").classList.remove("d-none");
           barcodePicker.accessCamera();
