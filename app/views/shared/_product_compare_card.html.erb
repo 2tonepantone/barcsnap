@@ -30,11 +30,8 @@
       <div class="row product-ingredients pb-2">
         <% [allergens, allergens_compare].each_with_index do |allergens, i| %>
           <div class="col-6 d-flex flex-column pb-2 text-center">
-            <span id="inputText" class="d-flex flex-grow-1 justify-content-center align-items-center pb-3">
-              <% if allergens.include?(current_user.allergies) %>
-                <%= current_user.allergies %>
-                <%= allergens %>
-              <% end %>
+            <span id="inputText<%= i %>" class="d-flex flex-grow-1 justify-content-center align-items-center pb-3">
+              <%= allergens %>
             </span>
             <button type="button" class="btn btn-outline-secondary mt-auto align-self-center"
             <%= "disabled" if allergens == "No ingredients provided." %> data-toggle="modal"
@@ -73,15 +70,17 @@
 
 <script>
   function highlight(text) {
-    var inputText = document.getElementById("inputText");
-    var innerHTML = inputText.innerHTML;
-    var index = innerHTML.indexOf(text);
-    console.log("hi");
-    if (index >= 0) {
-
-    innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-    inputText.innerHTML = innerHTML;
+    for(i = 0; i <= 1; i ++){
+      var inputText = document.getElementById("inputText" + i);
+      var innerHTML = inputText.innerHTML;
+      var index = innerHTML.indexOf(text);
+      console.log("hi");
+      if (index >= 0) {
+      innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+      inputText.innerHTML = innerHTML;
+      }
     }
   }
-  highlight("豚肉")
+  // highlight("豚肉")
+  highlight("<%= current_user.allergies %>")
 </script>
