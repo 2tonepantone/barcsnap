@@ -11,7 +11,7 @@
 <div class="row mx-0 mb-3">
   <% @product.find_related_on_tags[0..5].each do |product| %>
     <% avg_rating = product.avg_rating %>
-    <% rating_str = "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+    <% rating_str = "⭐#{avg_rating ? avg_rating.round(1) : '-'} (#{product.reviews.count})" %>
     <div class="col-6 col-md-4 col-lg-2 p-0 m-0">
       <% if show_compare_option %>
         <% modal_id = "product#{product.id}" %>

@@ -19,7 +19,7 @@
           <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : image_path("default-product.png") %>
           <%= link_to product_path(product) do %>
             <% avg_rating = product.avg_rating %>
-            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(1) : '-'} (#{product.reviews.count})" %>
           <% end %>
         </div>
       <% end %>
@@ -42,7 +42,7 @@
           <% bg_img_url = product.photo.attached? ? cl_image_path(product.photo.key) : image_path("default-product.png") %>
           <%= link_to product_path(product) do %>
             <% avg_rating = product.avg_rating %>
-            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(2) : '-'} (#{product.reviews.count})" %>
+            <%= render 'shared/product_card', bg_img_url: bg_img_url, product_name: product.name, price: "⭐#{avg_rating ? avg_rating.round(1) : '-'} (#{product.reviews.count})" %>
           <% end %>
         </div>
       <% end %>
