@@ -1,22 +1,23 @@
 <div class="modal fade" id="createReview" tabindex="-1" aria-labelledby="createCourseLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="createCourseLabel">Add a review</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <%= simple_form_for [@product, @review] do |f| %>
-          <div class="modal-body">
-            <%= f.input :rating, input_html: { min: '1', max: '5' }, required: true %>
-            <%= f.input :comment, as: :text, required: true %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <%= f.submit "Submit review", class: "btn btn-primary" %>
-          </div>
-        <% end %>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createCourseLabel">Add a review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <%= simple_form_for [@product, @review] do |f| %>
+        <div class="modal-body">
+          <%= f.input :rating, input_html: { min: '1', max: '5' }, required: true, label: 'Rating (1-5)' %>
+          <%= f.input :comment, as: :text, required: true %>
+          <%= f.hidden_field :source, value: 'BarcSnap' %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Submit review", class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
+  </div>
 </div>

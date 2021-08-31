@@ -1,10 +1,12 @@
 <!-- Product info compare -->
 <!-- <div style ="margin-right:-15px"> Expand the card's size by remove padding in product_compare_card instead. -->
 <% avg_rating = @product.avg_rating %>
-<% rating = avg_rating ? avg_rating.round(2) : '-' %>
+<% rating = avg_rating ? avg_rating.round(1) : '-' %>
 <% avg_rating_compare = @product_compare.avg_rating %>
-<% rating_compare = avg_rating_compare ? avg_rating_compare.round(2) : '-' %>
-<%= render 'shared/product_compare_card', product_name: @product.name, product_name_compare: @product_compare.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), bg_img_url_compare: @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating: rating, rating_compare: rating_compare, company_name: @product.company_name, company_name_compare: @product_compare.company_name, price: "¥100", price_compare:"¥50", ingredients: @product.ingredients, ingredients_compare: @product_compare.ingredients, allergens: @product.allergens, allergens_compare: @product_compare.allergens, size: @product.size, size_compare: @product_compare.size%>
+<% rating_compare = avg_rating_compare ? avg_rating_compare.round(1) : '-' %>
+<% image_path = @product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.png") %>
+<% compare_image_path = @product_compare.photo.attached? ? cl_image_path(@product_compare.photo.key , height: 300, width: 400, crop: :fill) : image_path("default-product.png") %>
+<%= render 'shared/product_compare_card', product_name: @product.name, product_name_compare: @product_compare.name, bg_img_url: image_path, bg_img_url_compare: compare_image_path, rating: rating, rating_compare: rating_compare, company_name: @product.company_name, company_name_compare: @product_compare.company_name, price: "¥100", price_compare:"¥50", ingredients: @product.ingredients, ingredients_compare: @product_compare.ingredients, allergens: @product.allergens, allergens_compare: @product_compare.allergens, size: @product.size, size_compare: @product_compare.size%>
 <!-- </div> -->
 <!-- product_recommend_card -->
 <%= render 'shared/product_recommend_card', show_compare_option: false %>
