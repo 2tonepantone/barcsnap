@@ -1,5 +1,6 @@
 <!-- Product info card -->
-<% review_count = Product.find(params[:id]).reviews.count %>
+<% reviews = Product.find(params[:id]).reviews.order(created_at: :desc) %>
+<% review_count = reviews.count %>
 <% avg_rating = @product.avg_rating %>
 <% rating = avg_rating ? avg_rating.round(2) : '-' %>
 <%= render 'shared/product_info' , product_name: @product.name, bg_img_url:@product.photo.attached? ? cl_image_path(@product.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), rating: rating, company_name: @product.company_name, ingredients: @product.ingredients, allergens: @product.allergens, size: @product.size, review_count: review_count%>
@@ -7,7 +8,7 @@
 <!-- Button trigger modal -->
 <%= render 'shared/modal_form' %>
 <% if review_count > 0 %>
-  <% review_first =  Product.find(params[:id]).reviews.first %>
+  <% review_first =  reviews.first %>
   <% user = review_first.user %>
 <% end %>
 <!-- small box before toggling -->
@@ -17,6 +18,7 @@
     <i class="fas fa-chevron-down toggling mr-1"></i>
   </div>
   <% if review_count > 0 %>
+    <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.jpg") %>
     <%= render 'shared/review_card_no_click', bg_img_url:user.photo.attached? ? cl_image_path(user.photo.key , height: 300, width: 400, crop: :fill) : image_path("https://dummyimage.com/300x300/fff/000&text=X"), review: review_first.comment %>
   <% else %>
   <% end %>
@@ -40,7 +42,7 @@
     <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.jpg") %>
     <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: "Add a public comment..." %>
   </div>
-  <% Product.find(params[:id]).reviews.each do |review| %>
+  <% reviews.each do |review| %>
     <% user = Review.find(review.id).user %>
     <% avatar_path = (user && user.photo.attached?) ? cl_image_path(user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.jpg") %>
     <%= render 'shared/review_card', bg_img_url: avatar_path, username: user.display_name, review:review.comment, rating:review.rating, source:review.source %>
