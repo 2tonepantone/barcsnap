@@ -23,25 +23,27 @@ const initScanditSDK = () => {
       // Hide scandit video element that white space below the sticky footer
       if (document.querySelector(".scandit-video")) {
         document.querySelector(".scandit-video").classList.add("d-none");
-      }
+      };
       // Select sticky footer navbar elements
       const scannerNew = document.querySelector('.scanner-new');
       const barcodeCompare = document.querySelector('.barcode-compare');
-      const barcodeMultiple = document.querySelector('.barcode-multiple');
+      const barcodeMultipleButton = document.querySelector('.barcode-multiple');
+      // Select scanner form fields
+      const multipleField = document.getElementById("multiple-field")
 
       // Set "compare" and "multiple" value to false when clicking "scan" button
       scannerNew.addEventListener("click", () => {
         document.getElementById("barcodeCompare").setAttribute('value', false);
-        document.getElementById("barcodeMultiple").setAttribute('value', false);
+        document.getElementById("multiple-field").setAttribute('value', false);
       });
       // Set "compare" value to true when clicking "compare" button (and "multiple" to false)
       barcodeCompare.addEventListener("click", () => {
         document.getElementById("barcodeCompare").setAttribute('value', true);
-        document.getElementById("barcodeMultiple").setAttribute('value', false);
+        document.getElementById("multiple-field").setAttribute('value', false);
       });
       // Set "multiple" value to true when clicking "multiple" button (and "compare" to false)
-      barcodeMultiple.addEventListener("click", () => {
-        document.getElementById("barcodeMultiple").setAttribute('value', true);
+      barcodeMultipleButton.addEventListener("click", () => {
+        document.getElementById("multiple-field").setAttribute('value', true);
         scanSettings = new ScanditSDK.ScanSettings({
           enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
           maxNumberOfCodesPerFrame: 2
@@ -57,36 +59,30 @@ const initScanditSDK = () => {
       // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
       document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
-          document.querySelector(".scandit-video").classList.remove("d-none");
+          if (document.querySelector(".scandit-video")) {
+            document.querySelector(".scandit-video").classList.remove("d-none");
+          };
           barcodePicker.accessCamera();
           barcodePicker.resumeScanning();
         });
       });
-      // if (scanMultiple == false) {
-      //   console.log(scanMultiple);
-      //   console.log("hello!")
-      //     scanSettings = new ScanditSDK.ScanSettings({
-      //     enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-      //     maxNumberOfCodesPerFrame: 2,
-      //   });
-      // }
-      console.log("hello! before applyscansettings");
-      console.log(scanSettings);
       barcodePicker.applyScanSettings(scanSettings); // need to appyScanSettings for each type of scan?
-      console.log("hello! after applyscansettings");
-      console.log(scanSettings);
       // Send scanned barcode to hidden form and automatically submit it
       barcodePicker.on("scan", (scanResult) => {
-          let barcodes = scanResult.barcodes.map(barcode => barcode.data);
-          if (barcodes.length == 2) {
-            console.log(barcodes)
-          }
+        let barcodes = scanResult.barcodes.map(barcode => barcode.data);
+        if (multipleField.value == 'true' && barcodes.length == 2) {
+          console.log(barcodes);
+          const barcodeField = document.getElementById('barcode-field');
+          barcodeField.setAttribute('value', barcodes);
+          document.getElementById('barcodeSubmit').click();
+        };
+
           // console.log(scanResult);
             // console.log(barcodes);
         //  else {
         //   let barcodes = scanResult.barcodes[0].data;
         // console.log(scanResult);
-        // const input = document.getElementById('barcodeInput');
+        // const input = document.getElementById('barcode-field');
         // input.setAttribute('value', barcode);
         // document.getElementById('barcodeSubmit').click();
       });
