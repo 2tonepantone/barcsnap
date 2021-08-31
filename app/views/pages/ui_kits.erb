@@ -5,6 +5,7 @@
   <% Product.tagged_with(tag.name).each do |product| %>
     <%= link_to product do %>
       <%= cl_image_tag(product.photo.key, class:'img-thumbnail', style:'width:100px; height:100px;') if product.photo.attached? %>
+      <%= image_tag("default-product.jpg", class:'img-thumbnail', style:'width:100px; height:100px;') unless product.photo.attached? %>
     <% end %>
   <% end %>
 <% end %>
