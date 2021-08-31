@@ -15,23 +15,36 @@ const initScanditSDK = () => {
         mobile: { usageStrategy: SingleImageModeSettings.UsageStrategy.FALLBACK }
       }
     }).then(function (barcodePicker) {
-      const scanSettings = new ScanditSDK.ScanSettings({
+      let scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: 3000, // Minimum delay between allowing the same barcodes
+        // codeDuplicateFilter: 3000,
+        maxNumberOfCodesPerFrame: 2,
       });
       // Hide scandit video element that white space below the sticky footer
       document.querySelector(".scandit-video").classList.add("d-none");
-      // Check for navbar footer elements
-      if (document.querySelector('.scanner-new') && document.querySelector('.barcode-compare')) {
-        // Set "compare" value false when clicking "scan" button
-        document.querySelector('.scanner-new').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").setAttribute('value', false);
+      // Select sticky footer navbar elements
+      const scannerNew = document.querySelector('.scanner-new');
+      const barcodeCompare = document.querySelector('.barcode-compare');
+      const barcodeMultiple = document.querySelector('.barcode-multiple');
+
+      // Set "compare" and "multiple" value to false when clicking "scan" button
+      scannerNew.addEventListener("click", () => {
+        document.getElementById("barcodeCompare").setAttribute('value', false);
+        document.getElementById("barcodeMultiple").setAttribute('value', false);
+      });
+      // Set "compare" value to true when clicking "compare" button (and "multiple" to false)
+      barcodeCompare.addEventListener("click", () => {
+        document.getElementById("barcodeCompare").setAttribute('value', true);
+        document.getElementById("barcodeMultiple").setAttribute('value', false);
+      });
+      // Set "multiple" value to true when clicking "multiple" button (and "compare" to false)
+      barcodeMultiple.addEventListener("click", () => {
+        document.getElementById("barcodeMultiple").setAttribute('value', true);
+        scanSettings = new ScanditSDK.ScanSettings({
+          enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
+          maxNumberOfCodesPerFrame: 2
         });
-        // Set "compare" value to true when clicking "compare" button
-        document.querySelector('.barcode-compare').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").setAttribute('value', true);
-        });
-      }
+      });
       // Close barcode scanner modal to pause scanning and camera access
       document.querySelectorAll(".scanner-pause").forEach((pauseButton) => {
         pauseButton.addEventListener("click", () => {
@@ -40,7 +53,6 @@ const initScanditSDK = () => {
         });
       });
       // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
-      barcodePicker.applyScanSettings(scanSettings);
       document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
           document.querySelector(".scandit-video").classList.remove("d-none");
@@ -48,12 +60,31 @@ const initScanditSDK = () => {
           barcodePicker.resumeScanning();
         });
       });
+      // if (scanMultiple == false) {
+      //   console.log(scanMultiple);
+      //   console.log("hello!")
+      //     scanSettings = new ScanditSDK.ScanSettings({
+      //     enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
+      //     maxNumberOfCodesPerFrame: 2,
+      //   });
+      // }
+      console.log("hello! above applyscansettings");
+      console.log(scanSettings);
+      barcodePicker.applyScanSettings(scanSettings); // need to appyScanSettings for each type of scan?
       // Send scanned barcode to hidden form and automatically submit it
       barcodePicker.on("scan", (scanResult) => {
-        let barcode = scanResult.barcodes[0].data;
-        const input = document.getElementById('barcodeInput');
-        input.setAttribute('value', barcode);
-        document.getElementById('barcodeSubmit').click();
+          let barcodes = scanResult.barcodes.map(barcode => barcode.data);
+          if (barcodes.length == 2) {
+            console.log(barcodes)
+          }
+          // console.log(scanResult);
+            // console.log(barcodes);
+        //  else {
+        //   let barcodes = scanResult.barcodes[0].data;
+        // console.log(scanResult);
+        // const input = document.getElementById('barcodeInput');
+        // input.setAttribute('value', barcode);
+        // document.getElementById('barcodeSubmit').click();
       });
     });
   });
