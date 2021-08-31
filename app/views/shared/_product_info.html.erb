@@ -63,28 +63,19 @@
 </div>
 
 <script>
-  function highlight(text) {
-    var inputText = document.getElementById("inputText");
+  function highlight2(text, inputTexty, decoration) {
+    console.log(inputText);
+    var inputText = document.getElementById(inputTexty);
     var innerHTML = inputText.innerHTML;
     var index = innerHTML.indexOf(text);
     console.log("hi");
     if (index >= 0) {
-    innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+    innerHTML = innerHTML.substring(0,index) + "<span class='"+decoration+"'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
     inputText.innerHTML = innerHTML;
     }
   }
-  function highlight2(text) {
-    var inputText = document.getElementById("inputText2");
-    var innerHTML = inputText.innerHTML;
-    var index = innerHTML.indexOf(text);
-    console.log("hi");
-    if (index >= 0) {
-    innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-    inputText.innerHTML = innerHTML;
-    }
-  }
-  highlight("<%= current_user.allergies %>")
-  highlight("<%= current_user.dislikes %>")
-  highlight2("<%= current_user.allergies %>")
-  highlight2("<%= current_user.dislikes %>")
+  highlight2("<%= current_user.allergies %>", "inputText", "highlight")
+  highlight2("<%= current_user.dislikes %>", "inputText", "highlight2")
+  highlight2("<%= current_user.allergies %>", "inputText2", "highlight")
+  highlight2("<%= current_user.dislikes %>", "inputText2", "highlight2")
 </script>
