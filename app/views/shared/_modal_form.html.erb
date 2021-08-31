@@ -9,7 +9,7 @@
         </div>
         <%= simple_form_for [@product, @review] do |f| %>
           <div class="modal-body">
-            <%= f.input :rating, input_html: { min: '1', max: '5' }, required: true %>
+            <%= f.input :rating, input_html: { min: '1', max: '5' }, required: true, label: 'Rating (1-5)' %>
             <%= f.input :comment, as: :text, required: true %>
             <%= f.input :source, as: :text %>
 
