@@ -55,31 +55,39 @@
   </div>
 </div>
 <div class="container">
-  <% body_content = ingredients %>
-  <%= render 'shared/modal', modal_id: 'ingredients', modal_title: 'Ingredients',
-        text_header: ' ', text_body: ' ', body_content: body_content,
-        redirect_path: root_path, btn_modal_confirm: 'Home'  %>
+  <span id="inputTexty0">
+    <% body_content = ingredients %>
+    <%= render 'shared/modal', modal_id: 'ingredients', modal_title: 'Ingredients',
+          text_header: ' ', text_body: ' ', body_content: body_content,
+          redirect_path: root_path, btn_modal_confirm: 'Home'  %>
+  </span>
 </div>
 <div class="container">
-  <% body_content = ingredients_compare %>
-  <%= render 'shared/modal', modal_id: 'ingredients-compare', modal_title: 'Ingredients',
-        text_header: ' ', text_body: ' ', body_content: body_content,
-        redirect_path: root_path, btn_modal_confirm: 'Home'  %>
+  <span id="inputTexty1">
+    <% body_content = ingredients_compare %>
+    <%= render 'shared/modal', modal_id: 'ingredients-compare', modal_title: 'Ingredients',
+          text_header: ' ', text_body: ' ', body_content: body_content,
+          redirect_path: root_path, btn_modal_confirm: 'Home'  %>
+  </span>
 </div>
 
 
 <script>
-  function highlight(text) {
+  function highlight(text, inputTexty, decoration) {
     for(i = 0; i <= 1; i ++){
-      var inputText = document.getElementById("inputText" + i);
+      var inputText = document.getElementById(inputTexty + i);
       var innerHTML = inputText.innerHTML;
       var index = innerHTML.indexOf(text);
       console.log("hi");
       if (index >= 0) {
-      innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+      innerHTML = innerHTML.substring(0,index) + "<span class='"+ decoration +"'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
       inputText.innerHTML = innerHTML;
       }
     }
   }
-  highlight("<%= current_user.allergies %>")
+  // highlight("<%= current_user.allergies %>")
+  highlight("<%= current_user.allergies %>", "inputText", "highlight")
+  highlight("<%= current_user.dislikes %>", "inputText", "highlight2")
+  highlight("<%= current_user.allergies %>", "inputTexty", "highlight")
+  highlight("<%= current_user.dislikes %>", "inputTexty", "highlight2")
 </script>
