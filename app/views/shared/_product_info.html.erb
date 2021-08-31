@@ -31,7 +31,7 @@
           <p class="mb-1"><strong>Ingredients:</strong></p>
         </div>
         <div class ="row info-style p-1 d-flex justify-content-center">
-          <p class="mb-1">
+          <p id="inputText2" class="mb-1">
             <% if ingredients.length > 30 %>
               <%= first_string = ingredients.slice(0,30) %><span class="dots">...</span>
               <span class="more">
@@ -73,5 +73,18 @@
     inputText.innerHTML = innerHTML;
     }
   }
+  function highlight2(text) {
+    var inputText = document.getElementById("inputText2");
+    var innerHTML = inputText.innerHTML;
+    var index = innerHTML.indexOf(text);
+    console.log("hi");
+    if (index >= 0) {
+    innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
+    inputText.innerHTML = innerHTML;
+    }
+  }
   highlight("<%= current_user.allergies %>")
+  highlight("<%= current_user.dislikes %>")
+  highlight2("<%= current_user.allergies %>")
+  highlight2("<%= current_user.dislikes %>")
 </script>
