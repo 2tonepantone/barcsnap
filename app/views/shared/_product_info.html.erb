@@ -19,6 +19,17 @@
         <p class="mb-1"><%= "#{@product.tag_list.join(', ')}"  %></p>
       </div>
       <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
+      <% raise %>
+        <% if allergens == "No allergens found." %>
+
+          <div class="row p-0 d-flex justify-content-center">
+            <p class="mb-1"><strong>allergens:</strong></p>
+          </div>
+          <div class="row info-style p-0 d-flex justify-content-center">
+            <p class="mb-1"><%= allergens %></p>
+          </div>
+        <% end %>
+
         <div class="row p-1 d-flex justify-content-center">
           <p class="mb-1"><strong>Ingredients:</strong></p>
         </div>
