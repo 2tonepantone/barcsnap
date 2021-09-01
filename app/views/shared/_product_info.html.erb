@@ -3,7 +3,7 @@
     <div class="card-category-product product-background p-0" style="background-color: white; background-image: url(<%= bg_img_url %>); background-size: contain;">
       <p id="badge-rating" class="mx-1 my-1 position-absolute badge badge-pill badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
       <%= link_to product_favorites_path(@product), method: :post, remote: true do %>
-        <div id="btn-favorite-<%= @product.id %>" style="position:absolute; left: 0; top: 0;">
+        <div id="btn-favorite-<%= @product.id %>" style="position:absolute; left: 0; top: 0; font-size:1rem;">
           <%= render 'products/favorite_button', product_favorited: @product_favorited %>
         </div>
       <% end %>
@@ -73,21 +73,21 @@
     inputText.innerHTML = innerHTML;
     }
   }
-
+  
   function parsing(rubyarray) {
     var current = rubyarray;
     answer = current.replace(/[&quot;]+/g, '"');
     var array = JSON.parse(answer);
     return array
   }
-
+  
   array_allergies = parsing("<%= @array_allergies %>");
-
+  
   array_allergies.forEach(function (item) {
     highlight2(item, "inputText", "highlight");
     highlight2(item, "inputText2", "highlight");
   });
-
+  
   array_dislikes = parsing("<%= @array_dislikes %>")
   array_dislikes.forEach(function (item) {
     highlight2(item, "inputText", "highlight2");
