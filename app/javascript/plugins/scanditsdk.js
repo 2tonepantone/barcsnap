@@ -19,7 +19,7 @@ const initScanditSDK = () => {
     }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: -1,
+        codeDuplicateFilter: 1000, // Interval of time before allowing the same barcode to be read in one scan session
         maxNumberOfCodesPerFrame: 2,
       });
       // Apply scan settings described above
