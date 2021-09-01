@@ -63,11 +63,9 @@
 </div>
 <script>
   function highlight2(text, inputTexty, decoration) {
-    console.log(inputText);
     var inputText = document.getElementById(inputTexty);
     var innerHTML = inputText.innerHTML;
     var index = innerHTML.indexOf(text);
-    console.log("hi");
     if (index >= 0) {
     innerHTML = innerHTML.substring(0,index) + "<span class='"+decoration+"'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
     inputText.innerHTML = innerHTML;
@@ -76,7 +74,6 @@
 
   function parsing(rubyarray) {
     var current = rubyarray;
-    console.log(current);
     answer = current.replace(/[&quot;]+/g, '"');
     var array = JSON.parse(answer);
     return array
@@ -85,14 +82,12 @@
   array_allergies = parsing("<%= @array_allergies %>");
 
   array_allergies.forEach(function (item) {
-    console.log(item);
     highlight2(item, "inputText", "highlight");
     highlight2(item, "inputText2", "highlight");
   });
 
   array_dislikes = parsing("<%= @array_dislikes %>")
   array_dislikes.forEach(function (item) {
-    console.log(item);
     highlight2(item, "inputText", "highlight2");
     highlight2(item, "inputText2", "highlight2");
   });

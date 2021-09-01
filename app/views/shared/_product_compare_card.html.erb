@@ -80,7 +80,6 @@
       var inputText = document.getElementById(inputTexty + i);
       var innerHTML = inputText.innerHTML;
       var index = innerHTML.indexOf(text);
-      console.log("hi");
       if (index >= 0) {
       innerHTML = innerHTML.substring(0,index) + "<span class='"+ decoration +"'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
       inputText.innerHTML = innerHTML;
@@ -89,7 +88,6 @@
   }
   function parsing(rubyarray) {
     var current = rubyarray;
-    console.log(current);
     answer = current.replace(/[&quot;]+/g, '"');
     var array = JSON.parse(answer);
     return array
@@ -98,14 +96,12 @@
   array_allergies = parsing("<%= @array_allergies %>");
 
   array_allergies.forEach(function (item) {
-    console.log(item);
     highlight(item, "inputText", "highlight");
     highlight(item, "inputTexty", "highlight");
   });
 
   array_dislikes = parsing("<%= @array_dislikes %>")
   array_dislikes.forEach(function (item) {
-    console.log(item);
     highlight(item, "inputText", "highlight2");
     highlight(item, "inputTexty", "highlight2");
   });
