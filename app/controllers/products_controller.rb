@@ -23,10 +23,6 @@ class ProductsController < ApplicationController
     else
       @products = get_related_product_sorted(@product)
     end
-    respond_to do |format|
-      # format.html
-      format.js
-    end
   end
 
   def create
