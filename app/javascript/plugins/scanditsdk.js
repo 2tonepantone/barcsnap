@@ -106,15 +106,19 @@ const initScanditSDK = () => {
         };
 
         const load_screen = document.getElementById("spinner");
-        new Spinner(opts).spin(load_screen);
+        // new Spinner(opts).spin(load_screen);
         let barcodes = scanResult.barcodes.map(barcode => barcode.data);
         const barcodeField = document.getElementById('barcode-field');
         barcodeField.setAttribute('value', barcodes);
         // Force the scanner to wait for 2 barcodes if comparing multiple
         if (multipleField.value == 'true' && barcodes.length == 2) {
           document.getElementById('barcodeSubmit').click();
+          // Display spinner overlay
+          new Spinner(opts).spin(load_screen);
         } else if (multipleField.value == 'false' && barcodes.length == 1) {
           document.getElementById('barcodeSubmit').click();
+          // Display spinner overlay
+          new Spinner(opts).spin(load_screen);
         };
       });
     });
