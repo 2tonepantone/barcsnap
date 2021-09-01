@@ -28,6 +28,7 @@ const initScanditSDK = () => {
       };
       // Select sticky footer navbar elements
       const scannerNewButton = document.querySelector('.scanner-new');
+      const scannerHomeButton = document.querySelector('.scanner-home');
       const barcodeCompareButton = document.querySelector('.barcode-compare');
       const barcodeMultipleButton = document.querySelector('.barcode-multiple');
       // Select scanner form fields (barcode_scanner.html.erb)
@@ -37,9 +38,19 @@ const initScanditSDK = () => {
         document.getElementById("compare-field").setAttribute('value', false);
         document.getElementById("multiple-field").setAttribute('value', false);
       });
-      // Set "compare" value to "true" when clicking "scan & compare" button (and "multiple" to "false")
+      if (scannerHomeButton) {
+        scannerHomeButton.addEventListener("click", () => {
+          document.getElementById("compare-field").setAttribute('value', false);
+          document.getElementById("multiple-field").setAttribute('value', false);
+        });
+      };
+      // Set "compare" value to "true" (unless on the homepage) when clicking "scan & compare" button (and "multiple" to "false")
       barcodeCompareButton.addEventListener("click", () => {
+        if (scannerHomeButton) {
+          document.getElementById("compare-field").setAttribute('value', false);
+        } else {
         document.getElementById("compare-field").setAttribute('value', true);
+        };
         document.getElementById("multiple-field").setAttribute('value', false);
       });
       // Set "multiple" value to "true" when clicking "multiple" button (and "compare" to "false")
@@ -73,10 +84,9 @@ const initScanditSDK = () => {
         const barcodeField = document.getElementById('barcode-field');
         barcodeField.setAttribute('value', barcodes);
         // Force the scanner to wait for 2 barcodes if comparing multiple
-        if (multipleField.value == 'true') {
-          barcodes.length == 2
+        if (multipleField.value == 'true' && barcodes.length == 2) {
           document.getElementById('barcodeSubmit').click();
-        } else {
+        } else if (multipleField.value == 'false' && barcodes.length == 1) {
           document.getElementById('barcodeSubmit').click();
         };
       });
