@@ -7,14 +7,10 @@ class ProductsController < ApplicationController
     @review = Review.new
 
     # If product_id exists, generate @product_compare
-    if !params[:product_id].nil?
-      @product_compare = Product.find(params[:product_id])
-    end
+    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
 
     @product_favorited = false
-    if current_user && @product
-      @product_favorited = current_user.favorited?(@product)
-    end
+    @product_favorited = current_user.favorited?(@product) if current_user && @product
     # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
@@ -65,15 +61,17 @@ class ProductsController < ApplicationController
         if @product.save
           jancode_scraper.upload_image
           @products_multiple << @product
-        else
-          redirect_back(fallback_location: root_path,
-                        alert: "Product info unavailable. Please try a different barcode!")
         end
       end
     end
-    @product1 = @products_multiple[0]
-    @product2 = @products_multiple[1]
-    redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
+    if @products_multiple.length == barcodes.length
+      @product1 = @products_multiple[0]
+      @product2 = @products_multiple[1]
+      redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
+    else
+      redirect_back(fallback_location: root_path,
+                           alert: "Product info unavailable. Please try a different barcode!")
+    end
   end
 
   def comparing_scanned?
