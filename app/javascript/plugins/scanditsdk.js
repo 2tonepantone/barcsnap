@@ -1,3 +1,4 @@
+// This scanner scans and returns one barcode at a time.
 import * as ScanditSDK from "scandit-sdk";
 import { SingleImageModeSettings } from "scandit-sdk";
 
@@ -16,21 +17,50 @@ const initScanditSDK = () => {
     }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: 3000, // Minimum delay between duplicate results
+        // codeDuplicateFilter: 3000,
+        maxNumberOfCodesPerFrame: 2,
       });
+      // Apply scan settings described above
+      barcodePicker.applyScanSettings(scanSettings);
       // Hide scandit video element that white space below the sticky footer
-      document.querySelector(".scandit-video").classList.add("d-none");
-      // Check for navbar footer elements
-      if (document.querySelector('.scanner-new') && document.querySelector('.barcode-compare')) {
-        // Set "compare" value false when clicking "scan" button
-        document.querySelector('.scanner-new').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").setAttribute('value', false);
+      if (document.querySelector(".scandit-video")) {
+        document.querySelector(".scandit-video").classList.add("d-none");
+      };
+      // Select sticky footer navbar elements
+      const scannerNewButton = document.querySelector('.scanner-new');
+      const scannerHomeButton = document.querySelector('.scanner-home');
+      const barcodeCompareButton = document.querySelector('.barcode-compare');
+      const barcodeMultipleButton = document.querySelector('.barcode-multiple');
+      // Select scanner form fields (barcode_scanner.html.erb)
+      const multipleField = document.getElementById("multiple-field")
+      // Set "compare" and "multiple" value to "false" when clicking "scan" button
+      scannerNewButton.addEventListener("click", () => {
+        document.getElementById("compare-field").setAttribute('value', false);
+        document.getElementById("multiple-field").setAttribute('value', false);
+      });
+      if (scannerHomeButton) {
+        scannerHomeButton.addEventListener("click", () => {
+          document.getElementById("compare-field").setAttribute('value', false);
+          document.getElementById("multiple-field").setAttribute('value', false);
         });
-        // Set "compare" value to true when clicking "compare" button
-        document.querySelector('.barcode-compare').addEventListener("click", () => {
-          document.getElementById("barcodeCompare").setAttribute('value', true);
+      };
+      // Set "compare" value to "true" (unless on the homepage) when clicking "scan & compare" button (and "multiple" to "false")
+      barcodeCompareButton.addEventListener("click", () => {
+        if (scannerHomeButton) {
+          document.getElementById("compare-field").setAttribute('value', false);
+        } else {
+        document.getElementById("compare-field").setAttribute('value', true);
+        };
+        document.getElementById("multiple-field").setAttribute('value', false);
+      });
+      // Set "multiple" value to "true" when clicking "multiple" button (and "compare" to "false")
+      barcodeMultipleButton.addEventListener("click", () => {
+        document.getElementById("multiple-field").setAttribute('value', true);
+        scanSettings = new ScanditSDK.ScanSettings({
+          enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
+          maxNumberOfCodesPerFrame: 2
         });
-      }
+      });
       // Close barcode scanner modal to pause scanning and camera access
       document.querySelectorAll(".scanner-pause").forEach((pauseButton) => {
         pauseButton.addEventListener("click", () => {
@@ -38,21 +68,27 @@ const initScanditSDK = () => {
           barcodePicker.pauseScanning(true);
         });
       });
-      // Click "Scan a barcode", "scan", "compare" buttons to start barcode scanner
-      barcodePicker.applyScanSettings(scanSettings);
+      // Click "scan & compare", "scan", "scan multiple" buttons to start barcode scanner
       document.querySelectorAll(".scanner-start").forEach((startButton) => {
         startButton.addEventListener("click", () => {
-          document.querySelector(".scandit-video").classList.remove("d-none");
+          if (document.querySelector(".scandit-video")) {
+            document.querySelector(".scandit-video").classList.remove("d-none");
+          };
           barcodePicker.accessCamera();
           barcodePicker.resumeScanning();
         });
       });
       // Send scanned barcode to hidden form and automatically submit it
       barcodePicker.on("scan", (scanResult) => {
-        let barcode = scanResult.barcodes[0].data;
-        const input = document.getElementById('barcodeInput');
-        input.setAttribute('value', barcode);
-        document.getElementById('barcodeSubmit').click();
+        let barcodes = scanResult.barcodes.map(barcode => barcode.data);
+        const barcodeField = document.getElementById('barcode-field');
+        barcodeField.setAttribute('value', barcodes);
+        // Force the scanner to wait for 2 barcodes if comparing multiple
+        if (multipleField.value == 'true' && barcodes.length == 2) {
+          document.getElementById('barcodeSubmit').click();
+        } else if (multipleField.value == 'false' && barcodes.length == 1) {
+          document.getElementById('barcodeSubmit').click();
+        };
       });
     });
   });

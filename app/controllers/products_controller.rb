@@ -19,14 +19,10 @@ class ProductsController < ApplicationController
     end
 
     # If product_id exists, generate @product_compare
-    if !params[:product_id].nil?
-      @product_compare = Product.find(params[:product_id])
-    end
+    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
 
     @product_favorited = false
-    if current_user && @product
-      @product_favorited = current_user.favorited?(@product)
-    end
+    @product_favorited = current_user.favorited?(@product) if current_user && @product
     # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
@@ -38,6 +34,8 @@ class ProductsController < ApplicationController
   end
 
   def create
+    return compare_multiple_scanned if comparing_multiple_scanned?
+
     @barcode = params[:barcode]
     @barcode = convert_to_jancode unless jancode_format?
 
@@ -54,6 +52,37 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def comparing_multiple_scanned?
+    params.key?(:multiple) && params[:multiple] == 'true'
+  end
+
+  def compare_multiple_scanned
+    barcodes = params[:barcode].split(',')
+    @products_multiple = []
+    barcodes.each do |barcode|
+      @barcode = barcode
+      @barcode = convert_to_jancode unless jancode_format?
+      if in_database?
+        @product = Product.find_by(barcode: @barcode)
+        @products_multiple << @product
+      else
+        jancode_scraper = ScrapeJancodeService.new(@barcode)
+        jancode_scraper.call
+        @product = jancode_scraper.create_product
+        if @product.save
+          jancode_scraper.upload_image
+          @products_multiple << @product
+        else
+          return redirect_back(fallback_location: root_path,
+                               alert: "Product info unavailable. Please try a different barcode!")
+        end
+      end
+    end
+    @product1 = @products_multiple[0]
+    @product2 = @products_multiple[1]
+    redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
+  end
 
   def comparing_scanned?
     params.key?(:compare) && params[:compare] == 'true'
