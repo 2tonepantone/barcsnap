@@ -14,6 +14,21 @@
   display:none !important;
 } 
 
+#goog-gt-tt {
+  display: none !important;
+}
+
+.goog-text-highlight {
+  background: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  box-sizing: unset !important;
+  -webkit-box-sizing: unset !important;
+  -moz-box-sizing: unset !important;
+  position: relative !important;
+} 
+
 .goog-te-combo {
   width: 35px;
   opacity: 0;
