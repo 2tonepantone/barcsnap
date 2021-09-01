@@ -48,17 +48,6 @@
     <%= render 'shared/review_card', bg_img_url: avatar_path, username: user.display_name, review:review.comment, rating:review.rating, source:review.source %>
   <% end %>
 </div>
-<%# <script>
-  document.querySelector(".toggling")
-    .addEventListener("click", (event) => {
-      document.querySelector(".toggling2").classList.toggle("active");
-      document.querySelector(".toggling3").classList.toggle("active");
-    });
-  document.querySelector(".toggling4")
-    .addEventListener("click", (event) => {
-      document.querySelector(".toggling2").classList.toggle("active");
-      document.querySelector(".toggling3").classList.toggle("active");
-    });
-</script> %>
+
 <!-- product_recommend_card -->
 <%= render 'shared/product_recommend_card', show_compare_option: true %>
