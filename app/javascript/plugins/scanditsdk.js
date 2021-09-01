@@ -103,7 +103,7 @@ const initScanditSDK = () => {
           shadow: false,
           hwaccel: false,
           position: 'absolute',
-        }
+        };
 
         const load_screen = document.getElementById("spinner");
         new Spinner(opts).spin(load_screen);
