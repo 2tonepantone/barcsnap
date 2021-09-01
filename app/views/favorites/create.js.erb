@@ -1,0 +1,1 @@
+document.querySelector('#btn-favorite-<%= @product.id %>').innerHTML = "<%= j render 'products/favorite_button', product_favorited: current_user.favorited?(@product) %>";

@@ -2,14 +2,17 @@
   <%# Calling and rendering the barcode scanner %>
   <div class="container">
     <h1 class="normal">Get information on Japanese products by scanning their barcodes!</h1>
-    <% body_content = render 'shared/barcode_scanner' %>
-    <%= render 'shared/modal', modal_id: 'camera', modal_title: 'Show me your barcode!',
+    <% create_home_modal = false %>
+    <% if create_home_modal %>
+      <% body_content = render 'shared/barcode_scanner' %>
+      <%= render 'shared/modal', modal_id: 'camera', modal_title: 'Show me your barcode!',
         text_header: '', text_body: '', body_content: body_content,
         redirect_path: root_path, btn_modal_confirm: 'Home'  %>
+    <% end %>
     <div class="position-relative">
       <div class="scanner-line w-100"></div>
       <div class="d-flex bd-highlight m-3">
-        <a class="scanner-start btn btn-cta flex-grow-1 d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#camera">
+        <a class="scanner-start scanner-home btn btn-cta flex-grow-1 d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#camera">
           <p class="barcode-text text-center m-0">Scan a barcode!</p>
         </a>
       </div>
