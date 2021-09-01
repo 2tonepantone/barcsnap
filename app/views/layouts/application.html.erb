@@ -25,9 +25,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
-    <%= render 'shared/ios_pwa_links' %>
+    <%= render 'shared/ios_pwa_links' %>\
   </head>
   <body>
+    <div id="load_screen"></div>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
