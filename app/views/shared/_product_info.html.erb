@@ -2,15 +2,9 @@
   <div id="product-background-box" class="mx-0 my-1 p-3 position-relative border-bottom bg-white">
     <div class="card-category-product product-background p-0" style="background-color: white; background-image: url(<%= bg_img_url %>); background-size: contain;">
       <p id="badge-rating" class="mx-1 my-1 position-absolute badge badge-pill badge-secondary" style="bottom: 0px; right: 0px;"><strong> ⭐ <%= rating %></strong> (<%= review_count  %>)</p>
-      <div data-controller="click-heart">
-        <div data-click-heart-target ="items">
-          <%= link_to product_favorites_path(@product), method: :post,
-                      data: { click_heart_target: "form",
-                              action: 'submit->click-heart#send'} do %>
+          <%= link_to product_favorites_path(@product), method: :post, remote: true do %>
             <i class="fas fa-heart btn <%= defined?(@product_favorited) && @product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; left: 0; top: 0;"></i>
           <% end %>
-        </div>
-      </div>
     </div>
   </div>
   <div class="card-category bg-white w-100 text-justify-content-around">
