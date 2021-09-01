@@ -1,0 +1,25 @@
+#google_translate_element {
+  position: static;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+.goog-logo-link {
+  display:none !important;
+} 
+
+.goog-te-combo {
+  width: 16px;
+  border: none;
+  background: none;
+}
+
+#fa-translate-icon {
+  font-size: 24px;
+}
+
+.skiptranslate.goog-te-gadget{
+  font-size: 0px;
+}
