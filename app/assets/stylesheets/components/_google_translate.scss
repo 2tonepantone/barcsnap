@@ -2,6 +2,10 @@
   position: static;
 }
 
+#google-translate-container {
+  width: 35px;
+}
+
 .goog-te-banner-frame.skiptranslate {
   display: none !important;
 }
@@ -11,13 +15,18 @@
 } 
 
 .goog-te-combo {
-  width: 16px;
+  width: 35px;
+  opacity: 0;
   border: none;
   background: none;
 }
 
 #fa-translate-icon {
-  font-size: 24px;
+  font-size: 28px;
+}
+
+#fa-translate-chevron {
+  font-size: 12px;
 }
 
 .skiptranslate.goog-te-gadget{
