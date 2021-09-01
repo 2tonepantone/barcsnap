@@ -1,10 +1,11 @@
 <div class="container">
   <div id="scandit-barcode-picker" style="max-width: 1280px; max-height: 80%;">
     <%= form_with url: "/products", class: 'd-none', method: "POST" do |form| %>
-      <%= form.hidden_field :barcode, id: 'barcodeInput' %>
+      <%= form.hidden_field :barcode, id: 'barcode-field' %>
+      <%= form.hidden_field :multiple, id: 'multiple-field' %>
+      <%= form.hidden_field :compare, id: 'compare-field' %>
       <% if @product %>
-        <%= form.hidden_field :compare, id: 'barcodeCompare' %>
-        <%= form.hidden_field :first_product_id, id: 'compareProductId', value: product.id %>
+        <%= form.hidden_field :first_product_id, id: 'compare-product-id', value: product.id %>
       <% end %>
       <%= form.submit "Search", id: 'barcodeSubmit' %>
     <% end %>

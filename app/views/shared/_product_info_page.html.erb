@@ -15,7 +15,7 @@
 <div class="toggling2">
   <div class="row px-3 d-flex justify-content-between">
     <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
-    <i class="fas fa-chevron-down toggling mr-1"></i>
+    <i id="btn-show-reviews" class="fas fa-chevron-down toggling mr-1"></i>
   </div>
   <% if review_count > 0 %>
     <% avatar_path = (user && user.photo.attached?) ? cl_image_path(user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
@@ -29,7 +29,7 @@
     <div class="card-product-infos">
       <div class="row d-flex justify-content-between">
         <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
-        <i class="fas fa-chevron-up toggling4 mr-1"></i>
+        <i id="btn-hide-reviews" class="fas fa-chevron-up toggling4 mr-1"></i>
       </div>
     </div>
   </div>
@@ -48,17 +48,6 @@
     <%= render 'shared/review_card', bg_img_url: avatar_path, username: user.display_name, review:review.comment, rating:review.rating, source:review.source %>
   <% end %>
 </div>
-<%# <script>
-  document.querySelector(".toggling")
-    .addEventListener("click", (event) => {
-      document.querySelector(".toggling2").classList.toggle("active");
-      document.querySelector(".toggling3").classList.toggle("active");
-    });
-  document.querySelector(".toggling4")
-    .addEventListener("click", (event) => {
-      document.querySelector(".toggling2").classList.toggle("active");
-      document.querySelector(".toggling3").classList.toggle("active");
-    });
-</script> %>
+
 <!-- product_recommend_card -->
 <%= render 'shared/product_recommend_card', show_compare_option: true %>

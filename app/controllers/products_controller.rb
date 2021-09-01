@@ -6,15 +6,23 @@ class ProductsController < ApplicationController
     @reviews = @product.reviews.order(created_at: :desc) if @product
     @review = Review.new
 
-    # If product_id exists, generate @product_compare
-    if !params[:product_id].nil?
-      @product_compare = Product.find(params[:product_id])
+    if current_user.present? && current_user.allergies != nil
+      @array_allergies = array_allergies
+    else
+      @array_allergies = []
     end
 
-    @product_favorited = false
-    if current_user && @product
-      @product_favorited = current_user.favorited?(@product)
+    if current_user.present? && current_user.dislikes != nil
+      @array_dislikes = array_dislikes
+    else
+      @array_dislikes = []
     end
+
+    # If product_id exists, generate @product_compare
+    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
+
+    @product_favorited = false
+    @product_favorited = current_user.favorited?(@product) if current_user && @product
     # If sort_by key exists, generate @products
     return unless params.key? :sort_by
 
@@ -26,6 +34,8 @@ class ProductsController < ApplicationController
   end
 
   def create
+    return compare_multiple_scanned if comparing_multiple_scanned?
+
     @barcode = params[:barcode]
     @barcode = convert_to_jancode unless jancode_format?
 
@@ -42,6 +52,37 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def comparing_multiple_scanned?
+    params.key?(:multiple) && params[:multiple] == 'true'
+  end
+
+  def compare_multiple_scanned
+    barcodes = params[:barcode].split(',')
+    @products_multiple = []
+    barcodes.each do |barcode|
+      @barcode = barcode
+      @barcode = convert_to_jancode unless jancode_format?
+      if in_database?
+        @product = Product.find_by(barcode: @barcode)
+        @products_multiple << @product
+      else
+        jancode_scraper = ScrapeJancodeService.new(@barcode)
+        jancode_scraper.call
+        @product = jancode_scraper.create_product
+        if @product.save
+          jancode_scraper.upload_image
+          @products_multiple << @product
+        else
+          return redirect_back(fallback_location: root_path,
+                               alert: "Product info unavailable. Please try a different barcode!")
+        end
+      end
+    end
+    @product1 = @products_multiple[0]
+    @product2 = @products_multiple[1]
+    redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
+  end
 
   def comparing_scanned?
     params.key?(:compare) && params[:compare] == 'true'
@@ -87,9 +128,9 @@ class ProductsController < ApplicationController
     case params[:sort_by]
     when "most_related"
       @products = Product.all
-    when "most_favorite"
+    when "most_favorited"
       @products = Product.all.sort_by { |p| p.favoritors.count }.reverse
-    when "top_rating"
+    when "top_rated"
       @products = Product.all.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = Product.order(created_at: :desc)
@@ -103,9 +144,9 @@ class ProductsController < ApplicationController
     case params[:sort_by]
     when "most_related"
       @products = product.find_related_on_tags
-    when "most_favorite"
+    when "most_favorited"
       @products = product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
-    when "top_rating"
+    when "top_rated"
       @products = product.find_related_on_tags.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = product.find_related_on_tags.sort_by(&:created_at).reverse
@@ -117,5 +158,22 @@ class ProductsController < ApplicationController
 
   def reviews_params
     params.require(:review).permit(:rating, :comment)
+  end
+
+  def array_allergies
+    string = current_user.allergies
+    array = string.split(",")
+    final = array.map do |ele|
+        ele.strip()
+    end
+    return final
+  end
+  def array_dislikes
+    string = current_user.dislikes
+    array = string.split(",")
+    final = array.map do |ele|
+        ele.strip()
+    end
+    return final
   end
 end
