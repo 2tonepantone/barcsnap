@@ -1,11 +1,25 @@
 .item-drawer {
   background-color: rgba(0, 0, 0, 0.2);
+  height: 80px;
 }
 
 .item-drawer.active {
   /*customizable*/
   background-color: transparent;
   height: 0px;
+}
+
+#btn-scn-compare i, #btn-scn-single i, #btn-scn-multiple i {
+  font-size: 24px;
+}
+
+#btn-scn-compare .footer-text, #btn-scn-single .footer-text, #btn-scn-multiple .footer-text {
+  max-width: 0px;
+  overflow: hidden;
+}
+
+#btn-scn-compare:hover .footer-text, #btn-scn-single:hover .footer-text, #btn-scn-multiple:hover .footer-text {
+  max-width: 500px;
 }
 
 .hidding1.active {
