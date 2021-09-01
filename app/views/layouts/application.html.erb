@@ -34,8 +34,6 @@
     <%= yield %>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="text/javascript">
-      // const duplicate_google_translate_counter = 0; // this should stop Google adding button multiple times
-      // console.log("duplicate_google_translate_counter" + duplicate_google_translate_counter)
       function googleTranslateElementInit() {
         translate_element = document.querySelector('#google_translate_element');
         while (translate_element.firstChild) { translate_element.removeChild(translate_element.firstChild); }
