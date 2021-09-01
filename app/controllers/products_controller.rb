@@ -87,9 +87,9 @@ class ProductsController < ApplicationController
     case params[:sort_by]
     when "most_related"
       @products = Product.all
-    when "most_favorite"
+    when "most_favorited"
       @products = Product.all.sort_by { |p| p.favoritors.count }.reverse
-    when "top_rating"
+    when "top_rated"
       @products = Product.all.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = Product.order(created_at: :desc)
@@ -103,9 +103,9 @@ class ProductsController < ApplicationController
     case params[:sort_by]
     when "most_related"
       @products = product.find_related_on_tags
-    when "most_favorite"
+    when "most_favorited"
       @products = product.find_related_on_tags.sort_by { |p| p.favoritors.count }.reverse
-    when "top_rating"
+    when "top_rated"
       @products = product.find_related_on_tags.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = product.find_related_on_tags.sort_by(&:created_at).reverse
