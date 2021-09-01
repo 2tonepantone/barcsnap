@@ -20,6 +20,7 @@ ActiveStorage.start()
 
 // External imports
 import "bootstrap";
+import "controllers"
 import { initScanditSDK } from "../plugins/scanditsdk"
 import { readMore } from "../plugins/readmore"
 import { closeModal } from "../plugins/closemodal"
@@ -37,4 +38,3 @@ document.addEventListener('turbolinks:load', () => {
   closeModal();
 });
 
-import "controllers"
