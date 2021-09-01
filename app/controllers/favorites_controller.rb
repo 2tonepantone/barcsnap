@@ -6,13 +6,16 @@ class FavoritesController < ApplicationController
 
     return if Product.exists?(params[:product_id]) == false
 
-    product = Product.find(params[:product_id])
-    if current_user.favorited?(product) == false
-      current_user.favorite(product)
+    @product = Product.find(params[:product_id])
+    if current_user.favorited?(@product) == false
+      current_user.favorite(@product)
     else
-      current_user.unfavorite(product)
+      current_user.unfavorite(@product)
     end
 
-    redirect_to product
+    respond_to do |format|
+      format.html { redirect_to @product }
+      format.js # Follow the classic Rails flow and look for a create.json view
+    end
   end
 end

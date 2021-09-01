@@ -41,8 +41,10 @@
       <%= link_to product_path(product) do %>
         <%= render 'shared/user_history_card', product: product, product_favorited: product_favorited, img_url: image_url, product_name: product.name, price:rating_str, scanned_time: '' %>
       <% end %>
-      <%= link_to product_favorites_path(product), method: :post do %>
-        <i class="fas fa-heart btn btn-sm <%= defined?(product_favorited) && product_favorited ? 'btn-danger' : 'btn-dark' %>" style="position:absolute; right: 8px; bottom: 8px;"></i>
+      <%= link_to product_favorites_path(product), method: :post, remote: true do %>
+        <div id="btn-favorite-<%= product.id %>" style="position:absolute; right: 8px; bottom: 8px;">
+          <%= render 'products/favorite_button', product_favorited: product_favorited %>
+        </div>
       <% end %>
     </div>
   </div>
