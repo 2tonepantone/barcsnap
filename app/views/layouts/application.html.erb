@@ -30,7 +30,9 @@
     <%= render 'shared/ios_pwa_links' %>
   </head>
   <body>
-    <div id="spinner"></div>
+    <div class="position-relative">
+      <div id="spinner"></div>
+    </div>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>

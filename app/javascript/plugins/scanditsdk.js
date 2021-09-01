@@ -98,7 +98,7 @@ const initScanditSDK = () => {
           fps: 20,
           zIndex: 2e9,
           className: 'spinner',
-          top: '50%',
+          top: '50vh',
           left: '50%',
           shadow: false,
           hwaccel: false,
