@@ -76,22 +76,31 @@
     inputText.innerHTML = innerHTML;
     }
   }
-  console.log("<%=current_user%>")
 
-  var current = "<%= @array_allergies %>";
-  console.log(current)
-  answer = current.replace(/[&quot;]+/g, '"')
-  var array = JSON.parse(answer)
+  function parsing(rubyarray) {
+    var current = rubyarray;
+    console.log(current);
+    answer = current.replace(/[&quot;]+/g, '"');
+    var array = JSON.parse(answer);
+    return array
+  }
 
-  array.forEach(function (item) {
-  console.log(item);
-  highlight2(item, "inputText", "highlight");
-  highlight2(item, "inputText2", "highlight");
-});
+  array_allergies = parsing("<%= @array_allergies %>");
+
+  array_allergies.forEach(function (item) {
+    console.log(item);
+    highlight2(item, "inputText", "highlight");
+    highlight2(item, "inputText2", "highlight");
+  });
+
+  array_dislikes = parsing("<%= @array_dislikes %>")
+  array_dislikes.forEach(function (item) {
+    console.log(item);
+    highlight2(item, "inputText", "highlight2");
+    highlight2(item, "inputText2", "highlight2");
+  });
 
 
-  highlight2("<%= current_user.dislikes %>", "inputText", "highlight2");
 
-  highlight2("<%= current_user.dislikes %>", "inputText2", "highlight2");
   console.log("fasd")
 </script>
