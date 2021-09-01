@@ -6,9 +6,17 @@ class ProductsController < ApplicationController
     @reviews = @product.reviews.order(created_at: :desc) if @product
     @review = Review.new
 
-    @array_allergies = array_allergies
-    @array_dislikes = array_dislikes
+    if current_user.present? && current_user.allergies != nil
+      @array_allergies = array_allergies
+    else
+      @array_allergies = []
+    end
 
+    if current_user.present? && current_user.dislikes != nil
+      @array_dislikes = array_dislikes
+    else
+      @array_dislikes = []
+    end
 
     # If product_id exists, generate @product_compare
     if !params[:product_id].nil?

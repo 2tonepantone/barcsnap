@@ -48,21 +48,6 @@
     <%= render 'shared/review_card', bg_img_url: avatar_path, username: user.display_name, review:review.comment, rating:review.rating, source:review.source %>
   <% end %>
 </div>
-<script>
-  function highlight(text) {
-    for(i = 0; i <= 1; i ++){
-      var inputText = document.getElementById("inputText" + i);
-      var innerHTML = inputText.innerHTML;
-      var index = innerHTML.indexOf(text);
-      console.log("hi");
-      if (index >= 0) {
-      innerHTML = innerHTML.substring(0,index) + "<span class='highlight'>" + innerHTML.substring(index,index+text.length) + "</span>" + innerHTML.substring(index + text.length);
-      inputText.innerHTML = innerHTML;
-      }
-    }
-  }
-  highlight("<%= current_user.allergies %>")
-</script>
 
 <!-- product_recommend_card -->
 <%= render 'shared/product_recommend_card', show_compare_option: true %>
