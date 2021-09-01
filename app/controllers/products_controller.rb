@@ -70,7 +70,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
     else
       redirect_back(fallback_location: root_path,
-                           alert: "Product info unavailable. Please try a different barcode!")
+                    alert: "Product info unavailable. Please try a different barcode!")
     end
   end
 
