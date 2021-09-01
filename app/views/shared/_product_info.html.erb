@@ -61,8 +61,10 @@
     </div>
   </div>
 </div>
-
 <script>
+  // var current = <%= @array_allergies %>;
+  // console.log(current);
+
   function highlight2(text, inputTexty, decoration) {
     console.log(inputText);
     var inputText = document.getElementById(inputTexty);
@@ -74,8 +76,22 @@
     inputText.innerHTML = innerHTML;
     }
   }
-  highlight2("<%= current_user.allergies %>", "inputText", "highlight")
-  highlight2("<%= current_user.dislikes %>", "inputText", "highlight2")
-  highlight2("<%= current_user.allergies %>", "inputText2", "highlight")
-  highlight2("<%= current_user.dislikes %>", "inputText2", "highlight2")
+  console.log("<%=current_user%>")
+
+  var current = "<%= @array_allergies %>";
+  console.log(current)
+  answer = current.replace(/[&quot;]+/g, '"')
+  var array = JSON.parse(answer)
+
+  array.forEach(function (item) {
+  console.log(item);
+  highlight2(item, "inputText", "highlight");
+  highlight2(item, "inputText2", "highlight");
+});
+
+
+  highlight2("<%= current_user.dislikes %>", "inputText", "highlight2");
+
+  highlight2("<%= current_user.dislikes %>", "inputText2", "highlight2");
+  console.log("fasd")
 </script>

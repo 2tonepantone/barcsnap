@@ -6,6 +6,10 @@ class ProductsController < ApplicationController
     @reviews = @product.reviews.order(created_at: :desc) if @product
     @review = Review.new
 
+    @array_allergies = array_allergies
+    @array_dislikes = array_dislikes
+
+
     # If product_id exists, generate @product_compare
     if !params[:product_id].nil?
       @product_compare = Product.find(params[:product_id])
@@ -117,5 +121,22 @@ class ProductsController < ApplicationController
 
   def reviews_params
     params.require(:review).permit(:rating, :comment)
+  end
+
+  def array_allergies
+    string = current_user.allergies
+    array = string.split(",")
+    final = array.map do |ele|
+        ele.strip()
+    end
+    return final
+  end
+  def array_dislikes
+    string = current_user.dislikes
+    array = string.split(",")
+    final = array.map do |ele|
+        ele.strip()
+    end
+    return final
   end
 end
