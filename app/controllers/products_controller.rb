@@ -61,17 +61,15 @@ class ProductsController < ApplicationController
         if @product.save
           jancode_scraper.upload_image
           @products_multiple << @product
+        else
+          return redirect_back(fallback_location: root_path,
+                               alert: "Product info unavailable. Please try a different barcode!")
         end
       end
     end
-    if @products_multiple.length == barcodes.length
-      @product1 = @products_multiple[0]
-      @product2 = @products_multiple[1]
-      redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
-    else
-      redirect_back(fallback_location: root_path,
-                    alert: "Product info unavailable. Please try a different barcode!")
-    end
+    @product1 = @products_multiple[0]
+    @product2 = @products_multiple[1]
+    redirect_to product_path(@product1) + "?product_id=#{@product2.id}"
   end
 
   def comparing_scanned?
