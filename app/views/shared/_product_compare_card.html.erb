@@ -31,7 +31,9 @@
         <% [allergens, allergens_compare].each_with_index do |allergens, i| %>
           <div class="col-6 d-flex flex-column pb-2 text-center">
             <span id="inputText<%= i %>" class="d-flex flex-grow-1 justify-content-center align-items-center pb-3">
-              <%= allergens %>
+              <div>
+                <%= allergens %>
+              </div>
             </span>
             <button type="button" class="btn btn-outline-secondary mt-auto align-self-center"
             <%= "disabled" if allergens == "No ingredients provided." %> data-toggle="modal"
