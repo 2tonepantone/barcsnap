@@ -72,12 +72,13 @@ const initScanditSDK = () => {
         let barcodes = scanResult.barcodes.map(barcode => barcode.data);
         const barcodeField = document.getElementById('barcode-field');
         barcodeField.setAttribute('value', barcodes);
-        // I
-        if (multipleField.value == 'true' && barcodes.length == 2) {
+        // Force the scanner to wait for 2 barcodes if comparing multiple
+        if (multipleField.value == 'true') {
+          barcodes.length == 2
           document.getElementById('barcodeSubmit').click();
-        } else if (multipleField.value == 'false' && barcodes.length == 1) {
+        } else {
           document.getElementById('barcodeSubmit').click();
-        }
+        };
       });
     });
   });
