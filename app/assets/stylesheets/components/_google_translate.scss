@@ -1,0 +1,49 @@
+#google_translate_element {
+  position: static;
+}
+
+#google-translate-container {
+  width: 35px;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+.goog-logo-link {
+  display:none !important;
+} 
+
+#goog-gt-tt {
+  display: none !important;
+}
+
+.goog-text-highlight {
+  background: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  box-sizing: unset !important;
+  -webkit-box-sizing: unset !important;
+  -moz-box-sizing: unset !important;
+  position: relative !important;
+} 
+
+.goog-te-combo {
+  width: 35px;
+  opacity: 0;
+  border: none;
+  background: none;
+}
+
+#fa-translate-icon {
+  font-size: 28px;
+}
+
+#fa-translate-chevron {
+  font-size: 12px;
+}
+
+.skiptranslate.goog-te-gadget{
+  font-size: 0px;
+}

@@ -2,21 +2,28 @@
   <%= link_to root_path do %>
     <span class="navbar-brand mb-0 h1"><i class="fas fa-paw"></i> BarcSnap!</span>
   <% end %>
-  <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key, width: 24, height: 24, crop: :fill) : image_path("default-avatar.png") %>
-  <div class="d-flex">
-    <%= image_tag(avatar_path, class: "rounded-circle my-auto", style: "width: 24px; height: 24px;") if current_user %>
+  <div class="d-flex"">
+    <div id="google-translate-container" class="d-flex align-items-center position-relative mr-2">
+      <div id="google_translate_element">
+      </div>
+      <div class="position-absolute d-flex align-items-center" style="z-index: -1;">
+        <i id="fa-translate-icon" class="fas fa-language"></i>
+        <!-- <i id="fa-translate-chevron" class="fas fa-chevron-down"></i> -->
+      </div>
+    </div>
     <li class="nav-item dropdown">
-      <a class="nav-link pl-3 pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a class="nav-link pl-1 pr-1" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-bars"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <% if user_signed_in? %>
           <% username = (current_user.display_name.blank? || current_user.display_name.nil?) ? current_user.email.split('@')[0] : current_user.display_name  %>
-          <p class="dropdown-item disabled">Welcome, <%= username %>!</p>
+          <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key, width: 24, height: 24, crop: :fill) : image_path("default-avatar.png") %>
+          <div class="d-flex dropdown-item disabled mb-1 align-items-center align-content-center text-center">
+            <%= image_tag(avatar_path, class: "rounded-circle my-auto", style: "width: 24px; height: 24px;") if current_user %>
+            <p class="mb-0 ml-2">Welcome, <%= username %>!</p>
+          </div>
           <div class="dropdown-divider"></div>
-          <%= link_to '#' do %>
-            <p class="dropdown-item">My User Profile</p>
-          <% end %>
           <%= link_to edit_user_registration_path do %>
             <p class="dropdown-item">Update my profile</p>
           <% end %>
@@ -29,14 +36,3 @@
     </li>
   </div>
 </nav>
-<%# <div id="google_translate_element"></div>
-<script type="text/javascript">
-  var duplicate_google_translate_counter = 0; // this should stop Google adding button multiple times
-  function googleTranslateElementInit() {
-    if (duplicate_google_translate_counter == 0) {
-      new google.translate.TranslateElement({pageLanguage: 'ja'}, 'google_translate_element');
-    }
-    duplicate_google_translate_counter++;
-  }
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> %>
