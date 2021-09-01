@@ -24,7 +24,6 @@ import { initScanditSDK } from "../plugins/scanditsdk"
 import { readMore } from "../plugins/readmore"
 import { closeModal } from "../plugins/closemodal"
 import { reviewMore } from "../plugins/reviewmore"
-// import { highlightt } from "../plugins/highlightt"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -36,7 +35,6 @@ document.addEventListener('turbolinks:load', () => {
   readMore();
   reviewMore();
   closeModal();
-  // highlightt();
 });
 
 import "controllers"
