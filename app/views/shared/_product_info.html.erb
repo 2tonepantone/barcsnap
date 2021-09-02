@@ -54,10 +54,7 @@
         <div class ="row info-style p-1 d-flex justify-content-center">
           <p id="inputText2" class="mb-1">
             <% if ingredients.length > 30 %>
-              <%= first_string = ingredients.slice(0,30) %><span class="dots">...</span>
-              <span class="more">
-                <%= second_string = ingredients.slice(30,ingredients.length-30) %>
-              </span>
+              <%= first_string = ingredients.slice(0,30) %><span class="dots">...</span><span class="more"><%= second_string = ingredients.slice(30,ingredients.length-30) %></span>
               <button id="btn-read-more" class="btn btn-link p-0 toggle-read-more">Read more</button>
             <% else %>
               <%= ingredients %>
