@@ -18,11 +18,11 @@
         <p class="mb-1"><strong>Category</strong></p>
       </div>
       <div class="row info-style p-0 d-flex justify-content-center">
-      <% @product.tag_list.each do |tag| %>
-        <%= link_to (product_path(0) + "?sort_by=tag&tag_name=#{tag}") do %>
-          <p class="badge badge-pill badge-dark mx-1"><%= "#{tag}" %></p>
+        <% @product.tag_list.each do |tag| %>
+          <%= link_to (product_path(0) + "?sort_by=tag&tag_name=#{tag}") do %>
+            <p class="badge badge-pill badge-dark mx-1"><%= "#{tag}" %></p>
+          <% end %>
         <% end %>
-      <% end %>
       </div>
       <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
         <% unless allergens == "No allergens found." %>
@@ -40,18 +40,18 @@
             <i class="fas fa-apple-alt text-success"></i>
             <strong> Ingredients</strong>
             <% if @allergies_matched_count > 0 %>
-            <p class="mx-0 my-0 badge">
-            </p>
-            <p class="mx-0 my-1 badge badge-pill badge-danger">
-              <strong> <%= @allergies_matched_count %> </strong>
-            </p>
+              <p class="mx-0 my-0 badge">
+              </p>
+              <p class="mx-0 my-1 badge badge-pill badge-danger">
+                <strong> <%= @allergies_matched_count %> </strong>
+              </p>
             <% end %>
             <% if @dislikes_matched_count > 0 %>
-            <p class="mx-0 my-1 badge">
-            </p>
-            <p class="mx-0 my-1 badge badge-pill badge-warning">
-              <strong> <%= @dislikes_matched_count %> </strong>
-            </p>
+              <p class="mx-0 my-1 badge">
+              </p>
+              <p class="mx-0 my-1 badge badge-pill badge-warning">
+                <strong> <%= @dislikes_matched_count %> </strong>
+              </p>
             <% end %>
           </p>
         </div>
@@ -77,8 +77,14 @@
       <div class="row p-0 d-flex justify-content-center">
         <p class="mb-1"><strong>Company</strong></p>
       </div>
-      <div class="row info-style p-0 d-flex justify-content-center border-bottom-0">
+      <div class="row info-style p-0 d-flex justify-content-center">
         <p class="mb-1"><%= company_name %></p>
+      </div>
+      <div class="row d-grid gap-2 info-style p-0 d-flex justify-content-center border-bottom-0">
+        <button id="btn-scn-compare" class="mt-auto align-self-center mx-0 mb-1 scanner-start barcode-compare btn hidding1"
+        style="width: 100%;" data-toggle="modal" data-target="#camera">
+          <span class="footer-text text-center">Compare to this product.</span>
+        </button>
       </div>
     </div>
   </div>
@@ -93,16 +99,16 @@
     inputText.innerHTML = innerHTML;
     }
   }
-
+  
   function parsing(rubyarray) {
     var current = rubyarray;
     answer = current.replace(/[&quot;]+/g, '"');
     var array = JSON.parse(answer);
     return array
   }
-
+  
   array_allergies = parsing("<%= @array_allergies %>");
-
+  
   array_allergies.forEach(function (item) {
     if (!(document.getElementById("inputText")==null)) {
       highlight2(item, "inputText", "highlight");
@@ -111,7 +117,7 @@
       highlight2(item, "inputText2", "highlight");
     }
   });
-
+  
   array_dislikes = parsing("<%= @array_dislikes %>")
   array_dislikes.forEach(function (item) {
     if (!(document.getElementById("inputText")==null)) {
