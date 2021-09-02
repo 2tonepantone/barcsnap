@@ -1,11 +1,34 @@
 .item-drawer {
-  background-color: rgba(0, 0, 0, 0.2);
+  // background-color: rgba(0, 0, 0, 0.2);
+  height: 68px;
 }
 
 .item-drawer.active {
   /*customizable*/
   background-color: transparent;
   height: 0px;
+}
+
+#btn-scn-compare i, #btn-scn-single i, #btn-scn-multiple i {
+  font-size: 28px;
+  transition: transform .2s;
+}
+
+#btn-scn-compare:hover i, #btn-scn-single:hover i, #btn-scn-multiple:hover i {
+  transform: scale(1.1);
+}
+
+#btn-scn-compare .footer-text, #btn-scn-single .footer-text, #btn-scn-multiple .footer-text {
+  // Expand animation
+  // max-width: 0px;
+  // overflow: hidden;
+  // transition: max-width 1s;
+  font-size: 14px;
+}
+
+#btn-scn-compare:hover .footer-text, #btn-scn-single:hover .footer-text, #btn-scn-multiple:hover .footer-text {
+  // Expand animation
+  // max-width: 500px;
 }
 
 .hidding1.active {

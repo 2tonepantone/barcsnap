@@ -1,21 +1,22 @@
-<footer id="footer-stick">
-  <div class="d-flex item-drawer">
-    <div class="d-flex flex-grow-1">
-      <button type="button" class="d-flex flex-column flex-grow-1 scanner-start
-      barcode-compare btn bg-light btn-outline-dark border-right-0 hidding1" data-toggle="modal" data-target="#camera">
-        <span><i class="fas fa-barcode"></i></span>Scan & Compare</button>
+<footer id="footer-barc">
+  <div class="d-flex item-drawer justify-content-center bg-light">
+    <div class="d-flex flex-grow-1 overflow-hidden m-0 p-0" style="max-width: 160px;">
+      <a type="button" id="btn-scn-compare" class="d-flex mx-0 mb-0 px-3 pt-2 flex-column justify-content-around flex-grow-1 scanner-start
+      barcode-compare btn bg-light hidding1" data-toggle="modal" data-target="#camera">
+        <i class="fas fa-barcode mb-1"></i><span class="footer-text text-center">Scan & Compare</span>
+      </a>
     </div>
-    <div class="d-flex flex-grow-1">
-      <button type="button" class="d-flex flex-column flex-grow-1 scanner-start
-      scanner-new btn bg-light btn-outline-dark border-right-0 hidding2" data-toggle="modal" data-target="#camera">
-        <span><i class="fas fa-camera"></i></span>Scan
-      </button>
+    <div class="d-flex flex-grow-1 overflow-hidden m-0 p-0" style="max-width: 160px;">
+      <a type="button" id="btn-scn-single" class="d-flex mx-0 mb-0 px-3 pt-2 flex-column justify-content-around flex-grow-1 scanner-start
+      scanner-new btn bg-light hidding2" data-toggle="modal" data-target="#camera">
+        <i class="fas fa-camera mb-1"></i><span class="footer-text text-center">Scan</span>
+      </a>
     </div>
-    <div class="d-flex flex-grow-1">
-      <button type="button" class="d-flex flex-column flex-grow-1 scanner-start
-      barcode-multiple btn bg-light btn-outline-dark hidding3" data-toggle="modal" data-target="#camera">
-        <span><i class="fas fa-ellipsis-h"></i></span>Scan Multiple
-      </button>
+    <div class="d-flex flex-grow-1 overflow-hidden m-0 p-0" style="max-width: 160px;">
+      <a type="button" id="btn-scn-multiple" class="d-flex mx-0 mb-0 px-3 pt-2 flex-column justify-content-around flex-grow-1 scanner-start
+      barcode-multiple btn bg-light hidding3" data-toggle="modal" data-target="#camera">
+        <i class="fas fa-tags mb-1"></i><span class="footer-text text-center">Scan Multiple</span>
+      </a>
     </div>
   </div>
 </footer>
