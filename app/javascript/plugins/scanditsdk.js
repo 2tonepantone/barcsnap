@@ -19,7 +19,7 @@ const initScanditSDK = () => {
     }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: 1000, // Interval of time before allowing the same barcode to be read in one scan session
+        codeDuplicateFilter: -1, // Scanner will only read unique (non-duplicate) barcodes
         maxNumberOfCodesPerFrame: 2,
       });
       // Apply scan settings described above
@@ -107,15 +107,21 @@ const initScanditSDK = () => {
 
         const load_screen = document.getElementById("spinner");
         // new Spinner(opts).spin(load_screen);
-        let barcodes = scanResult.barcodes.map(barcode => barcode.data);
+        let barcodes = []
         const barcodeField = document.getElementById('barcode-field');
-        barcodeField.setAttribute('value', barcodes);
         // Force the scanner to wait for 2 barcodes if comparing multiple
-        if (multipleField.value == 'true' && barcodes.length == 2) {
+        if (multipleField.value == 'true') {
+          while (barcodes.length != 2) {
+            scanResult.barcodes.forEach(barcode => { barcodes << barcode.data });
+          }
+          barcodeField.setAttribute('value', barcodes);
           document.getElementById('barcodeSubmit').click();
           // Display spinner overlay
           new Spinner(opts).spin(load_screen);
-        } else if (multipleField.value == 'false' && barcodes.length == 1) {
+        } else {
+          barcodes << scanResult.barcodes[0].data;
+          console.log(barcodes);
+          barcodeField.setAttribute('value', barcodes);
           document.getElementById('barcodeSubmit').click();
           // Display spinner overlay
           new Spinner(opts).spin(load_screen);
