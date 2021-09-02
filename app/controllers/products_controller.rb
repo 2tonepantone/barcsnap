@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
     return unless params.key? :sort_by
 
     if @product.nil? && params[:id] == '0'
+      @tag_name = params[:tag_name] || ''
       @products = get_all_product_sorted
     else
       @products = get_related_product_sorted(@product)
@@ -134,6 +135,8 @@ class ProductsController < ApplicationController
       @products = Product.all.sort_by { |p| p.avg_rating || 0 }.reverse
     when "newest"
       @products = Product.order(created_at: :desc)
+    when "tag"
+      @products = Product.tagged_with(@tag_name)
     else
       params[:sort_by] = "oldest"
       @products = Product.order(:created_at)
