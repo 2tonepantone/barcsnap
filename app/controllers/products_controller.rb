@@ -4,6 +4,11 @@ class ProductsController < ApplicationController
   def index
     @page_header = 'Products from our community'
     @products = Product.all
+    if params[:query].present?
+      # @products = policy_scope(Product).order(created_at: :desc)
+      @products = @products.search_by_name(params[:query])
+      # raise
+    end
   end
 
   def show
@@ -36,7 +41,6 @@ class ProductsController < ApplicationController
     # @dislikes_matched_count_potential_compare = count_matched_dislikes_potential(@product_compare)
     end
     # If product_id exists, generate @product_compare
-
 
     @product_favorited = false
     @product_favorited = current_user.favorited?(@product) if current_user && @product

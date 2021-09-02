@@ -12,6 +12,13 @@ class Product < ApplicationRecord
   ActsAsTaggableOn.force_lowercase = true
   acts_as_favoritable
 
+  include PgSearch::Model
+    pg_search_scope :search_by_name,
+      against: [ :name ],
+      using: {
+        tsearch: { prefix: true } # <-- now `superman batm` will return something!
+      }
+
   def allergens
     contains = ALLERGENS.select { |allergen| ingredients.include?(allergen) }.join(', ') if ingredients
     return "No ingredients provided." if contains.nil?

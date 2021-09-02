@@ -1,5 +1,15 @@
 <div class="container">
 <h3 class="text-dark mt-0 mb-2"><%= @page_header %></h3>
+
+    <form action="/products">
+      <div class="form-group row">
+        <div class="col-9">
+          <input type="text" class="form-control" id="query" name="query" value="" placeholder="ボタニスト ボタニカルシャンプーM 490ml">
+        </div>
+        <input type="submit" class="btn btn-primary mr-3" value="Search now!">
+      </div>
+    </form>
+
 <% @products.each do |product| %>
   <% image_url = product.photo.attached? ? cl_image_path(product.photo.key) : image_path("default-product.png") %>
   <% days_ago = (Date.today - Date.new(product.created_at.year, product.created_at.month, product.created_at.day)).to_i %>
