@@ -13,9 +13,9 @@
 <% end %>
 <!-- small box before toggling -->
 <div class="toggling2">
-  <div class="row px-3 d-flex justify-content-between">
+  <div class="row pl-4 pr-3 pt-3 d-flex justify-content-between">
     <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
-    <i id="btn-show-reviews" class="fas fa-chevron-down toggling mr-1"></i>
+    <i id="btn-show-reviews" class="fas fa-chevron-down toggling mr-2"></i>
   </div>
   <% if review_count > 0 %>
     <% avatar_path = (user && user.photo.attached?) ? cl_image_path(user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
