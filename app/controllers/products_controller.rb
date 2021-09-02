@@ -154,6 +154,8 @@ class ProductsController < ApplicationController
       @products = Product.order(created_at: :desc)
     when "tag"
       @products = Product.tagged_with(@tag_name)
+    when "my_favorite"
+      @products = current_user.all_favorited if current_user
     else
       params[:sort_by] = "oldest"
       @products = Product.order(:created_at)
@@ -182,10 +184,14 @@ class ProductsController < ApplicationController
 
   def array_allergies
     if current_user
-      string = current_user.allergies
-      array = string.split(",")
-      final = array.map do |ele|
-          ele.strip()
+      if current_user.allergies
+        string = current_user.allergies
+        array = string.split(",")
+        final = array.map do |ele|
+            ele.strip()
+        end
+      else
+        final = []
       end
     else
       final = []
@@ -194,10 +200,14 @@ class ProductsController < ApplicationController
   end
   def array_dislikes
     if current_user
-      string = current_user.dislikes
-      array = string.split(",")
-      final = array.map do |ele|
-          ele.strip()
+      if current_user.dislikes
+        string = current_user.dislikes
+        array = string.split(",")
+        final = array.map do |ele|
+            ele.strip()
+        end
+      else
+        final = []
       end
     else
       final = []

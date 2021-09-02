@@ -2,8 +2,13 @@
   <%= link_to root_path do %>
     <span class="navbar-brand mb-0 h1"><i class="fas fa-paw"></i> BarcSnap!</span>
   <% end %>
-  <div class="d-flex"">
-    <div id="google-translate-container" class="d-flex align-items-center position-relative mr-2">
+  <div class="d-flex align-items-center"">
+  <% if current_user %>
+  <%= link_to product_path(0, sort_by: "my_favorite") do %>
+    <i class="fas fa-heart mr-3 text-dark"></i>
+  <% end %>
+  <% end %>
+    <div id="google-translate-container" class="d-flex align-items-center position-relative mr-3">
       <div id="google_translate_element">
       </div>
       <div class="position-absolute d-flex align-items-center" style="z-index: -1;">
