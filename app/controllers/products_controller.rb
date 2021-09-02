@@ -154,6 +154,8 @@ class ProductsController < ApplicationController
       @products = Product.order(created_at: :desc)
     when "tag"
       @products = Product.tagged_with(@tag_name)
+    when "my_favorite"
+      @products = current_user.all_favorited if current_user
     else
       params[:sort_by] = "oldest"
       @products = Product.order(:created_at)
