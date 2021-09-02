@@ -17,13 +17,18 @@ class ProductsController < ApplicationController
     else
       @array_dislikes = []
     end
-    @allergies_matched_count = count_matched_allergies_ingredients
-    @dislikes_matched_count = count_matched_dislikes_ingredients
-    @allergies_matched_count_potential = count_matched_allergies_potential
-    @dislikes_matched_count_potential = count_matched_dislikes_potential
+    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
+    @allergies_matched_count = count_matched_allergies_ingredients(@product)
+    @dislikes_matched_count = count_matched_dislikes_ingredients(@product)
+    @allergies_matched_count_potential = count_matched_allergies_potential(@product)
+    @dislikes_matched_count_potential = count_matched_dislikes_potential(@product)
+    @allergies_matched_count_compare = count_matched_allergies_ingredients(@product_compare)
+    @dislikes_matched_count_compare = count_matched_dislikes_ingredients(@product_compare)
+    @allergies_matched_count_potential_compare = count_matched_allergies_potential(@product_compare)
+    @dislikes_matched_count_potential_compare = count_matched_dislikes_potential(@product_compare)
 
     # If product_id exists, generate @product_compare
-    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
+
 
     @product_favorited = false
     @product_favorited = current_user.favorited?(@product) if current_user && @product
@@ -181,40 +186,40 @@ class ProductsController < ApplicationController
     return final
   end
 
-  def count_matched_allergies_ingredients
+  def count_matched_allergies_ingredients(products)
     count = 0
     array_allergies.each do |allergy|
-      if @product.ingredients.include?(allergy)
+      if products.ingredients.include?(allergy)
         count += 1
       end
     end
     return count
   end
 
-  def count_matched_dislikes_ingredients
+  def count_matched_dislikes_ingredients(products)
     count = 0
     array_dislikes.each do |dislike|
-      if @product.ingredients.include?(dislike)
+      if products.ingredients.include?(dislike)
         count += 1
       end
     end
     return count
   end
 
-  def count_matched_allergies_potential
+  def count_matched_allergies_potential(products)
     count = 0
     array_allergies.each do |allergy|
-      if @product.allergens.include?(allergy)
+      if products.allergens.include?(allergy)
         count += 1
       end
     end
     return count
   end
 
-  def count_matched_dislikes_potential
+  def count_matched_dislikes_potential(products)
     count = 0
     array_dislikes.each do |dislike|
-      if @product.allergens.include?(dislike)
+      if products.allergens.include?(dislike)
         count += 1
       end
     end

@@ -25,7 +25,10 @@
     </div>
     <% unless ingredients.nil? && ingredients_compare.nil? %>
       <div class="row py-3">
-        <div class="col text-center">Potential Allergens</div>
+        <div class="col text-center">
+          Potential Allergens
+        </div>
+
       </div>
       <div class="row product-ingredients pb-2">
         <% [allergens, allergens_compare].each_with_index do |allergens, i| %>
@@ -37,7 +40,7 @@
             </span>
             <button type="button" class="btn btn-outline-secondary mt-auto align-self-center"
             <%= "disabled" if allergens == "No ingredients provided." %> data-toggle="modal"
-            data-target=<%= ["#ingredients", "#ingredients-compare"][i] %>>Full Ingredients</button>
+            data-target=<%= ["#ingredients", "#ingredients-compare"][i] %>>All ingredients <span class="badge badge-pill badge-danger"><%= @allergies_matched_count %></span></button>
           </div>
         <% end %>
       </div>
