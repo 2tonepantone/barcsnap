@@ -107,12 +107,11 @@ const initScanditSDK = () => {
         };
 
         const load_screen = document.getElementById("spinner");
-        // new Spinner(opts).spin(load_screen);
         const barcodeField = document.getElementById('barcode-field');
         if (multipleField.value == 'true') {
           if (scanned_barcodes.length != 2) {
             scanned_barcodes.push(scanResult.barcodes[0].data);
-          // Force the scanner to wait for 2 barcodes if comparing multiple
+          // Force the form submit to wait for 2 barcodes if comparing multiple
           } if (scanned_barcodes.length == 2) {
               barcodeField.setAttribute('value', scanned_barcodes);
               document.getElementById('barcodeSubmit').click();
