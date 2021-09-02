@@ -23,7 +23,19 @@
       <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
         <% unless allergens == "No allergens found." %>
           <div class="row p-0 d-flex justify-content-center">
-            <p class="mb-1"><strong>Potential allergens:</strong></p>
+            <p class="mb-1">
+              <strong>Potential allergens:</strong>
+                <p class="mx-0 my-0 badge">
+                </p>
+                <p class="mx-0 my-1 badge badge-pill badge-danger">
+                  <strong> <%= @allergies_matched_count_potential %> </strong>
+                </p>
+                <p class="mx-0 my-1 badge">
+                </p>
+                <p class="mx-0 my-1 badge badge-pill badge-warning">
+                  <strong> <%= @dislikes_matched_count_potential %> </strong>
+                </p>
+            </p>
           </div>
           <div id="inputText"class="row info-style p-0 d-flex justify-content-center">
             <p class="mb-1"><%= allergens %></p>
