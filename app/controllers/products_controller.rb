@@ -18,6 +18,9 @@ class ProductsController < ApplicationController
       @array_dislikes = []
     end
 
+    @allergies_matched_count = count_matched_allergies_ingredients
+    @dislikes_matched_count = count_matched_dislikes_ingredients
+
     # If product_id exists, generate @product_compare
     @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
 
@@ -175,5 +178,25 @@ class ProductsController < ApplicationController
         ele.strip()
     end
     return final
+  end
+
+  def count_matched_allergies_ingredients
+    count = 0
+    array_allergies.each do |allergy|
+      if @product.ingredients.include?(allergy)
+        count += 1
+      end
+    end
+    return count
+  end
+
+  def count_matched_dislikes_ingredients
+    count = 0
+    array_dislikes.each do |dislike|
+      if @product.ingredients.include?(dislike)
+        count += 1
+      end
+    end
+    return count
   end
 end
