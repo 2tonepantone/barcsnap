@@ -1,5 +1,10 @@
 class ProductsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[show create]
+  skip_before_action :authenticate_user!, only: %i[index show create]
+
+  def index
+    @page_header = 'Products from our community'
+    @products = Product.all
+  end
 
   def show
     @product = Product.find(params[:id]) if params[:id].to_i.positive?
