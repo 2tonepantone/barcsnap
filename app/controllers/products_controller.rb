@@ -20,13 +20,14 @@ class ProductsController < ApplicationController
     @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
     @allergies_matched_count = count_matched_allergies_ingredients(@product)
     @dislikes_matched_count = count_matched_dislikes_ingredients(@product)
-    @allergies_matched_count_potential = count_matched_allergies_potential(@product)
-    @dislikes_matched_count_potential = count_matched_dislikes_potential(@product)
-    @allergies_matched_count_compare = count_matched_allergies_ingredients(@product_compare)
-    @dislikes_matched_count_compare = count_matched_dislikes_ingredients(@product_compare)
-    @allergies_matched_count_potential_compare = count_matched_allergies_potential(@product_compare)
-    @dislikes_matched_count_potential_compare = count_matched_dislikes_potential(@product_compare)
-
+    # @allergies_matched_count_potential = count_matched_allergies_potential(@product)
+    # @dislikes_matched_count_potential = count_matched_dislikes_potential(@product)
+    if @product_compare
+      @allergies_matched_count_compare = count_matched_allergies_ingredients(@product_compare)
+      @dislikes_matched_count_compare = count_matched_dislikes_ingredients(@product_compare)
+    # @allergies_matched_count_potential_compare = count_matched_allergies_potential(@product_compare)
+    # @dislikes_matched_count_potential_compare = count_matched_dislikes_potential(@product_compare)
+    end
     # If product_id exists, generate @product_compare
 
 
@@ -170,18 +171,26 @@ class ProductsController < ApplicationController
   end
 
   def array_allergies
-    string = current_user.allergies
-    array = string.split(",")
-    final = array.map do |ele|
-        ele.strip()
+    if current_user
+      string = current_user.allergies
+      array = string.split(",")
+      final = array.map do |ele|
+          ele.strip()
+      end
+    else
+      final = []
     end
     return final
   end
   def array_dislikes
-    string = current_user.dislikes
-    array = string.split(",")
-    final = array.map do |ele|
-        ele.strip()
+    if current_user
+      string = current_user.dislikes
+      array = string.split(",")
+      final = array.map do |ele|
+          ele.strip()
+      end
+    else
+      final = []
     end
     return final
   end

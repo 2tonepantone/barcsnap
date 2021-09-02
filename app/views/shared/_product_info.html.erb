@@ -15,7 +15,7 @@
         <strong><%= product_name %></strong>
       </div>
       <div class="row p-0 d-flex justify-content-center">
-        <p class="mb-1"><strong>Category:</strong></p>
+        <p class="mb-1"><strong>Category</strong></p>
       </div>
       <div class="row info-style p-0 d-flex justify-content-center">
         <p class="mb-1"><%= "#{@product.tag_list.join(', ')}"  %></p>
@@ -24,17 +24,7 @@
         <% unless allergens == "No allergens found." %>
           <div class="row p-0 d-flex justify-content-center">
             <p class="mb-1">
-              <strong>Potential allergens:</strong>
-                <p class="mx-0 my-0 badge">
-                </p>
-                <p class="mx-0 my-1 badge badge-pill badge-danger">
-                  <strong> <%= @allergies_matched_count_potential %> </strong>
-                </p>
-                <p class="mx-0 my-1 badge">
-                </p>
-                <p class="mx-0 my-1 badge badge-pill badge-warning">
-                  <strong> <%= @dislikes_matched_count_potential %> </strong>
-                </p>
+              <strong>Common allergens</strong>
             </p>
           </div>
           <div id="inputText"class="row info-style p-0 d-flex justify-content-center">
@@ -45,16 +35,20 @@
           <p class="mb-1">
             <i class="fas fa-apple-alt text-success"></i>
             <strong> Ingredients</strong>
+            <% if @allergies_matched_count > 0 %>
             <p class="mx-0 my-0 badge">
             </p>
             <p class="mx-0 my-1 badge badge-pill badge-danger">
               <strong> <%= @allergies_matched_count %> </strong>
             </p>
+            <% end %>
+            <% if @dislikes_matched_count > 0 %>
             <p class="mx-0 my-1 badge">
             </p>
             <p class="mx-0 my-1 badge badge-pill badge-warning">
               <strong> <%= @dislikes_matched_count %> </strong>
             </p>
+            <% end %>
           </p>
         </div>
         <div class ="row info-style p-1 d-flex justify-content-center">
@@ -73,14 +67,14 @@
       <% end %>
       <% if defined?(size) && size && size.length.positive? %>
         <div class="row  p-0 d-flex justify-content-center">
-          <p class="mb-1"><strong>Size:</strong></p>
+          <p class="mb-1"><strong>Size</strong></p>
         </div>
         <div class="row info-style justify-content-center">
           <p class="mb-1"><%= size %></p>
         </div>
       <% end %>
       <div class="row p-0 d-flex justify-content-center">
-        <p class="mb-1"><strong>Company name:</strong></p>
+        <p class="mb-1"><strong>Company</strong></p>
       </div>
       <div class="row info-style p-0 d-flex justify-content-center border-bottom-0">
         <p class="mb-1"><%= company_name %></p>
