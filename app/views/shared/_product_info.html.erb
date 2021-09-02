@@ -103,13 +103,21 @@
   array_allergies = parsing("<%= @array_allergies %>");
 
   array_allergies.forEach(function (item) {
-    highlight2(item, "inputText", "highlight");
-    highlight2(item, "inputText2", "highlight");
+    if (!(document.getElementById("inputText")==null)) {
+      highlight2(item, "inputText", "highlight");
+    }
+    if (!(document.getElementById("inputText2")==null)) {
+      highlight2(item, "inputText2", "highlight");
+    }
   });
 
   array_dislikes = parsing("<%= @array_dislikes %>")
   array_dislikes.forEach(function (item) {
-    highlight2(item, "inputText", "highlight2");
-    highlight2(item, "inputText2", "highlight2");
+    if (!(document.getElementById("inputText")==null)) {
+      highlight2(item, "inputText", "highlight2");
+    }
+    if (!(document.getElementById("inputText2")==null)) {
+      highlight2(item, "inputText2", "highlight2");
+    }
   });
 </script>

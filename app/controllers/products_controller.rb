@@ -17,11 +17,13 @@ class ProductsController < ApplicationController
     else
       @array_dislikes = []
     end
-    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
-    @allergies_matched_count = count_matched_allergies_ingredients(@product)
-    @dislikes_matched_count = count_matched_dislikes_ingredients(@product)
-    # @allergies_matched_count_potential = count_matched_allergies_potential(@product)
-    # @dislikes_matched_count_potential = count_matched_dislikes_potential(@product)
+    if @product
+      @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
+      @allergies_matched_count = count_matched_allergies_ingredients(@product)
+      @dislikes_matched_count = count_matched_dislikes_ingredients(@product)
+      # @allergies_matched_count_potential = count_matched_allergies_potential(@product)
+      # @dislikes_matched_count_potential = count_matched_dislikes_potential(@product)
+    end
     if @product_compare
       @allergies_matched_count_compare = count_matched_allergies_ingredients(@product_compare)
       @dislikes_matched_count_compare = count_matched_dislikes_ingredients(@product_compare)
@@ -198,7 +200,7 @@ class ProductsController < ApplicationController
   def count_matched_allergies_ingredients(products)
     count = 0
     array_allergies.each do |allergy|
-      if products.ingredients.include?(allergy)
+      if products.ingredients&.include?(allergy)
         count += 1
       end
     end
@@ -208,7 +210,7 @@ class ProductsController < ApplicationController
   def count_matched_dislikes_ingredients(products)
     count = 0
     array_dislikes.each do |dislike|
-      if products.ingredients.include?(dislike)
+      if products.ingredients&.include?(dislike)
         count += 1
       end
     end
