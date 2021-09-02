@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show create]
 
   def index
-    @product = Product.new
+    @page_header = 'Products from our community'
+    @products = Product.all
   end
 
   def show
