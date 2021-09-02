@@ -30,7 +30,20 @@
           </div>
         <% end %>
         <div class="row p-1 d-flex justify-content-center">
-          <p class="mb-1"><i class="fas fa-apple-alt text-success"></i><strong> Ingredients:</strong><p class="mx-0 my-1 badge badge-pill badge-danger"><strong><%= @array_allergies.length %></strong></p></p>
+          <p class="mb-1">
+            <i class="fas fa-apple-alt text-success"></i>
+            <strong> Ingredients</strong>
+            <p class="mx-0 my-0 badge">
+            </p>
+            <p class="mx-0 my-1 badge badge-pill badge-danger">
+              <strong> <%= @allergies_matched_count %> </strong>
+            </p>
+            <p class="mx-0 my-1 badge">
+            </p>
+            <p class="mx-0 my-1 badge badge-pill badge-warning">
+              <strong> <%= @dislikes_matched_count %> </strong>
+            </p>
+          </p>
         </div>
         <div class ="row info-style p-1 d-flex justify-content-center">
           <p id="inputText2" class="mb-1">
