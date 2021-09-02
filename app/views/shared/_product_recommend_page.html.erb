@@ -42,7 +42,7 @@
         <%= render 'shared/user_history_card', product: product, product_favorited: product_favorited, img_url: image_url, product_name: product.name, price:rating_str, scanned_time: '' %>
       <% end %>
       <%= link_to product_favorites_path(product), method: :post, remote: true do %>
-        <div id="btn-favorite-<%= product.id %>" style="position:absolute; right: 8px; bottom: 8px;">
+        <div id="btn-favorite-<%= product.id %>" style="position:absolute; right: 8px; bottom: 8px; font-size:1rem;">
           <%= render 'products/favorite_button', product_favorited: product_favorited %>
         </div>
       <% end %>

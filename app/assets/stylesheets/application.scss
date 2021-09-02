@@ -15,23 +15,17 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap');
 
-body a {
-  color: #607D8B;
-  &:hover{
-    color: #203d69;
-  }
+body {
+  background-color: $cream-white;
 }
 
-.dropdown-menu > a {
+a {
+  color: $light-blue;
   text-decoration: none;
-}
-.dropdown-menu > a > span:hover, .dropdown-menu > a > p:hover {
-  color: #607D8B;
-}
-
-.dropdown-menu > a > span:active, .dropdown-menu > a > p:active {
-  color: #F5F5F5;
-  background-color: #6c757d;
+  &:hover{
+    color: $dark-blue;
+    text-decoration: none;
+  }
 }
 
 body {
