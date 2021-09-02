@@ -13,13 +13,13 @@
 <% end %>
 <!-- small box before toggling -->
 <div class="toggling2">
-  <div class="row px-3 d-flex justify-content-between">
+  <div class="row pl-4 pr-3 pt-3 d-flex justify-content-between">
     <h5 class="ml-2">Reviews <span class="text-muted"><%= review_count %></span></h5>
-    <i id="btn-show-reviews" class="fas fa-chevron-down toggling mr-1"></i>
+    <i id="btn-show-reviews" class="fas fa-chevron-down toggling mr-2"></i>
   </div>
   <% if review_count > 0 %>
     <% avatar_path = (user && user.photo.attached?) ? cl_image_path(user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
-    <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: review_first.comment %>
+    <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: review_first.comment, rating: review_first.rating %>
   <% else %>
   <% end %>
 </div>
@@ -33,14 +33,9 @@
       </div>
     </div>
   </div>
-  <div class="title-card-product2">
-    <div class="card-product-infos">
-      <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
-    </div>
-  </div>
   <div class ="comment-box" data-toggle="modal" data-target="#createReview">
     <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
-    <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: "Add a public comment..." %>
+    <%= render 'shared/review_card_no_click2', bg_img_url: avatar_path, review: "Add a public comment..." %>
   </div>
   <% @reviews.each do |review| %>
     <% user = Review.find(review.id).user %>

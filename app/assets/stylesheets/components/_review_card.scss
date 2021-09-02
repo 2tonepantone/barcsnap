@@ -17,9 +17,10 @@
 .title-card-product {
   overflow: hidden;
   height: 50px;
-  border: 0.5px solid rgba(0,0,0,.2);
+  // border: 0.5px solid rgba(0,0,0,.2);
+  // border-top: 0.5px solid rgba(0,0,0,0.5);
   display: flex;
-  background-color: white;
+  background-color: rgba(77,77,77,0.04);
   align-items: center;
 }
 

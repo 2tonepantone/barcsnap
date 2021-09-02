@@ -9,6 +9,8 @@
       </div>
       <%= simple_form_for [@product, @review] do |f| %>
         <div class="modal-body">
+          <span style="font-size:16px;">Remember to keep comments respectful and to follow our <a href="#" class="font-italic">Community Guidelines</a></span><br>
+          <br>
           <%= f.input :rating, input_html: { min: '1', max: '5' }, required: true, label: 'Rating (1-5)' %>
           <%= f.input :comment, as: :text, required: true %>
           <%= f.hidden_field :source, value: 'BarcSnap' %>
