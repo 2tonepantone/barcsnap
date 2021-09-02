@@ -81,7 +81,7 @@ const initScanditSDK = () => {
         });
       });
       // Send scanned barcode to hidden form and automatically submit it
-      let barcodes = [];
+      let scanned_barcodes = [];
       barcodePicker.on("scan", (scanResult) => {
         let opts = {
           lines: 13,
@@ -109,23 +109,19 @@ const initScanditSDK = () => {
         const load_screen = document.getElementById("spinner");
         // new Spinner(opts).spin(load_screen);
         const barcodeField = document.getElementById('barcode-field');
-        // Force the scanner to wait for 2 barcodes if comparing multipl
         if (multipleField.value == 'true') {
-          while (barcodes.length != 2) {
-            scanResult.barcodes.forEach(barcode => { barcodes << barcode.data });
-          }
-          barcodeField.setAttribute('value', barcodes);
-          document.getElementById('barcodeSubmit').click();
-          // Display spinner overlay
-          new Spinner(opts).spin(load_screen);
-        } else {
-          // console.log('hi!')
-          let barcode = scanResult.barcodes[0].data;
-          // console.log('bye');
-          // console.log(scanResult.barcodes[0].data);
-          // console.log(scanResult.barcodes);
-          // console.log(barcodes);
-          barcodeField.setAttribute('value', barcode);
+          if (scanned_barcodes.length != 2) {
+            scanned_barcodes.push(scanResult.barcodes[0].data);
+          // Force the scanner to wait for 2 barcodes if comparing multiple
+          } if (scanned_barcodes.length == 2) {
+              barcodeField.setAttribute('value', scanned_barcodes);
+              document.getElementById('barcodeSubmit').click();
+              // Display spinner overlay
+              new Spinner(opts).spin(load_screen);
+          };
+        } else if (multipleField.value == 'false') {
+          let scanned_barcode = scanResult.barcodes[0].data;
+          barcodeField.setAttribute('value', scanned_barcode);
           document.getElementById('barcodeSubmit').click();
           // Display spinner overlay
           new Spinner(opts).spin(load_screen);
