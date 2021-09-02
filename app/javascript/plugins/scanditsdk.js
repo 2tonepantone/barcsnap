@@ -19,7 +19,7 @@ const initScanditSDK = () => {
     }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        codeDuplicateFilter: 1000, // Interval of time before allowing the same barcode to be read in one scan session
+        codeDuplicateFilter: -1, // Scanner will only read unique (non-duplicate) barcodes
         maxNumberOfCodesPerFrame: 2,
       });
       // Apply scan settings described above
@@ -81,6 +81,7 @@ const initScanditSDK = () => {
         });
       });
       // Send scanned barcode to hidden form and automatically submit it
+      let scanned_barcodes = [];
       barcodePicker.on("scan", (scanResult) => {
         let opts = {
           lines: 13,
@@ -106,16 +107,20 @@ const initScanditSDK = () => {
         };
 
         const load_screen = document.getElementById("spinner");
-        // new Spinner(opts).spin(load_screen);
-        let barcodes = scanResult.barcodes.map(barcode => barcode.data);
         const barcodeField = document.getElementById('barcode-field');
-        barcodeField.setAttribute('value', barcodes);
-        // Force the scanner to wait for 2 barcodes if comparing multiple
-        if (multipleField.value == 'true' && barcodes.length == 2) {
-          document.getElementById('barcodeSubmit').click();
-          // Display spinner overlay
-          new Spinner(opts).spin(load_screen);
-        } else if (multipleField.value == 'false' && barcodes.length == 1) {
+        if (multipleField.value == 'true') {
+          if (scanned_barcodes.length != 2) {
+            scanned_barcodes.push(scanResult.barcodes[0].data);
+          // Force the form submit to wait for 2 barcodes if comparing multiple
+          } if (scanned_barcodes.length == 2) {
+              barcodeField.setAttribute('value', scanned_barcodes);
+              document.getElementById('barcodeSubmit').click();
+              // Display spinner overlay
+              new Spinner(opts).spin(load_screen);
+          };
+        } else if (multipleField.value == 'false') {
+          let scanned_barcode = scanResult.barcodes[0].data;
+          barcodeField.setAttribute('value', scanned_barcode);
           document.getElementById('barcodeSubmit').click();
           // Display spinner overlay
           new Spinner(opts).spin(load_screen);
