@@ -1,7 +1,9 @@
 <div class="container">
   <% if params[:sort_by] %>
     <!-- If sort_by params exist, render the recommendation page -->
-    <%= render 'shared/product_recommend_page' %>
+    <% page_header = "#{params[:sort_by].split('_').join(' ').capitalize} products" %>
+    <% page_header = params[:tag_name] if params[:sort_by]&.downcase == 'tag' %>
+    <%= render 'shared/product_recommend_page', page_header: page_header %>
   <% elsif params[:product_id] %>
     <!-- If product_id params exist, render the product comparison page -->
     <%= render 'shared/product_compare_page' %>

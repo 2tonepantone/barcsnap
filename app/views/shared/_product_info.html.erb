@@ -18,7 +18,11 @@
         <p class="mb-1"><strong>Category</strong></p>
       </div>
       <div class="row info-style p-0 d-flex justify-content-center">
-        <p class="mb-1"><%= "#{@product.tag_list.join(', ')}"  %></p>
+      <% @product.tag_list.each do |tag| %>
+        <%= link_to (product_path(0) + "?sort_by=tag&tag_name=#{tag}") do %>
+          <p class="badge badge-pill badge-dark mx-1"><%= "#{tag}" %></p>
+        <% end %>
+      <% end %>
       </div>
       <% if defined?(ingredients) && ingredients && ingredients.length.positive? %>
         <% unless allergens == "No allergens found." %>
