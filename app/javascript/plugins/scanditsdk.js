@@ -1,6 +1,8 @@
 // This scanner scans and returns one barcode at a time.
 import * as ScanditSDK from "scandit-sdk";
 import { SingleImageModeSettings } from "scandit-sdk";
+import { Spinner } from 'spin.js';
+import 'spin.js/spin.css';
 
 const initScanditSDK = () => {
   ScanditSDK.configure("AelgfmP2Q/QqARqoCjtBkSsu6zcXPYf4bWyk7QUI+1CzX7wP7FMwArwsTKGIfFWCRHCcxgcNfk8OWtyhsWLDbj4BK8AGfNlBiBpWvnZsN2kvTdI0nG4yC0sH+75wCeBZdDR1iq8Y7xR+/Ob7EeB39dLgYbRgIcV2FO17/2knl+lxRSq+LdKwAaDhdKPn8/CXRpZiuwxJvmhOFlVO1zNxnVgoRFy6ifQbQNDbmIo8O+3ReKdEVld5qqdo0MqD2fC3nN93WGxRJHQOl1LmglKYLJ7ofITQtyS2nXLOsjPRkK/+xpYPQK33TWDHD9qzkkKhAjeVj0+MRT5y0FOp4g0thVBQ0RwiGGWVr5dGfFGvsYyUHYr+hPUwWL8HDlxmMrwVcVrPIIdXnnlTPICPkNAmd9WG8/gAGBCUNJCPpvgXCJJeGgJW/Yv96p7m21KpuInbvtSczQGzMJDUjNekPHv0N+zuO45aU5TNQI66wPpdXq8t6vs7S0tr8mDP8Hoe8SSgUDWphHj/+kP8E/WDOCMsZmKqkRuzrQa3JR7M6goUoCuyfCtQQKB83em5L5teMVcEvW9EduGEykfcpOW6uVl3OQKLf3fEikFlayV6Cs7sRVwoDYUxtreq1aEcRBWJ5088AzBpCTNWdBBFNreGlInw+6Hl8OWk8sGfgxOPaGIPWmdOqBIN/ca+/Jvf+xLPaH2sm28/Fg6trwOZSyUxlFBm0ZrZjlSBzRCqWZGlpJew+JNIDlg0hk+v5aid/NrWfy7aM++XDqCXWk69k+uNZFa9A7li46x6iNa2UqA49T+SJ+OxkcloYnbGUg==", {
@@ -17,7 +19,7 @@ const initScanditSDK = () => {
     }).then(function (barcodePicker) {
       const scanSettings = new ScanditSDK.ScanSettings({
         enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
-        // codeDuplicateFilter: 3000,
+        codeDuplicateFilter: 1000, // Interval of time before allowing the same barcode to be read in one scan session
         maxNumberOfCodesPerFrame: 2,
       });
       // Apply scan settings described above
@@ -80,14 +82,43 @@ const initScanditSDK = () => {
       });
       // Send scanned barcode to hidden form and automatically submit it
       barcodePicker.on("scan", (scanResult) => {
+        let opts = {
+          lines: 13,
+          length: 28,
+          width: 14,
+          radius: 42,
+          scale: 1,
+          corners: 1,
+          color: '#93B5C6',
+          opacity: 0.25,
+          rotate: 0,
+          direction: 1,
+          speed: 1,
+          trail: 60,
+          fps: 20,
+          zIndex: 2e9,
+          className: 'spinner',
+          top: '50vh',
+          left: '50%',
+          shadow: false,
+          hwaccel: false,
+          position: 'absolute',
+        };
+
+        const load_screen = document.getElementById("spinner");
+        // new Spinner(opts).spin(load_screen);
         let barcodes = scanResult.barcodes.map(barcode => barcode.data);
         const barcodeField = document.getElementById('barcode-field');
         barcodeField.setAttribute('value', barcodes);
         // Force the scanner to wait for 2 barcodes if comparing multiple
         if (multipleField.value == 'true' && barcodes.length == 2) {
           document.getElementById('barcodeSubmit').click();
+          // Display spinner overlay
+          new Spinner(opts).spin(load_screen);
         } else if (multipleField.value == 'false' && barcodes.length == 1) {
           document.getElementById('barcodeSubmit').click();
+          // Display spinner overlay
+          new Spinner(opts).spin(load_screen);
         };
       });
     });
