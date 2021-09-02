@@ -4,7 +4,9 @@
   <% end %>
   <div class="d-flex align-items-center"">
   <% if current_user %>
-    <a href="0?sort_by=my_favorite"><i class="fas fa-heart mr-3 text-dark"></i></a>
+  <%= link_to product_path(0, sort_by: "my_favorite") do %>
+    <i class="fas fa-heart mr-3 text-dark"></i>
+  <% end %>
   <% end %>
     <div id="google-translate-container" class="d-flex align-items-center position-relative mr-3">
       <div id="google_translate_element">
