@@ -17,9 +17,21 @@ class ProductsController < ApplicationController
     else
       @array_dislikes = []
     end
-
+    if @product
+      @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
+      @allergies_matched_count = count_matched_allergies_ingredients(@product)
+      @dislikes_matched_count = count_matched_dislikes_ingredients(@product)
+      # @allergies_matched_count_potential = count_matched_allergies_potential(@product)
+      # @dislikes_matched_count_potential = count_matched_dislikes_potential(@product)
+    end
+    if @product_compare
+      @allergies_matched_count_compare = count_matched_allergies_ingredients(@product_compare)
+      @dislikes_matched_count_compare = count_matched_dislikes_ingredients(@product_compare)
+    # @allergies_matched_count_potential_compare = count_matched_allergies_potential(@product_compare)
+    # @dislikes_matched_count_potential_compare = count_matched_dislikes_potential(@product_compare)
+    end
     # If product_id exists, generate @product_compare
-    @product_compare = Product.find(params[:product_id]) unless params[:product_id].nil?
+
 
     @product_favorited = false
     @product_favorited = current_user.favorited?(@product) if current_user && @product
@@ -161,19 +173,67 @@ class ProductsController < ApplicationController
   end
 
   def array_allergies
-    string = current_user.allergies
-    array = string.split(",")
-    final = array.map do |ele|
-        ele.strip()
+    if current_user
+      string = current_user.allergies
+      array = string.split(",")
+      final = array.map do |ele|
+          ele.strip()
+      end
+    else
+      final = []
     end
     return final
   end
   def array_dislikes
-    string = current_user.dislikes
-    array = string.split(",")
-    final = array.map do |ele|
-        ele.strip()
+    if current_user
+      string = current_user.dislikes
+      array = string.split(",")
+      final = array.map do |ele|
+          ele.strip()
+      end
+    else
+      final = []
     end
     return final
+  end
+
+  def count_matched_allergies_ingredients(products)
+    count = 0
+    array_allergies.each do |allergy|
+      if products.ingredients&.include?(allergy)
+        count += 1
+      end
+    end
+    return count
+  end
+
+  def count_matched_dislikes_ingredients(products)
+    count = 0
+    array_dislikes.each do |dislike|
+      if products.ingredients&.include?(dislike)
+        count += 1
+      end
+    end
+    return count
+  end
+
+  def count_matched_allergies_potential(products)
+    count = 0
+    array_allergies.each do |allergy|
+      if products.allergens.include?(allergy)
+        count += 1
+      end
+    end
+    return count
+  end
+
+  def count_matched_dislikes_potential(products)
+    count = 0
+    array_dislikes.each do |dislike|
+      if products.allergens.include?(dislike)
+        count += 1
+      end
+    end
+    return count
   end
 end
