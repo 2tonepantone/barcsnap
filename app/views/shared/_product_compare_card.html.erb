@@ -40,7 +40,7 @@
             </span>
             <button type="button" class="btn btn-outline-secondary mt-auto align-self-center"
             <%= "disabled" if allergens == "No ingredients provided." %> data-toggle="modal"
-            data-target=<%= ["#ingredients", "#ingredients-compare"][i] %>>Ingredients
+            data-target=<%= ["#ingredients", "#ingredients-compare"][i] %>>Contains
               <% if i.zero? %>
                 <% if @allergies_matched_count > 0 %>
                   <span class="badge badge-pill badge-danger"><%= @allergies_matched_count %></span>
