@@ -46,15 +46,17 @@ const initScanditSDK = () => {
           document.getElementById("multiple-field").setAttribute('value', false);
         });
       };
-      // Set "compare" value to "true" (unless on the homepage) when clicking "scan & compare" button (and "multiple" to "false")
-      barcodeCompareButton.addEventListener("click", () => {
-        if (scannerHomeButton) {
-          document.getElementById("compare-field").setAttribute('value', false);
-        } else {
-        document.getElementById("compare-field").setAttribute('value', true);
-        };
-        document.getElementById("multiple-field").setAttribute('value', false);
-      });
+      if (barcodeCompareButton) {
+        // Set "compare" value to "true" (unless on the homepage) when clicking "scan & compare" button (and "multiple" to "false")
+        barcodeCompareButton.addEventListener("click", () => {
+          if (scannerHomeButton) {
+            document.getElementById("compare-field").setAttribute('value', false);
+          } else {
+          document.getElementById("compare-field").setAttribute('value', true);
+          };
+          document.getElementById("multiple-field").setAttribute('value', false);
+        });
+      };
       // Set "multiple" value to "true" when clicking "multiple" button (and "compare" to "false")
       barcodeMultipleButton.addEventListener("click", () => {
         document.getElementById("multiple-field").setAttribute('value', true);
