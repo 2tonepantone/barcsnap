@@ -33,11 +33,6 @@
       </div>
     </div>
   </div>
-  <div class="title-card-product2">
-    <div class="card-product-infos">
-      <span style = "font-size: 12px">Remember to keep comments respectful and to follow our <a href="#">Community Guidelines</a></span>
-    </div>
-  </div>
   <div class ="comment-box" data-toggle="modal" data-target="#createReview">
     <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
     <%= render 'shared/review_card_no_click2', bg_img_url: avatar_path, review: "Add a public comment..." %>
