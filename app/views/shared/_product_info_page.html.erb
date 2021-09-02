@@ -19,7 +19,7 @@
   </div>
   <% if review_count > 0 %>
     <% avatar_path = (user && user.photo.attached?) ? cl_image_path(user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
-    <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: review_first.comment %>
+    <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: review_first.comment, rating: review_first.rating %>
   <% else %>
   <% end %>
 </div>
@@ -40,7 +40,7 @@
   </div>
   <div class ="comment-box" data-toggle="modal" data-target="#createReview">
     <% avatar_path = (current_user && current_user.photo.attached?) ? cl_image_path(current_user.photo.key , height: 300, width: 300, crop: :fill) : image_path("default-avatar.png") %>
-    <%= render 'shared/review_card_no_click', bg_img_url: avatar_path, review: "Add a public comment..." %>
+    <%= render 'shared/review_card_no_click2', bg_img_url: avatar_path, review: "Add a public comment..." %>
   </div>
   <% @reviews.each do |review| %>
     <% user = Review.find(review.id).user %>
