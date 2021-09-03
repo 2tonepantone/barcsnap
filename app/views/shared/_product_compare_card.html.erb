@@ -18,7 +18,7 @@
       <% [{reviews: @product.reviews.count, rating: rating},
           {reviews: @product_compare.reviews.count, rating: rating_compare}].each do |product| %>
         <div class="col-6 flex-column d-flex align-items-center">
-          <span><i class="fas fa-star"></i><%= product[:rating] %></span>
+          <span class ="notranslate"><i class="fas fa-star"></i><%= product[:rating] %></span>
           <span>(<%= product[:reviews] %> reviews)</span>
         </div>
       <% end %>
@@ -63,7 +63,7 @@
     <% end %>
     <% unless size.nil? && size_compare.nil? %>
       <div class="row py-3">
-        <div class="col text-center">Size</div>
+        <div class="col text-center notranslate">Size</div>
       </div>
       <div class="row product-size pb-2">
         <% [size, size_compare].each do |size| %>
