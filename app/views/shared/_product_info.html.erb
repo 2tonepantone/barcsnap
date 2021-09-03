@@ -10,7 +10,7 @@
       <div class="info-style border-bottom-0">
         <button id="btn-scn-compare" class="btn btn-light btn-sm position-absolute mx-1 my-1 scanner-start barcode-compare hidding1"
          data-toggle="modal" data-target="#camera" style="bottom: 0px; right: 0px;">
-          <p class="mb-0" style="width: 100%; font-size: .8rem;"><i class="fas fa-camera" style="font-size: .8rem;"></i> Compare</p>
+          <p class="mb-0" style="width: 100%; font-size: .8rem;"><i class="fas fa-camera" style="font-size: .8rem;"></i> Compa<span style="display:inline-block">re</span></p>
         </button>
       </div>
     </div>
@@ -73,7 +73,7 @@
       <% end %>
       <% if defined?(size) && size && size.length.positive? %>
         <div class="row  p-0 d-flex justify-content-center">
-          <p class="mb-1"><strong>Size</strong></p>
+          <p class="mb-1"><strong>Si<span style="display:inline-block">ze</span></strong></p>
         </div>
         <div class="row info-style justify-content-center">
           <p class="mb-1"><%= size %></p>
@@ -98,16 +98,16 @@
     inputText.innerHTML = innerHTML;
     }
   }
-  
+
   function parsing(rubyarray) {
     var current = rubyarray;
     answer = current.replace(/[&quot;]+/g, '"');
     var array = JSON.parse(answer);
     return array
   }
-  
+
   array_allergies = parsing("<%= @array_allergies %>");
-  
+
   array_allergies.forEach(function (item) {
     if (!(document.getElementById("inputText")==null)) {
       highlight2(item, "inputText", "highlight");
@@ -116,7 +116,7 @@
       highlight2(item, "inputText2", "highlight");
     }
   });
-  
+
   array_dislikes = parsing("<%= @array_dislikes %>")
   array_dislikes.forEach(function (item) {
     if (!(document.getElementById("inputText")==null)) {
