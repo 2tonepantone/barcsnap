@@ -25,6 +25,7 @@ import { initScanditSDK } from "../plugins/scanditsdk"
 import { readMore } from "../plugins/readmore"
 import { closeModal } from "../plugins/closemodal"
 import { reviewMore } from "../plugins/reviewmore"
+import gtag from "../src/analytics"
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
