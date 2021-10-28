@@ -1,4 +1,6 @@
-Quagga.init({
+import Quagga from '@ericblade/quagga2';
+
+const initQuagga = Quagga.init({
   inputStream: {
     name: "Live",
     type: "LiveStream",
@@ -15,3 +17,5 @@ Quagga.init({
   console.log("Initialization finished. Ready to start");
   Quagga.start();
 });
+
+export { initQuagga }
