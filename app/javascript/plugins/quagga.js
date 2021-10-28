@@ -1,13 +1,13 @@
 import Quagga from '@ericblade/quagga2';
 
-const initQuagga = Quagga.init({
+Quagga.init({
   inputStream: {
     name: "Live",
     type: "LiveStream",
-    target: document.querySelector('#yourElement')    // Or '#yourElement' (optional)
+    target: document.querySelector('#barcode-scanner')
   },
   decoder: {
-    readers: ["ean_reader", "ean_8_reader"]
+    readers: ['ean_reader', 'ean_8_reader']
   }
 }, function (err) {
   if (err) {
@@ -16,6 +16,8 @@ const initQuagga = Quagga.init({
   }
   console.log("Initialization finished. Ready to start");
   Quagga.start();
-});
 
-export { initQuagga }
+  Quagga.onDetected(function (data) {
+    console.log(data.codeResult.code);
+  });
+});
