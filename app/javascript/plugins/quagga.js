@@ -21,7 +21,7 @@ Quagga.init({
   Quagga.onDetected(function (data) {
     codes.push(data.codeResult.code);
     console.log(codes.length);
-    if (codes.length >= 15) {
+    if (codes.length >= 8) {
       const barcode = mostFrequent(codes, codes.length);
       console.log(barcode);
       codes = [];
