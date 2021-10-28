@@ -26,6 +26,7 @@ import { readMore } from "../plugins/readmore"
 import { closeModal } from "../plugins/closemodal"
 import { reviewMore } from "../plugins/reviewmore"
 import gtag from "../src/analytics"
+import Quagga from '@ericblade/quagga2';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -38,4 +39,3 @@ document.addEventListener('turbolinks:load', () => {
   reviewMore();
   closeModal();
 });
-
