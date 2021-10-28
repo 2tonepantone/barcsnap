@@ -5,7 +5,7 @@ Quagga.init({
     target: document.querySelector('#yourElement')    // Or '#yourElement' (optional)
   },
   decoder: {
-    readers: ["code_128_reader"]
+    readers: ["ean_reader", "ean_8_reader"]
   }
 }, function (err) {
   if (err) {
