@@ -77,10 +77,6 @@ class ProductsController < ApplicationController
 
   def compare_multiple_scanned
     barcodes = params[:barcode].split(',')
-    if barcodes.length <= 1
-      second_barcode = params[:barcode_second]
-      barcodes << second_barcode
-    end
     @products_multiple = []
     barcodes.each do |barcode|
       @barcode = barcode
