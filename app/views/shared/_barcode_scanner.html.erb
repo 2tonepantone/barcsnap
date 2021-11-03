@@ -3,12 +3,16 @@
     <%= form_with url: "/products", method: "POST" do |form| %>
       <div class="d-flex">
         <%= form.label :barcode, "Barcode:" %>
-        <%= form.text_field :barcode, id: 'barcode-field', class: 'w-100 mx-2' %>
-        <%= form.hidden_field :multiple, id: 'multiple-field' %>
-        <%= form.hidden_field :compare, id: 'compare-field' %>
         <% if @product %>
           <%= form.hidden_field :first_product_id, id: 'compare-product-id', value: product.id %>
+          <%= form.hidden_field :barcode, id: 'barcode-field', value: product.barcode, class: 'w-100 mx-2' %>
+          <%= form.text_field :barcode_second, id: 'barcode-second-field', class: 'w-100 mx-2' %>
+        <% else %>
+          <%= form.text_field :barcode, id: 'barcode-field', class: 'w-100 mx-2' %>
         <% end %>
+        <%= form.hidden_field :multiple, id: 'multiple-field' %>
+        <%= form.hidden_field :compare, id: 'compare-field' %>
+
         <%= form.submit "Search", id: 'barcodeSubmit' %>
       </div>
     <% end %>
